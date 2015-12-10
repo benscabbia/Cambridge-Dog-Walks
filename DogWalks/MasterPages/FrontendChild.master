@@ -1,0 +1,20 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPages/Frontend.Master" AutoEventWireup="true" CodeBehind="FrontendChild.master.cs" Inherits="DogWalks.MasterPages.FrontendChild" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+  <asp:ContentPlaceHolder ID="HeadContentChild" runat="server"></asp:ContentPlaceHolder>
+  <style>
+    /*removes margin which is caused by the form*/
+    html, body, form {
+      margin: 0;
+      padding-bottom: 0;
+    }
+  </style>
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="container">
+      <asp:ContentPlaceHolder ID="MainContentChild" runat="server"></asp:ContentPlaceHolder>
+  </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="CustomScriptContent" runat="server">
+  <asp:ContentPlaceHolder ID="CustomScriptContentChild" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>

@@ -1,0 +1,480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WalkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WalkID" Type="int" Nullable="false" />
+          <Property Name="AuthorID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DogWalk">
+          <Key>
+            <PropertyRef Name="WalkID" />
+          </Key>
+          <Property Name="WalkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Postcode" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Latitude" Type="numeric" Precision="8" Scale="6" Nullable="false" />
+          <Property Name="Longitude" Type="numeric" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="LengthID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="FeatureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeatureName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+          <Property Name="PictureUrl" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Length">
+          <Key>
+            <PropertyRef Name="LengthID" />
+          </Key>
+          <Property Name="LengthID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LengthName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SizeRank" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="PictureID" />
+          </Key>
+          <Property Name="PictureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WalkID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="PictureUrl" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="UploaderID" Type="int" />
+        </EntityType>
+        <EntityType Name="PostCodesUK">
+          <Key>
+            <PropertyRef Name="PostcodeID" />
+          </Key>
+          <Property Name="PostcodeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Postcode" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Latitude" Type="numeric" Precision="8" Scale="6" Nullable="false" />
+          <Property Name="Longitude" Type="numeric" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="PostcodeNoSpace" Type="varchar" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WalkID" Type="int" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="AuthorID" Type="int" />
+        </EntityType>
+        <EntityType Name="WalkFeature">
+          <Key>
+            <PropertyRef Name="WalkID" />
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="WalkID" Type="int" Nullable="false" />
+          <Property Name="FeatureID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Comment_DogWalk">
+          <End Role="DogWalk" Type="Self.DogWalk" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DogWalk">
+              <PropertyRef Name="WalkID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="WalkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DogWalk_Length">
+          <End Role="Length" Type="Self.Length" Multiplicity="1" />
+          <End Role="DogWalk" Type="Self.DogWalk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Length">
+              <PropertyRef Name="LengthID" />
+            </Principal>
+            <Dependent Role="DogWalk">
+              <PropertyRef Name="LengthID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Image_DogWalk">
+          <End Role="DogWalk" Type="Self.DogWalk" Multiplicity="1" />
+          <End Role="Picture" Type="Self.Picture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DogWalk">
+              <PropertyRef Name="WalkID" />
+            </Principal>
+            <Dependent Role="Picture">
+              <PropertyRef Name="WalkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_DogWalk">
+          <End Role="DogWalk" Type="Self.DogWalk" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DogWalk">
+              <PropertyRef Name="WalkID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="WalkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WalkFeature_DogWalk">
+          <End Role="DogWalk" Type="Self.DogWalk" Multiplicity="1" />
+          <End Role="WalkFeature" Type="Self.WalkFeature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DogWalk">
+              <PropertyRef Name="WalkID" />
+            </Principal>
+            <Dependent Role="WalkFeature">
+              <PropertyRef Name="WalkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WalkFeature_Feature">
+          <End Role="Feature" Type="Self.Feature" Multiplicity="1" />
+          <End Role="WalkFeature" Type="Self.WalkFeature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Feature">
+              <PropertyRef Name="FeatureID" />
+            </Principal>
+            <Dependent Role="WalkFeature">
+              <PropertyRef Name="FeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WalkModelStoreContainer">
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DogWalk" EntityType="Self.DogWalk" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Length" EntityType="Self.Length" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostCodesUK" EntityType="Self.PostCodesUK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WalkFeature" EntityType="Self.WalkFeature" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comment_DogWalk" Association="Self.FK_Comment_DogWalk">
+            <End Role="DogWalk" EntitySet="DogWalk" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DogWalk_Length" Association="Self.FK_DogWalk_Length">
+            <End Role="Length" EntitySet="Length" />
+            <End Role="DogWalk" EntitySet="DogWalk" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Image_DogWalk" Association="Self.FK_Image_DogWalk">
+            <End Role="DogWalk" EntitySet="DogWalk" />
+            <End Role="Picture" EntitySet="Picture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_DogWalk" Association="Self.FK_Rating_DogWalk">
+            <End Role="DogWalk" EntitySet="DogWalk" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WalkFeature_DogWalk" Association="Self.FK_WalkFeature_DogWalk">
+            <End Role="DogWalk" EntitySet="DogWalk" />
+            <End Role="WalkFeature" EntitySet="WalkFeature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WalkFeature_Feature" Association="Self.FK_WalkFeature_Feature">
+            <End Role="Feature" EntitySet="Feature" />
+            <End Role="WalkFeature" EntitySet="WalkFeature" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WalkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="WalkContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="WalkModel.Comment" />
+          <EntitySet Name="DogWalks" EntityType="WalkModel.DogWalk" />
+          <EntitySet Name="Features" EntityType="WalkModel.Feature" />
+          <EntitySet Name="Ratings" EntityType="WalkModel.Rating" />
+          <AssociationSet Name="FK_Comment_DogWalk" Association="WalkModel.FK_Comment_DogWalk">
+            <End Role="DogWalk" EntitySet="DogWalks" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_DogWalk" Association="WalkModel.FK_Rating_DogWalk">
+            <End Role="DogWalk" EntitySet="DogWalks" />
+            <End Role="Rating" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="WalkFeature" Association="WalkModel.WalkFeature">
+            <End Role="DogWalk" EntitySet="DogWalks" />
+            <End Role="Feature" EntitySet="Features" />
+          </AssociationSet>
+          <EntitySet Name="PostCodesUKs" EntityType="WalkModel.PostCodesUK" />
+          <EntitySet Name="Pictures" EntityType="WalkModel.Picture" />
+          <AssociationSet Name="FK_Image_DogWalk" Association="WalkModel.FK_Image_DogWalk">
+            <End Role="DogWalk" EntitySet="DogWalks" />
+            <End Role="Picture" EntitySet="Pictures" />
+          </AssociationSet>
+          <EntitySet Name="Lengths" EntityType="WalkModel.Length" />
+          <AssociationSet Name="FK_DogWalk_Length" Association="WalkModel.FK_DogWalk_Length">
+            <End Role="Length" EntitySet="Lengths" />
+            <End Role="DogWalk" EntitySet="DogWalks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WalkID" Type="Int32" Nullable="false" />
+          <Property Name="AuthorID" Type="Int32" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DogWalk" Relationship="WalkModel.FK_Comment_DogWalk" FromRole="Comment" ToRole="DogWalk" />
+        </EntityType>
+        <EntityType Name="DogWalk">
+          <Key>
+            <PropertyRef Name="WalkID" />
+          </Key>
+          <Property Name="WalkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Decimal" Nullable="false" Precision="8" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <NavigationProperty Name="Comments" Relationship="WalkModel.FK_Comment_DogWalk" FromRole="DogWalk" ToRole="Comment" />
+          <NavigationProperty Name="Ratings" Relationship="WalkModel.FK_Rating_DogWalk" FromRole="DogWalk" ToRole="Rating" />
+          <NavigationProperty Name="Features" Relationship="WalkModel.WalkFeature" FromRole="DogWalk" ToRole="Feature" />
+          <NavigationProperty Name="Pictures" Relationship="WalkModel.FK_Image_DogWalk" FromRole="DogWalk" ToRole="Picture" />
+          <Property Name="LengthID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Length" Relationship="WalkModel.FK_DogWalk_Length" FromRole="DogWalk" ToRole="Length" />
+        </EntityType>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="FeatureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DogWalks" Relationship="WalkModel.WalkFeature" FromRole="Feature" ToRole="DogWalk" />
+          <Property Name="FeatureName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PictureUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WalkID" Type="Int32" Nullable="false" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
+          <Property Name="AuthorID" Type="Int32" />
+          <NavigationProperty Name="DogWalk" Relationship="WalkModel.FK_Rating_DogWalk" FromRole="Rating" ToRole="DogWalk" />
+        </EntityType>
+        <Association Name="FK_Comment_DogWalk">
+          <End Type="WalkModel.DogWalk" Role="DogWalk" Multiplicity="1" />
+          <End Type="WalkModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DogWalk">
+              <PropertyRef Name="WalkID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="WalkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_DogWalk">
+          <End Type="WalkModel.DogWalk" Role="DogWalk" Multiplicity="1" />
+          <End Type="WalkModel.Rating" Role="Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DogWalk">
+              <PropertyRef Name="WalkID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="WalkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WalkFeature">
+          <End Type="WalkModel.DogWalk" Role="DogWalk" Multiplicity="*" />
+          <End Type="WalkModel.Feature" Role="Feature" Multiplicity="*" />
+        </Association>
+        <EntityType Name="PostCodesUK">
+          <Key>
+            <PropertyRef Name="PostcodeID" />
+          </Key>
+          <Property Name="PostcodeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Decimal" Nullable="false" Precision="8" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="PostcodeNoSpace" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Picture">
+          <Key>
+            <PropertyRef Name="PictureID" />
+          </Key>
+          <Property Name="PictureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WalkID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PictureUrl" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UploaderID" Type="Int32" />
+          <NavigationProperty Name="DogWalk" Relationship="WalkModel.FK_Image_DogWalk" FromRole="Picture" ToRole="DogWalk" />
+        </EntityType>
+        <Association Name="FK_Image_DogWalk">
+          <End Type="WalkModel.DogWalk" Role="DogWalk" Multiplicity="1" />
+          <End Type="WalkModel.Picture" Role="Picture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DogWalk">
+              <PropertyRef Name="WalkID" />
+            </Principal>
+            <Dependent Role="Picture">
+              <PropertyRef Name="WalkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Length">
+          <Key>
+            <PropertyRef Name="LengthID" />
+          </Key>
+          <Property Name="LengthID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SizeRank" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DogWalks" Relationship="WalkModel.FK_DogWalk_Length" FromRole="Length" ToRole="DogWalk" />
+          <Property Name="LengthName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_DogWalk_Length">
+          <End Type="WalkModel.Length" Role="Length" Multiplicity="1" />
+          <End Type="WalkModel.DogWalk" Role="DogWalk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Length">
+              <PropertyRef Name="LengthID" />
+            </Principal>
+            <Dependent Role="DogWalk">
+              <PropertyRef Name="LengthID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WalkModelStoreContainer" CdmEntityContainer="WalkContext">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="WalkModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+                <ScalarProperty Name="WalkID" ColumnName="WalkID" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DogWalks">
+            <EntityTypeMapping TypeName="WalkModel.DogWalk">
+              <MappingFragment StoreEntitySet="DogWalk">
+                <ScalarProperty Name="LengthID" ColumnName="LengthID" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="UpdateDateTime" ColumnName="UpdateDateTime" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="WalkID" ColumnName="WalkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Features">
+            <EntityTypeMapping TypeName="WalkModel.Feature">
+              <MappingFragment StoreEntitySet="Feature">
+                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
+                <ScalarProperty Name="FeatureName" ColumnName="FeatureName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="WalkModel.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="WalkID" ColumnName="WalkID" />
+                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="WalkFeature" TypeName="WalkModel.WalkFeature" StoreEntitySet="WalkFeature">
+            <EndProperty Name="Feature">
+              <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+            </EndProperty>
+            <EndProperty Name="DogWalk">
+              <ScalarProperty Name="WalkID" ColumnName="WalkID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="PostCodesUKs">
+            <EntityTypeMapping TypeName="WalkModel.PostCodesUK">
+              <MappingFragment StoreEntitySet="PostCodesUK">
+                <ScalarProperty Name="PostcodeNoSpace" ColumnName="PostcodeNoSpace" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="PostcodeID" ColumnName="PostcodeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pictures">
+            <EntityTypeMapping TypeName="WalkModel.Picture">
+              <MappingFragment StoreEntitySet="Picture">
+                <ScalarProperty Name="UploaderID" ColumnName="UploaderID" />
+                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="WalkID" ColumnName="WalkID" />
+                <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lengths">
+            <EntityTypeMapping TypeName="WalkModel.Length">
+              <MappingFragment StoreEntitySet="Length">
+                <ScalarProperty Name="LengthName" ColumnName="LengthName" />
+                <ScalarProperty Name="SizeRank" ColumnName="SizeRank" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LengthID" ColumnName="LengthID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

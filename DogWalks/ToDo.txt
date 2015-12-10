@@ -1,0 +1,2 @@
+﻿-make images blurring at source, removing webkit functionality 
+-sort out absolute div risize issue

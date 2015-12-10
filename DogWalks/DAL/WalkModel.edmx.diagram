@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="22634f39ffc549fcbfa7851fa1e335a8" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="WalkModel.Comment" Width="1.5" PointX="1.625" PointY="5.5" />
+        <EntityTypeShape EntityType="WalkModel.DogWalk" Width="1.5" PointX="5" PointY="3.625" />
+        <EntityTypeShape EntityType="WalkModel.Feature" Width="1.5" PointX="4.875" PointY="0.875" />
+        <EntityTypeShape EntityType="WalkModel.Rating" Width="1.5" PointX="7.625" PointY="6" />
+        <AssociationConnector Association="WalkModel.FK_Comment_DogWalk" />
+        <AssociationConnector Association="WalkModel.FK_Rating_DogWalk" />
+        <AssociationConnector Association="WalkModel.WalkFeature" />
+        <EntityTypeShape EntityType="WalkModel.PostCodesUK" Width="1.5" PointX="9.375" PointY="2.875" />
+        <EntityTypeShape EntityType="WalkModel.Picture" Width="1.5" PointX="7.125" PointY="2.875" />
+        <AssociationConnector Association="WalkModel.FK_Image_DogWalk" />
+        <EntityTypeShape EntityType="WalkModel.Length" Width="1.5" PointX="0.875" PointY="2.25" />
+        <AssociationConnector Association="WalkModel.FK_DogWalk_Length" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
