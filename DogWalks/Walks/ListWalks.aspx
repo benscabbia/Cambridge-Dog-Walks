@@ -15,29 +15,50 @@
         <asp:ListItem Selected="True" Value="2">Date Created</asp:ListItem>
         <asp:ListItem Value="3">Length</asp:ListItem>
         <asp:ListItem Enabled="False" Value="4">Average Rating</asp:ListItem>
+        <asp:ListItem Value="5">Postcode Search</asp:ListItem>
       </asp:DropDownList>
     </div>
 
-    <div class="col-md-3">
-      <asp:DropDownList ID="SortOrder" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="CategoryList_SelectedIndexChanged">
-        <asp:ListItem Value="ASC" Selected="True">Ascending</asp:ListItem>
-        <asp:ListItem Value="DESC">Descending</asp:ListItem>
-      </asp:DropDownList>
-    </div>
+    <asp:Panel ID="PanelSearch" Visible="true" runat="server">
+      <div class="col-md-3">
+        <asp:DropDownList ID="SortOrder" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="CategoryList_SelectedIndexChanged">
+          <asp:ListItem Value="ASC" Selected="True">Ascending</asp:ListItem>
+          <asp:ListItem Value="DESC">Descending</asp:ListItem>
+        </asp:DropDownList>
+      </div>
 
-    <div class="col-md-6">      
-      <%--<div class="row">
+      <div class="col-md-6">
+        <%--<div class="row">
         <div class="col-md-7" >--%>
-          <div class="input-group">
-            <asp:TextBox ID="tbSearch" CssClass="form-control" placeholder="Search for..." runat="server" st></asp:TextBox>
-            <span class="input-group-btn">
-              <asp:Button ID="btSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="CategoryList_SelectedIndexChanged" />              
-            </span>
-          </div>
+        <div class="input-group">
+          <asp:TextBox ID="tbSearch" CssClass="form-control" placeholder="Search for..." runat="server"></asp:TextBox>
+          <span class="input-group-btn">
+            <asp:Button ID="btSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="CategoryList_SelectedIndexChanged" />
+          </span>
         </div>
-        </div>
-      <%--</div>
-    </div>--%>
+      </div>
+
+    </asp:Panel>
+
+    <%--Logic is still TODO--%>
+    <asp:Panel ID="PanelPostcode" runat="server" Visible="false">
+      <div class="col-md-5">
+        <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" placeholder="Enter Postcode"></asp:TextBox>
+      </div>
+      <div class="col-md-4">        
+        <div class="input-group">
+          <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
+          <asp:ListItem Value="5">5 miles</asp:ListItem>
+          <asp:ListItem>10 miles</asp:ListItem>
+        </asp:DropDownList>          
+          <span class="input-group-btn">
+            <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-success" OnClick="CategoryList_SelectedIndexChanged" />
+          </span>
+        </div>       
+      </div>      
+    </asp:Panel>
+  </div> 
+
   <br />
 
   <asp:ListView ID="ListView1" runat="server" DataKeyNames="WalkID" ItemType="DogWalks.DAL.DogWalk" SelectMethod="ListView1_GetData">
@@ -80,5 +101,17 @@
   </asp:ListView>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="CustomScriptContentChild" runat="server">
-  
+  <script>
+    //$(document).ready(function () {
+    //  $('#MainContent_MainContentChild_CategoryList').on('change', function () {
+    //    if (this.value == '5') {
+    //      $("#postcodeSearch").show();
+    //    }
+    //    else {
+    //      $("#postcodeSearch").hide();
+    //    }
+    //  });
+    //});
+
+  </script>
 </asp:Content>

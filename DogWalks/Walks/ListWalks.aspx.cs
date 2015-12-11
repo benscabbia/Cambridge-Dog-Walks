@@ -14,7 +14,20 @@ namespace DogWalks.Walks
   {
     protected void Page_Load(object sender, EventArgs e)
     {
-      
+      if (IsPostBack)
+      {
+        if (CategoryList.SelectedIndex == 5)
+        {
+          PanelSearch.Visible = false;
+          PanelPostcode.Visible = true;
+
+        }
+        else 
+        { 
+          PanelPostcode.Visible = false;
+          PanelSearch.Visible = true;
+        }
+      }
     }
 
     // The return type can be changed to IEnumerable, however to support
