@@ -129,8 +129,7 @@
           <asp:Repeater ID="Repeater4" runat="server" DataSource="<%# Item.Features %>">
             <ItemTemplate>
               <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("PictureUrl") %>'/>              
-              <%--<asp:Label ID="lbTest" runat="server" Text='<%# Eval("FeatureName") %>'></asp:Label>--%>
-               
+              <%--<asp:Label ID="lbTest" runat="server" Text='<%# Eval("FeatureName") %>'></asp:Label>--%>               
             </ItemTemplate>
           </asp:Repeater>
         </div>
@@ -158,6 +157,5 @@
       $('#carousel-items:first-child ').addClass('active');
       $('.carousel-indicators li:first-child').addClass('active');
     });
-
   </script>
 </asp:Content>

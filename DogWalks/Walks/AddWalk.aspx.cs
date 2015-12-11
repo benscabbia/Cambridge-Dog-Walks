@@ -72,25 +72,6 @@ namespace DogWalks.Walks
 
         }
  
-        //original ##########
-        //Picture picture = new Picture();
-        //if (FileUpload1.HasFile)
-        //{
-        //  picture.WalkID = dogWalk.WalkID;
-
-        //  string virtualFolder = "~/WalkPics/";
-        //  string physicalFolder = Server.MapPath(virtualFolder);
-        //  string fileName = Guid.NewGuid().ToString();
-        //  string extension = System.IO.Path.GetExtension(FileUpload1.FileName);
-
-        //  FileUpload1.SaveAs(System.IO.Path.Combine(physicalFolder, fileName + extension));
-        //  picture.PictureUrl = virtualFolder + fileName + extension;
-        //  picture.Description = "an image of the walk";
-        //  dogWalk.Pictures.Add(picture);
-
-        //}
-
-
         //http://stackoverflow.com/questions/1196007/linq-get-all-selected-values-of-a-checkboxlist-using-a-lambda-expression
         //IEnumerable<int> allChecked = chkBoxList.Items
         //                              .Cast<ListItem>()
@@ -102,9 +83,20 @@ namespace DogWalks.Walks
         //  .Where(li => li.Selected)
         //  .Select(li => li.Value).ToList();
 
-        dogWalk.Postcode = tbPostcode.Text; //toDo - must grab postcode from db do grab lat and long        
-        dogWalk.Latitude = 0;
-        dogWalk.Longitude = 0;
+        //convert any postcode to no-space, lowercase format
+        string postcode = tbPostcode.Text.ToLower().Replace(" ", "");
+        //get postcode coordinates
+        var postCodeCoords = (from p in db.PostCodesUKs
+                              where p.PostcodeNoSpace == postcode
+                              select p).SingleOrDefault();
+
+        decimal postcodeLat = postCodeCoords.Latitude;
+        decimal postcodeLong = postCodeCoords.Longitude;
+
+        dogWalk.Postcode = postCodeCoords.Postcode; //correctly formatted postcode
+        dogWalk.Latitude = postcodeLat;
+        dogWalk.Longitude = postcodeLong;
+
         dogWalk.CreateDateTime = DateTime.Now;
         dogWalk.UpdateDateTime = dogWalk.CreateDateTime;
 
@@ -113,7 +105,7 @@ namespace DogWalks.Walks
         db.SaveChanges();
         Response.Redirect("~/Walks/ListWalks.aspx");
       }
-    }
+    }   
 
     public IEnumerable<Feature> TagList_GetData()
     {
