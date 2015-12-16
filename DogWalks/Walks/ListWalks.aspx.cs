@@ -54,40 +54,51 @@ namespace DogWalks.Walks
                                 where p.PostcodeNoSpace == postcode
                                 select p).SingleOrDefault();
 
-          //VALIDATION HERE IF POSTCODE NOT FOUND IN SYSTEM
-
-          double userPostcodeLat = (double)postcodeCoords.Latitude;
-          double userPostcodeLong = (double)postcodeCoords.Longitude;
-
-          //grab all dogwalks in system
-          List<DogWalk> grabAllWalks = (from w in db.DogWalks.Include("Pictures")
-                                        select w).ToList();
-
-          List<DogWalk> inRangeWalk = new List<DogWalk>();
-          foreach (var walk in grabAllWalks)
+          if (postcodeCoords == null)
           {
-            //method params: distanceCalculator(user lat, user long, walk lat, walk long, metric system )
-            double walkLat = (double)walk.Latitude;
-            double walkLong = (double)walk.Longitude;
-
-            double dis = DistanceCalculator.distanceCalculator(userPostcodeLat, userPostcodeLong, walkLat, walkLong, 'M');
-            if (dis <= radius)
-            {
-              inRangeWalk.Add(walk);
-            }
-          }
-
-          if (inRangeWalk.Count < 1)
-          {
+            lbNoDogwalks.Text = "The postcode entered could not be found, please try another";
             lbNoDogwalks.Visible = true;
+            return null;
           }
           else
           {
-            lbNoDogwalks.Visible = false;
-          }
 
-          tbPostcode.Text = "";
-          return inRangeWalk.ToList();
+            double userPostcodeLat = (double)postcodeCoords.Latitude;
+            double userPostcodeLong = (double)postcodeCoords.Longitude;
+
+            //grab all dogwalks in system
+            List<DogWalk> grabAllWalks = (from w in db.DogWalks.Include("Pictures")
+                                          select w).ToList();
+            
+            var inRangeWalks = new List<InRangeWalks>();            
+            foreach (var walk in grabAllWalks)
+            {
+              //method params: distanceCalculator(user lat, user long, walk lat, walk long, metric system )
+              double walkLat = (double)walk.Latitude;
+              double walkLong = (double)walk.Longitude;
+
+              double dis = DistanceCalculator.distanceCalculator(userPostcodeLat, userPostcodeLong, walkLat, walkLong, 'M');
+              if (dis <= radius)
+              {
+                inRangeWalks.Add(new InRangeWalks(dis, walk));
+              }
+            }
+
+            if (inRangeWalks.Count < 1)
+            {
+              lbNoDogwalks.Text = "Sorry, we could not find any dog walks within the radius";
+              lbNoDogwalks.Visible = true;
+            }
+            else
+            {
+              lbNoDogwalks.Visible = false;
+              //sort the array
+              inRangeWalks.Sort((x, y) => x.DistanceFromPostcode.CompareTo(y.DistanceFromPostcode));
+            }
+            tbPostcode.Text = "";
+
+            return inRangeWalks.Select(x => x.Walk);
+          }
         }
         
         //if searchbox has text in it
@@ -124,9 +135,7 @@ namespace DogWalks.Walks
           }
           return query.ToList();
         }
-
       }
-
     }
 
     protected void CategoryList_SelectedIndexChanged(object sender, EventArgs e)
@@ -156,5 +165,21 @@ namespace DogWalks.Walks
     //    }
     //  }
     //}
-  } 
+  }
+
+  //used to temporarily store walks with the relative distance to the inputted postcode
+  struct InRangeWalks
+  {
+    private double distanceFromPostcode;
+    private DogWalk walk;
+
+    public InRangeWalks(double distanceFromPostcode, DogWalk walk)
+    {
+      this.distanceFromPostcode = distanceFromPostcode;
+      this.walk = walk;
+    }
+
+    public double DistanceFromPostcode { get { return distanceFromPostcode; } }
+    public DogWalk Walk { get { return walk; } }
+  }
 }

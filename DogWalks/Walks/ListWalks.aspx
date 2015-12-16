@@ -50,6 +50,11 @@
           <asp:DropDownList ID="RadiusList" runat="server" CssClass="form-control">
           <asp:ListItem Value="5">5 miles</asp:ListItem>
           <asp:ListItem Value="10">10 miles</asp:ListItem>
+          <asp:ListItem Value="15">15 miles</asp:ListItem>
+          <asp:ListItem Value="20">20 miles</asp:ListItem>
+          <asp:ListItem Value="30">30 miles</asp:ListItem>
+          <asp:ListItem Value="40">40 miles</asp:ListItem>
+          <asp:ListItem Value="50">50 miles</asp:ListItem>
         </asp:DropDownList>          
           <span class="input-group-btn">
             <asp:Button ID="btPostCostSearch" runat="server" Text="Search" CssClass="btn btn-success" OnClick="CategoryList_SelectedIndexChanged" />
