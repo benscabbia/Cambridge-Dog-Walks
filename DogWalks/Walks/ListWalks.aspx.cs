@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using DogWalks.DAL;
 using System.Linq.Expressions;
 using System.Linq.Dynamic;
+using DogWalks.App_Code;
 
 namespace DogWalks.Walks
 {
@@ -40,8 +41,57 @@ namespace DogWalks.Walks
     {
       using (WalkContext db = new WalkContext())
       {
+        //if postcodebox has text in it
+        if(!string.IsNullOrEmpty(tbPostcode.Text))
+        {
+          //clear textbox as precaution
+          tbSearch.Text = "";
+
+          string postcode = tbPostcode.Text.ToLower().Replace(" ", "");
+          int radius = Int32.Parse(RadiusList.SelectedValue);
+
+          var postcodeCoords = (from p in db.PostCodesUKs
+                                where p.PostcodeNoSpace == postcode
+                                select p).SingleOrDefault();
+
+          //VALIDATION HERE IF POSTCODE NOT FOUND IN SYSTEM
+
+          double userPostcodeLat = (double)postcodeCoords.Latitude;
+          double userPostcodeLong = (double)postcodeCoords.Longitude;
+
+          //grab all dogwalks in system
+          List<DogWalk> grabAllWalks = (from w in db.DogWalks.Include("Pictures")
+                                        select w).ToList();
+
+          List<DogWalk> inRangeWalk = new List<DogWalk>();
+          foreach (var walk in grabAllWalks)
+          {
+            //method params: distanceCalculator(user lat, user long, walk lat, walk long, metric system )
+            double walkLat = (double)walk.Latitude;
+            double walkLong = (double)walk.Longitude;
+
+            double dis = DistanceCalculator.distanceCalculator(userPostcodeLat, userPostcodeLong, walkLat, walkLong, 'M');
+            if (dis <= radius)
+            {
+              inRangeWalk.Add(walk);
+            }
+          }
+
+          if (inRangeWalk.Count < 1)
+          {
+            lbNoDogwalks.Visible = true;
+          }
+          else
+          {
+            lbNoDogwalks.Visible = false;
+          }
+
+          tbPostcode.Text = "";
+          return inRangeWalk.ToList();
+        }
+        
         //if searchbox has text in it
-        if (!string.IsNullOrWhiteSpace(tbSearch.Text))
+        else if (!string.IsNullOrWhiteSpace(tbSearch.Text))
         {
           string searchValue = tbSearch.Text;
           var searchQuery = (from w in db.DogWalks.Include("Pictures")
@@ -106,5 +156,5 @@ namespace DogWalks.Walks
     //    }
     //  }
     //}
-  }
+  } 
 }

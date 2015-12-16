@@ -43,16 +43,16 @@
     <%--Logic is still TODO--%>
     <asp:Panel ID="PanelPostcode" runat="server" Visible="false">
       <div class="col-md-5">
-        <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server" placeholder="Enter Postcode"></asp:TextBox>
+        <asp:TextBox ID="tbPostcode" CssClass="form-control" runat="server" placeholder="Enter Postcode"></asp:TextBox>
       </div>
       <div class="col-md-4">        
         <div class="input-group">
-          <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
+          <asp:DropDownList ID="RadiusList" runat="server" CssClass="form-control">
           <asp:ListItem Value="5">5 miles</asp:ListItem>
-          <asp:ListItem>10 miles</asp:ListItem>
+          <asp:ListItem Value="10">10 miles</asp:ListItem>
         </asp:DropDownList>          
           <span class="input-group-btn">
-            <asp:Button ID="Button1" runat="server" Text="Search" CssClass="btn btn-success" OnClick="CategoryList_SelectedIndexChanged" />
+            <asp:Button ID="btPostCostSearch" runat="server" Text="Search" CssClass="btn btn-success" OnClick="CategoryList_SelectedIndexChanged" />
           </span>
         </div>       
       </div>      
@@ -60,6 +60,7 @@
   </div> 
 
   <br />
+  <asp:Label ID="lbNoDogwalks" runat="server" Text="Sorry, we could not find any dog walks within the radius" Visible="false"></asp:Label>
 
   <asp:ListView ID="ListView1" runat="server" DataKeyNames="WalkID" ItemType="DogWalks.DAL.DogWalk" SelectMethod="ListView1_GetData">
     <ItemTemplate>
@@ -101,17 +102,4 @@
   </asp:ListView>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="CustomScriptContentChild" runat="server">
-  <script>
-    //$(document).ready(function () {
-    //  $('#MainContent_MainContentChild_CategoryList').on('change', function () {
-    //    if (this.value == '5') {
-    //      $("#postcodeSearch").show();
-    //    }
-    //    else {
-    //      $("#postcodeSearch").hide();
-    //    }
-    //  });
-    //});
-
-  </script>
 </asp:Content>

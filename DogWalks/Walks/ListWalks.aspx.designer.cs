@@ -67,31 +67,40 @@ namespace DogWalks.Walks {
         protected global::System.Web.UI.WebControls.Panel PanelPostcode;
         
         /// <summary>
-        /// TextBox1 control.
+        /// tbPostcode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox tbPostcode;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// RadiusList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList RadiusList;
         
         /// <summary>
-        /// Button1 control.
+        /// btPostCostSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btPostCostSearch;
+        
+        /// <summary>
+        /// lbNoDogwalks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNoDogwalks;
         
         /// <summary>
         /// ListView1 control.
