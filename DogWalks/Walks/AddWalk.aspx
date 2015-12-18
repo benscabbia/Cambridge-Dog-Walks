@@ -26,62 +26,63 @@
   <div class="form-horizontal">
     <%--title--%>
     <div class="form-group">
-     <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1"></asp:Label>
+      <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1"></asp:Label>
       <div class="col-md-11">
         <asp:TextBox ID="tbTitle" CssClass="form-control setMaxWidth" runat="server"></asp:TextBox>
       </div>
     </div>
     <%--description--%>
     <div class="form-group">
-       <asp:Label ID="lbDescription" runat="server" Text="Description" CssClass="control-label col-md-1 "></asp:Label>
+      <asp:Label ID="lbDescription" runat="server" Text="Description" CssClass="control-label col-md-1 "></asp:Label>
       <div class="col-md-11">
         <asp:TextBox ID="tbDescription" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control setMaxWidth"></asp:TextBox>
       </div>
     </div>
     <%--length--%>
     <div class="form-group">
-    <asp:Label ID="lbLength" runat="server" Text="Length" CssClass="control-label col-md-1"></asp:Label>
+      <asp:Label ID="lbLength" runat="server" Text="Length" CssClass="control-label col-md-1"></asp:Label>
       <div class="col-md-4">
-        <asp:DropDownList ID="LengthList" runat="server" SelectMethod="LengthList_GetData" OnSelectedIndexChanged="LengthList_SelectedIndexChanged" AutoPostBack="true" 
-          CssClass="form-control setMaxWidth" DataTextField="LengthName" DataValueField="LengthID"></asp:DropDownList>
+        <asp:DropDownList ID="LengthList" runat="server" SelectMethod="LengthList_GetData" OnSelectedIndexChanged="LengthList_SelectedIndexChanged" AutoPostBack="true"
+          CssClass="form-control setMaxWidth" DataTextField="LengthName" DataValueField="LengthID">
+        </asp:DropDownList>
       </div>
       <asp:Label ID="lbLengthDescription" runat="server" Text="Label" CssClass="col-md-7 control-label leftAlign"></asp:Label>
     </div>
     <%--location--%>
     <div class="form-group">
-   <asp:Label ID="lbLocation" runat="server" Text="Location" CssClass="control-label col-md-1"></asp:Label>
+      <asp:Label ID="lbLocation" runat="server" Text="Location" CssClass="control-label col-md-1"></asp:Label>
       <div class="col-md-11">
         <asp:TextBox ID="tbLocation" runat="server" TextMode="MultiLine" CssClass="form-control setMaxWidth"></asp:TextBox>
       </div>
     </div>
     <%--postcode--%>
     <div class="form-group">
-   <asp:Label ID="lbPostcode" runat="server" Text="Postcode" CssClass="control-label col-md-1"></asp:Label>
+      <asp:Label ID="lbPostcode" runat="server" Text="Postcode" CssClass="control-label col-md-1"></asp:Label>
       <div class="col-md-11">
         <asp:TextBox ID="tbPostcode" runat="server" CssClass="form-control setMaxWidth"></asp:TextBox>
       </div>
     </div>
     <%--tags--%>
     <div class="form-group">
-   <asp:Label ID="lbTags" runat="server" Text="Tags" CssClass="control-label col-md-1"></asp:Label>
+      <asp:Label ID="lbTags" runat="server" Text="Tags" CssClass="control-label col-md-1"></asp:Label>
       <div class="col-md-11">
         <asp:CheckBoxList ID="cblTags" SelectMethod="TagList_GetData" runat="server" DataTextField="FeatureName" DataValueField="FeatureID" RepeatDirection="Horizontal" CssClass="form-control">
         </asp:CheckBoxList>
-    </div>
       </div>
+    </div>
     <%--image--%>
     <div class="form-group">
-    <asp:Label ID="lbImage" runat="server" Text="Image" CssClass="control-label col-md-1"></asp:Label>
+      <asp:Label ID="lbImage" runat="server" Text="Image" CssClass="control-label col-md-1"></asp:Label>
       <div class="col-md-11">
         <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="True" CssClass="form-control " />
-    </div>
       </div>
-  <%--  submit--%>
+    </div>
+    <%--  submit--%>
     <div class="form-group">
       <div class="col-md-offset-1 col-md-11">
         <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Add Walk" OnClick="btnSave_Click" />
+      </div>
     </div>
-
   </div>
 
   <%--Bootstrap new form--%>

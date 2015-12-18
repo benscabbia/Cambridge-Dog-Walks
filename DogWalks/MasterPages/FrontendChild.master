@@ -15,6 +15,11 @@
       <asp:ContentPlaceHolder ID="MainContentChild" runat="server"></asp:ContentPlaceHolder>
   </div>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="CustomScriptContent" runat="server">
+
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContentFullWidth" runat="server">
+  <asp:ContentPlaceHolder ID="MainContentChildFullWidth" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="Content4" ContentPlaceHolderID="CustomScriptContent" runat="server">
   <asp:ContentPlaceHolder ID="CustomScriptContentChild" runat="server"></asp:ContentPlaceHolder>
 </asp:Content>

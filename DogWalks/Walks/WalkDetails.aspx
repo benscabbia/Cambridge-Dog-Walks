@@ -144,35 +144,45 @@
         <div class="col-md-12">
           <h1>Comments</h1>
           <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.DAL.Comment" SelectMethod="ListView1_GetData" InsertMethod="ListView1_InsertItem" InsertItemPosition="LastItem">
-            <InsertItemTemplate>
-              Add Comment:
-              <%--title--%>
-              <div class="form-group">
-                <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1"></asp:Label>
-                <asp:TextBox ID="tbTitle" CssClass="form-control col-md-11" Text="<%# BindItem.Title %>" runat="server"></asp:TextBox>
-              </div>
-              <%--comment--%>
-              <div class="form-group">
-                <asp:Label ID="Label2" runat="server" Text="Comment" CssClass="control-label col-md-1"></asp:Label>
-                <asp:TextBox ID="tbBody" CssClass="form-control col-md-11" Text="<%# BindItem.Body %>" runat="server"></asp:TextBox>
-              </div>
-              <div class="form-group">
-                <div class="col-md-offset-1 col-md-11">
-                  <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Add Comment" CommandName="Insert"/>
-                </div>
-              </div>
-            </InsertItemTemplate>
             <ItemTemplate>
               <div class="row">
                 <div class="col-md-12">
                   <blockquote class="comments-background">
-                    <h2><%# Item.Title %></h2>
+                    <h3><b><%# Item.Title %></b></h3>
                     <p><%# Item.Body %></p>
                     <p><small><%# Item.AuthorID %>Author Person, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
                   </blockquote>
                 </div>
               </div>
             </ItemTemplate>
+            <InsertItemTemplate>
+              <hr />
+              <h2>Add Comment:</h2>
+              <div class="row">
+               <div class="form-horizontal">
+                <%--title--%>
+                <div class="form-group">
+                  <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1"></asp:Label>
+                  <div class="col-md-11">
+                    <asp:TextBox ID="tbTitle" CssClass="form-control" Text="<%# BindItem.Title %>" runat="server"></asp:TextBox>
+                  </div>
+                </div>
+                <%--comment--%>
+                <div class="form-group">
+                  <asp:Label ID="Label2" runat="server" Text="Comment" CssClass="control-label col-md-1"></asp:Label>
+                  <div class="col-md-11">
+                    <asp:TextBox ID="tbBody" CssClass="form-control" Text="<%# BindItem.Body %>" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-offset-1 col-md-11">
+                    <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Add Comment" CommandName="Insert"/>
+                  </div>
+                </div>
+              </div>
+
+                </div>
+            </InsertItemTemplate>
             <EmptyDataTemplate>
               No Comments 
             </EmptyDataTemplate>
@@ -188,8 +198,10 @@
     </ItemTemplate>
   </asp:FormView>
 </asp:Content>
-
-<asp:Content ID="Content3" ContentPlaceHolderID="CustomScriptContentChild" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="MainContentChildFullWidth" runat="server">
+  <h1>THIS IS WHERE IT IS</h1>
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="CustomScriptContentChild" runat="server">
   <script type="text/javascript">
     $('#myCarousel').carousel({
       interval: 10000

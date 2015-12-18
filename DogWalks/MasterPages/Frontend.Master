@@ -83,6 +83,8 @@
         <%--<div class="container body-content">--%>
       <asp:ContentPlaceHolder ID="MainContent" runat="server">
       </asp:ContentPlaceHolder>
+      <asp:ContentPlaceHolder ID="MainContentFullWidth" runat="server">
+      </asp:ContentPlaceHolder>
       <hr />
       <div class="container">
         <footer>

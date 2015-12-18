@@ -208,6 +208,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Management\ManageFeatures.aspx" />
     <Content Include="MasterPages\master-backup.txt" />
+    <Content Include="MasterPages\master-backup2.txt" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -275,6 +276,7 @@
     <Content Include="Walks\AddWalk.aspx" />
     <Content Include="Walks\ListWalks.aspx" />
     <Content Include="Walks\Search.aspx" />
+    <Content Include="Walks\testpage.aspx" />
     <Content Include="Walks\WalkDetails.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -575,6 +577,13 @@
     </Compile>
     <Compile Include="Walks\Search.aspx.designer.cs">
       <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Walks\testpage.aspx.cs">
+      <DependentUpon>testpage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Walks\testpage.aspx.designer.cs">
+      <DependentUpon>testpage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Walks\WalkDetails.aspx.cs">
       <DependentUpon>WalkDetails.aspx</DependentUpon>
