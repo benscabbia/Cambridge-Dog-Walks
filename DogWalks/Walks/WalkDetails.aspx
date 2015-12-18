@@ -64,7 +64,7 @@
             </div>
           </div>
         </div>
-      </div>--%>      
+      </div>--%>
 
 
       <div class="row">
@@ -84,8 +84,8 @@
               <asp:Repeater ID="Repeater3" runat="server" DataSource="<%# Item.Pictures %>">
                 <ItemTemplate>
                   <div id="carousel-items" class="item">
-                      <asp:Image ID="Image2" runat="server" ImageUrl='<%# Eval("PictureUrl") %>' />
-                                         
+                    <asp:Image ID="Image2" runat="server" ImageUrl='<%# Eval("PictureUrl") %>' />
+
                   </div>
                 </ItemTemplate>
               </asp:Repeater>
@@ -126,77 +126,80 @@
           </div>
         </div>
       </div>
+
       <br />
+
       <div class="row">
         <div class="col-md-12">
-          <b>Features: </b><br />
+          <b>Features: </b>
+          <br />
           <asp:Repeater ID="Repeater4" runat="server" DataSource="<%# Item.Features %>">
             <ItemTemplate>
-              <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("PictureUrl") %>'/>              
-              <%--<asp:Label ID="lbTest" runat="server" Text='<%# Eval("FeatureName") %>'></asp:Label>--%>               
+              <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("PictureUrl") %>' />
+              <%--<asp:Label ID="lbTest" runat="server" Text='<%# Eval("FeatureName") %>'></asp:Label>--%>
             </ItemTemplate>
           </asp:Repeater>
         </div>
       </div>
-      <br />
       <hr />
-      <div class="row">
-        <div class="col-md-12">
-          <h1>Comments</h1>
-          <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.DAL.Comment" SelectMethod="ListView1_GetData" InsertMethod="ListView1_InsertItem" InsertItemPosition="LastItem">
-            <ItemTemplate>
-              <div class="row">
-                <div class="col-md-12">
-                  <blockquote class="comments-background">
-                    <h3><b><%# Item.Title %></b></h3>
-                    <p><%# Item.Body %></p>
-                    <p><small><%# Item.AuthorID %>Author Person, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
-                  </blockquote>
-                </div>
-              </div>
-            </ItemTemplate>
-            <InsertItemTemplate>
-              <hr />
-              <h2>Add Comment:</h2>
-              <div class="row">
-               <div class="form-horizontal">
-                <%--title--%>
-                <div class="form-group">
-                  <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1"></asp:Label>
-                  <div class="col-md-11">
-                    <asp:TextBox ID="tbTitle" CssClass="form-control" Text="<%# BindItem.Title %>" runat="server"></asp:TextBox>
-                  </div>
-                </div>
-                <%--comment--%>
-                <div class="form-group">
-                  <asp:Label ID="Label2" runat="server" Text="Comment" CssClass="control-label col-md-1"></asp:Label>
-                  <div class="col-md-11">
-                    <asp:TextBox ID="tbBody" CssClass="form-control" Text="<%# BindItem.Body %>" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-offset-1 col-md-11">
-                    <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Add Comment" CommandName="Insert"/>
-                  </div>
-                </div>
-              </div>
-
-                </div>
-            </InsertItemTemplate>
-            <EmptyDataTemplate>
-              No Comments 
-            </EmptyDataTemplate>
-
-          </asp:ListView>
-
-        </div>
-      </div>
-
-
-      <br /><br /><br /><br />
-      <asp:Button ID="btnDelete" CssClass="btn btn-danger" CausesValidation="false" runat="server" Text="Delete" OnClick="btnDelete_Click" />
     </ItemTemplate>
   </asp:FormView>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Comments</h1>
+      <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.DAL.Comment" SelectMethod="ListView1_GetData" InsertMethod="ListView1_InsertItem" InsertItemPosition="LastItem">
+        <ItemTemplate>
+          <div class="row">
+            <div class="col-md-12">
+              <blockquote class="comments-background">
+                <h3><b><%# Item.Title %></b></h3>
+                <p><%# Item.Body %></p>
+                <p><small><%# Item.AuthorID %>Author Person, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
+              </blockquote>
+            </div>
+          </div>
+        </ItemTemplate>
+        <InsertItemTemplate>
+          <hr />
+          <h2>Add Comment:</h2>
+          <div class="row">
+            <div class="form-horizontal">
+              <%--title--%>
+              <div class="form-group">
+                <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1"></asp:Label>
+                <div class="col-md-11">
+                  <asp:TextBox ID="tbTitle" CssClass="form-control" Text="<%# BindItem.Title %>" runat="server"></asp:TextBox>
+                </div>
+              </div>
+              <%--comment--%>
+              <div class="form-group">
+                <asp:Label ID="Label2" runat="server" Text="Comment" CssClass="control-label col-md-1"></asp:Label>
+                <div class="col-md-11">
+                  <asp:TextBox ID="tbBody" CssClass="form-control" Text="<%# BindItem.Body %>" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-offset-1 col-md-11">
+                  <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Add Comment" CommandName="Insert" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </InsertItemTemplate>
+        <EmptyDataTemplate>
+          No Comments 
+        </EmptyDataTemplate>
+
+      </asp:ListView>
+
+    </div>
+  </div>
+
+  <br /><br /><br /><br />
+  <asp:Button ID="btnDelete" CssClass="btn btn-danger" CausesValidation="false" runat="server" Text="Delete" OnClick="btnDelete_Click" />
+
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContentChildFullWidth" runat="server">
   <h1>THIS IS WHERE IT IS</h1>
