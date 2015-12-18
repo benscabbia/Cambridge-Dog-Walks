@@ -26,6 +26,10 @@
     .bs-example {
       margin: 20px;
     }
+
+    .comments-background {
+      background: #f5f5f5;
+    }
   </style>
   <br />
   <asp:FormView ID="FormView1" runat="server" ItemType="DogWalks.DAL.DogWalk" SelectMethod="FormView1_GetItem">
@@ -134,6 +138,51 @@
           </asp:Repeater>
         </div>
       </div>
+      <br />
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Comments</h1>
+          <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.DAL.Comment" SelectMethod="ListView1_GetData" InsertMethod="ListView1_InsertItem" InsertItemPosition="LastItem">
+            <InsertItemTemplate>
+              Add Comment:
+              <%--title--%>
+              <div class="form-group">
+                <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1"></asp:Label>
+                <asp:TextBox ID="tbTitle" CssClass="form-control col-md-11" Text="<%# BindItem.Title %>" runat="server"></asp:TextBox>
+              </div>
+              <%--comment--%>
+              <div class="form-group">
+                <asp:Label ID="Label2" runat="server" Text="Comment" CssClass="control-label col-md-1"></asp:Label>
+                <asp:TextBox ID="tbBody" CssClass="form-control col-md-11" Text="<%# BindItem.Body %>" runat="server"></asp:TextBox>
+              </div>
+              <div class="form-group">
+                <div class="col-md-offset-1 col-md-11">
+                  <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Add Comment" CommandName="Insert"/>
+                </div>
+              </div>
+            </InsertItemTemplate>
+            <ItemTemplate>
+              <div class="row">
+                <div class="col-md-12">
+                  <blockquote class="comments-background">
+                    <h2><%# Item.Title %></h2>
+                    <p><%# Item.Body %></p>
+                    <p><small><%# Item.AuthorID %>Author Person, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
+                  </blockquote>
+                </div>
+              </div>
+            </ItemTemplate>
+            <EmptyDataTemplate>
+              No Comments 
+            </EmptyDataTemplate>
+
+          </asp:ListView>
+
+        </div>
+      </div>
+
+
       <br /><br /><br /><br />
       <asp:Button ID="btnDelete" CssClass="btn btn-danger" CausesValidation="false" runat="server" Text="Delete" OnClick="btnDelete_Click" />
     </ItemTemplate>

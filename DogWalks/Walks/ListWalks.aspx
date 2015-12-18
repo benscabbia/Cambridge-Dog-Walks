@@ -67,7 +67,7 @@
   <br />
   <asp:Label ID="lbNoDogwalks" runat="server" Text="Sorry, we could not find any dog walks within the radius" Visible="false"></asp:Label>
 
-  <asp:ListView ID="ListView1" runat="server" DataKeyNames="WalkID" ItemType="DogWalks.DAL.DogWalk" SelectMethod="ListView1_GetData">
+  <asp:ListView ID="ListView1" runat="server" DataKeyNames="WalkID" ItemType="DogWalks.DAL.DogWalk" SelectMethod="ListView1_GetData" OnItemDataBound="ListView1_ItemDataBound">
     <ItemTemplate>
       <div class="row">
 
@@ -93,6 +93,10 @@
           <%--Had to apply 'fake space' to avoid exception if description is <300--%>
           <p><%# Item.Description.ToString().PadRight(300).Substring(0,300).TrimEnd()%> . . .</p>
           <h6><b>Created on:</b> <%# Item.CreateDateTime.ToString() %></h6>
+          <%--<asp:Label ID="lbPostcodeDistance" runat="server" Text="Label" Visible="false"></asp:Label>--%>
+          <asp:Label ID="lbPostcodeDistance" runat="server" Text="<%#testString%>" Visible="false"></asp:Label>
+          
+
         </div>
       </div>
     </ItemTemplate>

@@ -20,14 +20,15 @@ namespace DogWalks.Walks
         if (CategoryList.SelectedIndex == 5)
         {
           PanelSearch.Visible = false;
-          PanelPostcode.Visible = true;
-
+          PanelPostcode.Visible = true;       
         }
         else 
         { 
           PanelPostcode.Visible = false;
           PanelSearch.Visible = true;
+          tbPostcode.Text = "";
         }
+
       }
     }
 
@@ -37,7 +38,8 @@ namespace DogWalks.Walks
     //     int startRowIndex
     //     out int totalRowCount
     //     string sortByExpression
-    public IEnumerable<DogWalks.DAL.DogWalk> ListView1_GetData()
+
+    public IEnumerable<DogWalks.DAL.DogWalk> ListView1_GetData()    
     {
       using (WalkContext db = new WalkContext())
       {
@@ -95,9 +97,8 @@ namespace DogWalks.Walks
               //sort the array
               inRangeWalks.Sort((x, y) => x.DistanceFromPostcode.CompareTo(y.DistanceFromPostcode));
             }
-            tbPostcode.Text = "";
-
-            return inRangeWalks.Select(x => x.Walk);
+            //tbPostcode.Text = "";
+            return inRangeWalks.Select(x => x.Walk);        
           }
         }
         
@@ -111,6 +112,7 @@ namespace DogWalks.Walks
 
           tbSearch.Text = "";//remove text
           return searchQuery;
+        
         }
 
         else
@@ -133,7 +135,7 @@ namespace DogWalks.Walks
               query = query.AsQueryable().OrderBy("Length.SizeRank " + order);
               break;
           }
-          return query.ToList();
+         return query.ToList();
         }
       }
     }
@@ -143,32 +145,28 @@ namespace DogWalks.Walks
       ListView1.DataBind();
     }
 
-    //protected void btSearch_Click(object sender, EventArgs e)
-    //{
-    //  string searchValue = tbSearch.Text;
-    //  if (!string.IsNullOrWhiteSpace(searchValue))
-    //  {
-    //    using (WalkContext db = new WalkContext())
-    //    {
-          
-    //      var query = (from w in db.DogWalks.Include("Pictures")
-    //                   //where w.Title.Contains(searchValue)
-    //                   select w);
+    protected string testString;
 
-    //      if (query != null)
-    //      {
-    //        ListView1.DataSource = query;
-    //        ListView1.DataBind();
-    //      }
-    //      //IQueryable<DogWalk> query = db.DogWalks.Include("Pictures").;
+    protected void ListView1_ItemDataBound(object sender, ListViewItemEventArgs e)
+    {
+      if (e.Item.ItemType == ListViewItemType.DataItem)
+      {
+        if (CategoryList.SelectedIndex == 5)
+        {
+          var lb = e.Item.FindControl("lbPostcodeDistance") as Label;
+          if (!string.IsNullOrEmpty(tbPostcode.Text))
+          {
+            //lb.Text = "Distance from: " + tbPostcode.Text;
+            lb.Visible = true;
+          }
 
-    //    }
-    //  }
-    //}
+        }
+      }
+    }    
   }
 
   //used to temporarily store walks with the relative distance to the inputted postcode
-  struct InRangeWalks
+  public struct InRangeWalks
   {
     private double distanceFromPostcode;
     private DogWalk walk;

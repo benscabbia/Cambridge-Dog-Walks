@@ -100,5 +100,43 @@ namespace DogWalks.Walks
       }
 
     }
+
+    // The return type can be changed to IEnumerable, however to support
+    // paging and sorting, the following parameters must be added:
+    //     int maximumRows
+    //     int startRowIndex
+    //     out int totalRowCount
+    //     string sortByExpression
+    public IQueryable ListView1_GetData()
+    {
+      using (var db = new WalkContext())
+      {
+        int id = Convert.ToInt32(Request.QueryString["WalkID"]);
+
+        var walkComments = (from c in db.Comments
+                            where c.WalkID == id
+                            select c).ToList();
+        return walkComments.AsQueryable();
+      }
+    }
+
+    public void ListView1_InsertItem([QueryString("WalkID")] int walkID)
+    {
+      var comment = new DogWalks.DAL.Comment();
+      TryUpdateModel(comment);
+      if (ModelState.IsValid)
+      {
+        // Save changes here
+        using(var db=new WalkContext())
+        {
+          comment.WalkID = walkID;
+          comment.CreateDateTime = DateTime.Now;
+          db.Comments.Add(comment);
+          db.SaveChanges();
+        }
+        Response.Redirect("WalkDetails?WalkID=" + walkID);
+       
+      }
+    }
   }
 }
