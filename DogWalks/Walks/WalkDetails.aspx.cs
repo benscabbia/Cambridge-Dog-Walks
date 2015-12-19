@@ -6,13 +6,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DogWalks.DAL;
 using System.Web.ModelBinding;
+using System.Collections;
 
 namespace DogWalks.Walks
 {
   public partial class WalkDetail : System.Web.UI.Page
-  {
+  {    
+
     protected void Page_Load(object sender, EventArgs e)
     {
+
     }
 
     // The id parameter should match the DataKeyNames value set on the control
@@ -116,7 +119,13 @@ namespace DogWalks.Walks
         var walkComments = (from c in db.Comments
                             where c.WalkID == id
                             select c).ToList();
-        return walkComments.AsQueryable();
+              
+        if (walkComments.Count == 0)
+        {
+          lbNoComments.Visible = true;
+        }
+
+          return walkComments.AsQueryable();
       }
     }
 

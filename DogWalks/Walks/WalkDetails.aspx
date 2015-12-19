@@ -161,10 +161,9 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContentChildFullWidth" runat="server">
   <div class="comments-section-background">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
           <h1 class="white-text">Comments</h1>
-          <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.DAL.Comment" SelectMethod="ListView1_GetData" InsertMethod="ListView1_InsertItem" InsertItemPosition="LastItem">
+          <asp:Label ID="lbNoComments" runat="server" Text="No Comments" Visible="false" CssClass="white-text"></asp:Label>
+          <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.DAL.Comment" SelectMethod="ListView1_GetData" InsertMethod="ListView1_InsertItem" insertitemposition="LastItem">
             <ItemTemplate>
               <div class="row">
                 <div class="col-md-12">
@@ -179,7 +178,6 @@
             <InsertItemTemplate>
               <hr />
               <h2 class="white-text">Add Comment:</h2>
-              <div class="row">
                 <div class="form-horizontal">
                   <%--title--%>
                   <div class="form-group">
@@ -188,6 +186,7 @@
                       <asp:TextBox ID="tbTitle" CssClass="form-control" Text="<%# BindItem.Title %>" runat="server"></asp:TextBox>
                     </div>
                   </div>
+
                   <%--comment--%>
                   <div class="form-group">
                     <asp:Label ID="Label2" runat="server" Text="Comment" CssClass="control-label col-md-1 white-text"></asp:Label>
@@ -201,18 +200,11 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </InsertItemTemplate>
-            <EmptyDataTemplate>
-              No Comments 
-            </EmptyDataTemplate>
-
+            </InsertItemTemplate>           
           </asp:ListView>
 
         </div>
       </div>  
-    </div>
-  </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="CustomScriptContentChild" runat="server">
   <script type="text/javascript">
