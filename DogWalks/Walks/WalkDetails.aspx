@@ -30,6 +30,15 @@
     .comments-background {
       background: #f5f5f5;
     }
+
+    .comments-section-background{
+      background:#565656;
+      margin-bottom:-21px; /*required to cover part of the footer*/
+    }
+
+    .white-text{
+      color: white;
+    }
   </style>
   <br />
   <asp:FormView ID="FormView1" runat="server" ItemType="DogWalks.DAL.DogWalk" SelectMethod="FormView1_GetItem">
@@ -141,68 +150,69 @@
           </asp:Repeater>
         </div>
       </div>
-      <hr />
     </ItemTemplate>
   </asp:FormView>
 
-  <div class="row">
-    <div class="col-md-12">
-      <h1>Comments</h1>
-      <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.DAL.Comment" SelectMethod="ListView1_GetData" InsertMethod="ListView1_InsertItem" InsertItemPosition="LastItem">
-        <ItemTemplate>
-          <div class="row">
-            <div class="col-md-12">
-              <blockquote class="comments-background">
-                <h3><b><%# Item.Title %></b></h3>
-                <p><%# Item.Body %></p>
-                <p><small><%# Item.AuthorID %>Author Person, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
-              </blockquote>
-            </div>
-          </div>
-        </ItemTemplate>
-        <InsertItemTemplate>
-          <hr />
-          <h2>Add Comment:</h2>
-          <div class="row">
-            <div class="form-horizontal">
-              <%--title--%>
-              <div class="form-group">
-                <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1"></asp:Label>
-                <div class="col-md-11">
-                  <asp:TextBox ID="tbTitle" CssClass="form-control" Text="<%# BindItem.Title %>" runat="server"></asp:TextBox>
-                </div>
-              </div>
-              <%--comment--%>
-              <div class="form-group">
-                <asp:Label ID="Label2" runat="server" Text="Comment" CssClass="control-label col-md-1"></asp:Label>
-                <div class="col-md-11">
-                  <asp:TextBox ID="tbBody" CssClass="form-control" Text="<%# BindItem.Body %>" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-md-offset-1 col-md-11">
-                  <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Add Comment" CommandName="Insert" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </InsertItemTemplate>
-        <EmptyDataTemplate>
-          No Comments 
-        </EmptyDataTemplate>
 
-      </asp:ListView>
-
-    </div>
-  </div>
-
-  <br /><br /><br /><br />
+  <br /><br />
   <asp:Button ID="btnDelete" CssClass="btn btn-danger" CausesValidation="false" runat="server" Text="Delete" OnClick="btnDelete_Click" />
-
-
+  <br /><br />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContentChildFullWidth" runat="server">
-  <h1>THIS IS WHERE IT IS</h1>
+  <div class="comments-section-background">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="white-text">Comments</h1>
+          <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.DAL.Comment" SelectMethod="ListView1_GetData" InsertMethod="ListView1_InsertItem" InsertItemPosition="LastItem">
+            <ItemTemplate>
+              <div class="row">
+                <div class="col-md-12">
+                  <blockquote class="comments-background">
+                    <h3><b><%# Item.Title %></b></h3>
+                    <p><%# Item.Body %></p>
+                    <p><small><%# Item.AuthorID %>Author Person, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
+                  </blockquote>
+                </div>
+              </div>
+            </ItemTemplate>
+            <InsertItemTemplate>
+              <hr />
+              <h2 class="white-text">Add Comment:</h2>
+              <div class="row">
+                <div class="form-horizontal">
+                  <%--title--%>
+                  <div class="form-group">
+                    <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1 white-text"></asp:Label>
+                    <div class="col-md-11">
+                      <asp:TextBox ID="tbTitle" CssClass="form-control" Text="<%# BindItem.Title %>" runat="server"></asp:TextBox>
+                    </div>
+                  </div>
+                  <%--comment--%>
+                  <div class="form-group">
+                    <asp:Label ID="Label2" runat="server" Text="Comment" CssClass="control-label col-md-1 white-text"></asp:Label>
+                    <div class="col-md-11">
+                      <asp:TextBox ID="tbBody" CssClass="form-control" Text="<%# BindItem.Body %>" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-offset-1 col-md-11">
+                      <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Add Comment" CommandName="Insert" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </InsertItemTemplate>
+            <EmptyDataTemplate>
+              No Comments 
+            </EmptyDataTemplate>
+
+          </asp:ListView>
+
+        </div>
+      </div>  
+    </div>
+  </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="CustomScriptContentChild" runat="server">
   <script type="text/javascript">
