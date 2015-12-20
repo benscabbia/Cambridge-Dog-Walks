@@ -39,7 +39,7 @@ namespace DogWalks.Walks
     //     out int totalRowCount
     //     string sortByExpression
 
-    public IEnumerable<DogWalks.DAL.DogWalk> ListView1_GetData()    
+    public IQueryable<InRangeWalks> ListView1_GetData()    
     {
       using (WalkContext db = new WalkContext())
       {
@@ -98,7 +98,8 @@ namespace DogWalks.Walks
               inRangeWalks.Sort((x, y) => x.DistanceFromPostcode.CompareTo(y.DistanceFromPostcode));
             }
             //tbPostcode.Text = "";
-            return inRangeWalks.Select(x => x.Walk);        
+            //return inRangeWalks.Select(x => x.Walk);        
+            return inRangeWalks.AsQueryable();        
           }
         }
         
@@ -110,8 +111,14 @@ namespace DogWalks.Walks
                              where w.Title.Contains(searchValue)
                              select w).ToList();
 
+          var inRangeWalks = new List<InRangeWalks>();
+          foreach (var walk in searchQuery)
+          {
+            inRangeWalks.Add(new InRangeWalks(-1, walk));
+          }
+
           tbSearch.Text = "";//remove text
-          return searchQuery;
+          return inRangeWalks.AsQueryable();
         
         }
 
@@ -135,7 +142,12 @@ namespace DogWalks.Walks
               query = query.AsQueryable().OrderBy("Length.SizeRank " + order);
               break;
           }
-         return query.ToList();
+          var inRangeWalks = new List<InRangeWalks>();
+          foreach (var walk in query)
+          {
+            inRangeWalks.Add(new InRangeWalks(-1, walk));
+          }
+         return inRangeWalks.AsQueryable();
         }
       }
     }
@@ -166,11 +178,15 @@ namespace DogWalks.Walks
   }
 
   //used to temporarily store walks with the relative distance to the inputted postcode
-  public struct InRangeWalks
+  public class InRangeWalks
   {
     private double distanceFromPostcode;
     private DogWalk walk;
 
+    public InRangeWalks(DogWalk walk)
+    {
+      this.walk = walk;
+    }
     public InRangeWalks(double distanceFromPostcode, DogWalk walk)
     {
       this.distanceFromPostcode = distanceFromPostcode;
