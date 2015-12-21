@@ -16,6 +16,13 @@
       text-align:left !important;
     }
 
+    .checkboxListSpacing td {
+      padding:0 20px 2px 0;
+    }
+    .checkboxListSpacing label{
+      padding-left: 2px;
+    }
+
   </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentChild" runat="server">
@@ -66,7 +73,8 @@
     <div class="form-group">
       <asp:Label ID="lbTags" runat="server" Text="Tags" CssClass="control-label col-md-1"></asp:Label>
       <div class="col-md-11">
-        <asp:CheckBoxList ID="cblTags" SelectMethod="TagList_GetData" runat="server" DataTextField="FeatureName" DataValueField="FeatureID" RepeatDirection="Horizontal" CssClass="form-control">
+        <asp:CheckBoxList ID="cblTags" SelectMethod="TagList_GetData" runat="server" DataTextField="FeatureName" DataValueField="FeatureID" 
+          RepeatDirection="Horizontal" CssClass="checkboxListSpacing" RepeatColumns="5" >
         </asp:CheckBoxList>
       </div>
     </div>
@@ -74,7 +82,7 @@
     <div class="form-group">
       <asp:Label ID="lbImage" runat="server" Text="Image" CssClass="control-label col-md-1"></asp:Label>
       <div class="col-md-11">
-        <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="True" CssClass="form-control " />
+        <asp:FileUpload ID="FileUpload1" runat="server" AllowMultiple="True"/>
       </div>
     </div>
     <%--  submit--%>
