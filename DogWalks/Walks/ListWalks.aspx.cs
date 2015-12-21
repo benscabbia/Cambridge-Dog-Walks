@@ -20,7 +20,7 @@ namespace DogWalks.Walks
         if (CategoryList.SelectedIndex == 5)
         {
           PanelSearch.Visible = false;
-          PanelPostcode.Visible = true;       
+          PanelPostcode.Visible = true;
         }
         else 
         { 
@@ -152,29 +152,11 @@ namespace DogWalks.Walks
       }
     }
 
+    //method is also used by RadiusList
     protected void CategoryList_SelectedIndexChanged(object sender, EventArgs e)
     {
       ListView1.DataBind();
-    }
-
-    protected string testString;
-
-    protected void ListView1_ItemDataBound(object sender, ListViewItemEventArgs e)
-    {
-      if (e.Item.ItemType == ListViewItemType.DataItem)
-      {
-        if (CategoryList.SelectedIndex == 5)
-        {
-          var lb = e.Item.FindControl("lbPostcodeDistance") as Label;
-          if (!string.IsNullOrEmpty(tbPostcode.Text))
-          {
-            //lb.Text = "Distance from: " + tbPostcode.Text;
-            lb.Visible = true;
-          }
-
-        }
-      }
-    }    
+    }   
   }
 
   //used to temporarily store walks with the relative distance to the inputted postcode

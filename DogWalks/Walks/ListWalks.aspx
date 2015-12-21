@@ -47,7 +47,7 @@
       </div>
       <div class="col-md-4">        
         <div class="input-group">
-          <asp:DropDownList ID="RadiusList" runat="server" CssClass="form-control" AutoPostBack="true">
+          <asp:DropDownList ID="RadiusList" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="CategoryList_SelectedIndexChanged">
           <asp:ListItem Value="5">5 miles</asp:ListItem>
           <asp:ListItem Value="10">10 miles</asp:ListItem>
           <asp:ListItem Value="15">15 miles</asp:ListItem>
@@ -66,20 +66,10 @@
 
   <br />
   <asp:Label ID="lbNoDogwalks" runat="server" Text="Sorry, we could not find any dog walks within the radius" Visible="false"></asp:Label>
-
-  <%--<asp:ListView ID="ListView1" runat="server" DataKeyNames="WalkID" ItemType="DogWalks.DAL.DogWalk" SelectMethod="ListView1_GetData" OnItemDataBound="ListView1_ItemDataBound">--%>
-  <asp:ListView ID="ListView1" runat="server" ItemType="DogWalks.Walks.InRangeWalks" SelectMethod="ListView1_GetData" OnItemDataBound="ListView1_ItemDataBound">
+  
+  <asp:ListView ID="ListView1" runat="server" ItemType="DogWalks.Walks.InRangeWalks" SelectMethod="ListView1_GetData" >
     <ItemTemplate>
       <div class="row">
-
-        <!--old code, undecided-->
-        <%--<div class="col-md-3">
-          <a href="../Walks/WalkDetails?WalkID=<%#Item.WalkID%>"> 
-            <%--Grab first picture and check if its not null--%>
-           <%--<asp:Image ID="Image1" class="img-responsive pull-left" style="min-width:262.5px;min-height:150px;" runat="server" ImageUrl=<%# Item.Pictures.FirstOrDefault() != null ? Item.Pictures.FirstOrDefault().PictureUrl : string.Empty %>/>
-          </a>
-        </div>--%>
-
         <div class="col-md-3">
           <div class="thumbnail">
             <a href="../Walks/WalkDetails?WalkID=<%# Item.Walk.WalkID %>">             
@@ -94,10 +84,7 @@
           <%--Had to apply 'fake space' to avoid exception if description is <300--%>
           <p><%# Item.Walk.Description.ToString().PadRight(300).Substring(0,300).TrimEnd()%> . . .</p>
           <h6><b>Created on:</b> <%# Item.Walk.CreateDateTime.ToString() %></h6>
-          <%--<asp:Label ID="lbPostcodeDistance" runat="server" Text="Label" Visible="false"></asp:Label>--%>
-          <h6><asp:Label ID="lbPostcodeDistance" runat="server" Text='<%# "<b>Distance from Postcode:</b> " + Item.DistanceFromPostcode.ToString("0.##") + " miles" %>' Visible=<%# (Item.DistanceFromPostcode == -1 || !string.IsNullOrEmpty(tbPostcode.Text)) ? false : true %>></asp:Label> </h6>
-          
-
+          <h6><asp:Label ID="lbPostcodeDistance" runat="server" Text='<%# "<b>Distance from Postcode:</b> " + Item.DistanceFromPostcode.ToString("0.##") + " miles" %>' Visible=<%# (Item.DistanceFromPostcode == -1 || string.IsNullOrEmpty(tbPostcode.Text)) ? false : true %>></asp:Label> </h6>          
         </div>
       </div>
     </ItemTemplate>
