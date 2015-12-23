@@ -11,9 +11,13 @@ namespace DogWalks.Walks
 {
   public partial class AddWalk : System.Web.UI.Page
   {
+
     protected void Page_Load(object sender, EventArgs e)
     {
-
+      if (!this.IsPostBack)
+      {
+        this.Form.Enctype = "multipart/form-data";
+      }
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
@@ -42,10 +46,14 @@ namespace DogWalks.Walks
     //method which contains image logic
     private void ImageLogic(DogWalk dogWalk)
     {
-      if (FileUpload1.HasFiles)
+      HttpPostedFile myFile2 = Request.Files["myFile"];
+
+      for (int i = 0; i < Request.Files.Count; i++)
       {
-        foreach (var image in FileUpload1.PostedFiles)
+        HttpPostedFile image = Request.Files[i];
+        if (image.ContentLength > 0)
         {
+          //var image = file.FileName;
           Picture picture = new Picture(); //create new picture
 
           picture.WalkID = dogWalk.WalkID; //assign image the dogwalk id
@@ -63,7 +71,6 @@ namespace DogWalks.Walks
 
           dogWalk.Pictures.Add(picture); //add the image to pictures
         }
-
       }
     }
 
