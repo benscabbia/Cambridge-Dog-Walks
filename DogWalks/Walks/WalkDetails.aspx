@@ -43,39 +43,7 @@
   <br />
   <asp:FormView ID="FormView1" runat="server" ItemType="DogWalks.DAL.DogWalk" SelectMethod="FormView1_GetItem">
     <ItemTemplate>
-      <%--<div class="row">
-        <div class="container">
-          <div class="bs-example">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-              <!-- Carousel indicators -->
-              <%--<ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-              </ol>--%>
-      <!-- Wrapper for carousel items -->
-      <%--<div class="carousel-inner">
-                <asp:Repeater ID="Repeater2" runat="server" DataSource="<%# Item.Pictures %>">
-                  <ItemTemplate>
-                    <div id="carousel-items" class="item">
-                      <asp:Image ID="Image2" runat="server" ImageUrl='<%# Eval("PictureUrl") %>' />
-                    </div>
-                  </ItemTemplate>
-                </asp:Repeater>
-                <!-- Carousel controls -->
-              </div>
-              <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-              </a>
-              <a class="carousel-control right" href="#myCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>--%>
-
-
+     
       <div class="row">
         <div class="col-md-5">
           <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -130,6 +98,7 @@
                   </ItemTemplate>
                 </asp:Repeater>
               </p>
+              <p><asp:Label ID="lbPostcodeDistance" runat="server" Text='<%# "<b>Useful Website: </b>" + Item.WebsiteUrl %>' Visible=<%# (string.IsNullOrEmpty(Item.WebsiteUrl)) ? false : true %>></asp:Label> </p>
               <p><b>Created by: </b>user xxx on the <%# Item.CreateDateTime.ToShortDateString() %></p>
             </div>
           </div>

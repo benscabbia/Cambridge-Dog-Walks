@@ -29,6 +29,7 @@ namespace DogWalks.Walks
         dogWalk.Description = tbDescription.Text;
         dogWalk.LengthID = Convert.ToInt32(LengthList.SelectedValue);
         dogWalk.Location = tbLocation.Text;
+        dogWalk.WebsiteUrl = tbWebsite.Text;
 
         TagLogic(db, dogWalk);
         ImageLogic(dogWalk);               
@@ -66,7 +67,7 @@ namespace DogWalks.Walks
           image.SaveAs(System.IO.Path.Combine(physicalFolder, fileName + extension));  //save image on local
 
           picture.PictureUrl = virtualFolder + fileName + extension; //set picture url
-
+         
           picture.Description = "an image of the walk"; //set description (temp)
 
           dogWalk.Pictures.Add(picture); //add the image to pictures

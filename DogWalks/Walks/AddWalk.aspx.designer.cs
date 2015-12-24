@@ -130,6 +130,24 @@ namespace DogWalks.Walks {
         protected global::System.Web.UI.WebControls.CheckBoxList cblTags;
         
         /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
+        /// tbWebsite control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbWebsite;
+        
+        /// <summary>
         /// lbImage control.
         /// </summary>
         /// <remarks>

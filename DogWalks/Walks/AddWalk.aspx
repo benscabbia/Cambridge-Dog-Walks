@@ -101,6 +101,13 @@
         </asp:CheckBoxList>
       </div>
     </div>
+    <%--websiteUrl--%>
+    <div class="form-group">
+      <asp:Label ID="Label2" runat="server" Text="Website Link" CssClass="control-label col-md-1"></asp:Label>
+      <div class="col-md-11">
+        <asp:TextBox ID="tbWebsite" runat="server" CssClass="form-control setMaxWidth"></asp:TextBox>
+      </div>
+    </div>
     <%--image--%>
     <div class="form-group">
       <asp:Label ID="lbImage" runat="server" Text="Image" CssClass="control-label col-md-1"></asp:Label>

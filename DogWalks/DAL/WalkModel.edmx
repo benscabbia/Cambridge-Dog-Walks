@@ -30,6 +30,7 @@
           <Property Name="Latitude" Type="numeric" Precision="8" Scale="6" Nullable="false" />
           <Property Name="Longitude" Type="numeric" Precision="9" Scale="6" Nullable="false" />
           <Property Name="LengthID" Type="int" Nullable="false" />
+          <Property Name="WebsiteUrl" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Feature">
           <Key>
@@ -256,6 +257,7 @@
           <NavigationProperty Name="Pictures" Relationship="WalkModel.FK_Image_DogWalk" FromRole="DogWalk" ToRole="Picture" />
           <Property Name="LengthID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Length" Relationship="WalkModel.FK_DogWalk_Length" FromRole="DogWalk" ToRole="Length" />
+          <Property Name="WebsiteUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Feature">
           <Key>
@@ -381,6 +383,7 @@
           <EntitySetMapping Name="DogWalks">
             <EntityTypeMapping TypeName="WalkModel.DogWalk">
               <MappingFragment StoreEntitySet="DogWalk">
+                <ScalarProperty Name="WebsiteUrl" ColumnName="WebsiteUrl" />
                 <ScalarProperty Name="LengthID" ColumnName="LengthID" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
