@@ -30,6 +30,7 @@ namespace DogWalks.Walks
         dogWalk.LengthID = Convert.ToInt32(LengthList.SelectedValue);
         dogWalk.Location = tbLocation.Text;
         dogWalk.WebsiteUrl = tbWebsite.Text;
+        dogWalk.AuthorID = User.Identity.Name;
 
         TagLogic(db, dogWalk);
         ImageLogic(dogWalk);               
