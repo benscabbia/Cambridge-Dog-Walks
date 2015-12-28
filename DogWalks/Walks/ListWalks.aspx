@@ -5,7 +5,7 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentChild" runat="server">
-  <h1>Let's find the perfect walk!</h1><br />
+  <h2>Let's find the perfect walk!</h2><br />
 
   <div class="row">
     <div class="col-md-3">
