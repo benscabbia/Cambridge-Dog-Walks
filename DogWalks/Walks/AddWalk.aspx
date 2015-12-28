@@ -149,9 +149,11 @@
       $(document).on('change.bs.fileinput', '.fileinput', function (e) {
         var $this = $(this),
             $input = $this.find('input[type=file]'),
-            $span = $this.find('.fileinput-filename');
+            $span = $this.find('.fileinput-filename');        
         if ($input[0].files !== undefined && $input[0].files.length > 1) {
           $span.addClass('dropdown').html('<a href="#" data-toggle="dropdown" class="dropdown-toggle">multiple files selected <i class="caret"></i></a><ul class="dropdown-menu" role="menu"><li>' + $.map($input[0].files, function (val) { return val.name; }).join('</li><li>') + '</li></ul>');
+        } else if ($input[0].files !== undefined && $input[0].files.length == 1) {
+          $span.removeClass('dropdown').html($.map($input[0].files, function (val) { return val.name; }));
         }
       });
     });
