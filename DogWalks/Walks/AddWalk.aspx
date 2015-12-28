@@ -38,13 +38,9 @@
       .fileinput .fileinput-filename .dropdown-menu > li {
         padding: 3px 20px;
       }
-
-
   </style>
 
-  <%--<link href="http://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.css" rel="stylesheet" />
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.js"></script>--%>
-  <script src="../Scripts/jasny-bootstrap.min.js"></script>
+  <script src="../Scripts/jasny-bootstrap.js"></script>
   <link href="../Content/jasny-bootstrap.min.css" rel="stylesheet" />
 
 </asp:Content>
@@ -115,7 +111,8 @@
         <div class="fileinput fileinput-new setMaxWidth" data-provides="fileinput">
           <div class="input-group">
             <div class="form-control uneditable-input">
-              <i class="glyphicon glyphicon-file fileinput-exists"></i><span class="fileinput-filename"></span>
+              <i class="glyphicon glyphicon-file fileinput-exists"></i>
+              <span class="fileinput-filename"></span>
             </div>
             <div class="input-group-btn">
               <div class="btn btn-default btn-file">
