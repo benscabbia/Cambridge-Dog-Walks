@@ -49,44 +49,45 @@
   // ROWLINK PLUGIN DEFINITION
   // ===========================
   var old;
-if($.fn.rowlink != null){
-	old = $.fn.rowlink
-}
-  
+  if($ != null && $.fn != null && $.fn.rowlink != null){
+	  old = $.fn.rowlink
+    $.fn.rowlink = function (options) {
+      return this.each(function () {
+        var $this = $(this)
+        var data = $this.data('bs.rowlink')
+        if (!data) $this.data('bs.rowlink', (data = new Rowlink(this, options)))
+      })
+    }
 
-  $.fn.rowlink = function (options) {
-    return this.each(function () {
-      var $this = $(this)
-      var data = $this.data('bs.rowlink')
-      if (!data) $this.data('bs.rowlink', (data = new Rowlink(this, options)))
-    })
-  }
+    $.fn.rowlink.Constructor = Rowlink
 
-  $.fn.rowlink.Constructor = Rowlink
+    // ROWLINK NO CONFLICT
+    // ====================
 
+    $.fn.rowlink.noConflict = function () {
+      $.fn.rowlink = old
+      return this
+    }
+    // ROWLINK DATA-API
+    // ==================
 
-  // ROWLINK NO CONFLICT
-  // ====================
-
-  $.fn.rowlink.noConflict = function () {
-    $.fn.rowlink = old
-    return this
-  }
-
-
-  // ROWLINK DATA-API
-  // ==================
-
-  $(document).on('click.bs.rowlink.data-api', '[data-link="row"]', function (e) {
-    if ($(e.target).closest('.rowlink-skip').length !== 0) return
+    $(document).on('click.bs.rowlink.data-api', '[data-link="row"]', function (e) {
+      if ($(e.target).closest('.rowlink-skip').length !== 0) return
     
-    var $this = $(this)
-    if ($this.data('bs.rowlink')) return
-    $this.rowlink($this.data())
-    $(e.target).trigger('click.bs.rowlink')
-  })
+      var $this = $(this)
+      if ($this.data('bs.rowlink')) return
+      $this.rowlink($this.data())
+      $(e.target).trigger('click.bs.rowlink')
+    })
   
-}(window.jQuery);
+  }(window.jQuery);
+  }
+  
+
+
+
+
+
 
 /* ===========================================================
  * Bootstrap: inputmask.js v3.1.0
@@ -417,39 +418,42 @@ if($.fn.rowlink != null){
   // INPUTMASK PLUGIN DEFINITION
   // ===========================
 
-  var old = $.fn.inputmask
+  if ($ != null && $.fn != null && $.fn.inputmask != null) {
+    var old = $.fn.inputmask
   
-  $.fn.inputmask = function (options) {
-    return this.each(function () {
-      var $this = $(this)
-      var data = $this.data('bs.inputmask')
+    $.fn.inputmask = function (options) {
+      return this.each(function () {
+        var $this = $(this)
+        var data = $this.data('bs.inputmask')
       
-      if (!data) $this.data('bs.inputmask', (data = new Inputmask(this, options)))
+        if (!data) $this.data('bs.inputmask', (data = new Inputmask(this, options)))
+      })
+    }
+
+    $.fn.inputmask.Constructor = Inputmask
+
+
+    // INPUTMASK NO CONFLICT
+    // ====================
+
+    $.fn.inputmask.noConflict = function () {
+      $.fn.inputmask = old
+      return this
+    }
+
+
+    // INPUTMASK DATA-API
+    // ==================
+
+    $(document).on('focus.bs.inputmask.data-api', '[data-mask]', function (e) {
+      var $this = $(this)
+      if ($this.data('bs.inputmask')) return
+      $this.inputmask($this.data())
     })
+
+  }(window.jQuery);
   }
 
-  $.fn.inputmask.Constructor = Inputmask
-
-
-  // INPUTMASK NO CONFLICT
-  // ====================
-
-  $.fn.inputmask.noConflict = function () {
-    $.fn.inputmask = old
-    return this
-  }
-
-
-  // INPUTMASK DATA-API
-  // ==================
-
-  $(document).on('focus.bs.inputmask.data-api', '[data-mask]', function (e) {
-    var $this = $(this)
-    if ($this.data('bs.inputmask')) return
-    $this.inputmask($this.data())
-  })
-
-}(window.jQuery);
 
 /* ===========================================================
  * Bootstrap: fileinput.js v3.1.3
@@ -610,45 +614,48 @@ if($.fn.rowlink != null){
   // FILEUPLOAD PLUGIN DEFINITION
   // ===========================
 
-  var old = $.fn.fileinput
+  if ($ != null && $.fn != null && $.fn.fileinput != null) {
+    var old = $.fn.fileinput
   
-  $.fn.fileinput = function (options) {
-    return this.each(function () {
-      var $this = $(this),
-          data = $this.data('bs.fileinput')
-      if (!data) $this.data('bs.fileinput', (data = new Fileinput(this, options)))
-      if (typeof options == 'string') data[options]()
-    })
-  }
-
-  $.fn.fileinput.Constructor = Fileinput
-
-
-  // FILEINPUT NO CONFLICT
-  // ====================
-
-  $.fn.fileinput.noConflict = function () {
-    $.fn.fileinput = old
-    return this
-  }
-
-
-  // FILEUPLOAD DATA-API
-  // ==================
-
-  $(document).on('click.fileinput.data-api', '[data-provides="fileinput"]', function (e) {
-    var $this = $(this)
-    if ($this.data('bs.fileinput')) return
-    $this.fileinput($this.data())
-      
-    var $target = $(e.target).closest('[data-dismiss="fileinput"],[data-trigger="fileinput"]');
-    if ($target.length > 0) {
-      e.preventDefault()
-      $target.trigger('click.bs.fileinput')
+    $.fn.fileinput = function (options) {
+      return this.each(function () {
+        var $this = $(this),
+            data = $this.data('bs.fileinput')
+        if (!data) $this.data('bs.fileinput', (data = new Fileinput(this, options)))
+        if (typeof options == 'string') data[options]()
+      })
     }
-  })
 
-}(window.jQuery);
+    $.fn.fileinput.Constructor = Fileinput
+
+
+    // FILEINPUT NO CONFLICT
+    // ====================
+
+    $.fn.fileinput.noConflict = function () {
+      $.fn.fileinput = old
+      return this
+    }
+
+
+    // FILEUPLOAD DATA-API
+    // ==================
+
+    $(document).on('click.fileinput.data-api', '[data-provides="fileinput"]', function (e) {
+      var $this = $(this)
+      if ($this.data('bs.fileinput')) return
+      $this.fileinput($this.data())
+      
+      var $target = $(e.target).closest('[data-dismiss="fileinput"],[data-trigger="fileinput"]');
+      if ($target.length > 0) {
+        e.preventDefault()
+        $target.trigger('click.bs.fileinput')
+      }
+    })
+
+  }(window.jQuery);
+  }
+
 
 /* ========================================================================
  * Bootstrap: offcanvas.js v3.1.3
@@ -975,51 +982,56 @@ if($.fn.rowlink != null){
 
   // OFFCANVAS PLUGIN DEFINITION
   // ==========================
+  if ($ != null && $.fn != null && $.fn.offcanvas != null) {
+    var old = $.fn.offcanvas
 
-  var old = $.fn.offcanvas
+    $.fn.offcanvas = function (option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.offcanvas')
+        var options = $.extend({}, OffCanvas.DEFAULTS, $this.data(), typeof option === 'object' && option)
 
-  $.fn.offcanvas = function (option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.offcanvas')
-      var options = $.extend({}, OffCanvas.DEFAULTS, $this.data(), typeof option === 'object' && option)
+        if (!data) $this.data('bs.offcanvas', (data = new OffCanvas(this, options)))
+        if (typeof option === 'string') data[option]()
+      })
+    }
 
-      if (!data) $this.data('bs.offcanvas', (data = new OffCanvas(this, options)))
-      if (typeof option === 'string') data[option]()
+    $.fn.offcanvas.Constructor = OffCanvas
+
+
+    // OFFCANVAS NO CONFLICT
+    // ====================
+
+    $.fn.offcanvas.noConflict = function () {
+      $.fn.offcanvas = old
+      return this
+    }
+
+
+    // OFFCANVAS DATA-API
+    // =================
+
+    $(document).on('click.bs.offcanvas.data-api', '[data-toggle=offcanvas]', function (e) {
+      var $this   = $(this), href
+      var target  = $this.attr('data-target')
+          || e.preventDefault()
+          || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
+      var $canvas = $(target)
+      var data    = $canvas.data('bs.offcanvas')
+      var option  = data ? 'toggle' : $this.data()
+
+      e.stopPropagation()
+
+      if (data) data.toggle()
+        else $canvas.offcanvas(option)
     })
-  }
 
-  $.fn.offcanvas.Constructor = OffCanvas
+  }(window.jQuery);
 
 
-  // OFFCANVAS NO CONFLICT
-  // ====================
-
-  $.fn.offcanvas.noConflict = function () {
-    $.fn.offcanvas = old
-    return this
   }
 
 
-  // OFFCANVAS DATA-API
-  // =================
-
-  $(document).on('click.bs.offcanvas.data-api', '[data-toggle=offcanvas]', function (e) {
-    var $this   = $(this), href
-    var target  = $this.attr('data-target')
-        || e.preventDefault()
-        || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
-    var $canvas = $(target)
-    var data    = $canvas.data('bs.offcanvas')
-    var option  = data ? 'toggle' : $this.data()
-
-    e.stopPropagation()
-
-    if (data) data.toggle()
-      else $canvas.offcanvas(option)
-  })
-
-}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: transition.js v3.1.3
@@ -1055,19 +1067,21 @@ if($.fn.rowlink != null){
     return false // explicit for ie8 (  ._.)
   }
 
-  if ($.support.transition !== undefined) return  // Prevent conflict with Twitter Bootstrap
+  if($ != null && $.support != null && $.support.transition != null) return  // Prevent conflict with Twitter Bootstrap
 
-  // http://blog.alexmaccaw.com/css-transitions
-  $.fn.emulateTransitionEnd = function (duration) {
-    var called = false, $el = this
-    $(this).one($.support.transition.end, function () { called = true })
-    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
-    setTimeout(callback, duration)
-    return this
+  if ($ != null && $.fn != null && $.fn.emulateTransitionEnd != null) {
+    // http://blog.alexmaccaw.com/css-transitions
+    $.fn.emulateTransitionEnd = function (duration) {
+      var called = false, $el = this
+      $(this).one($.support.transition.end, function () { called = true })
+      var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+      setTimeout(callback, duration)
+      return this
+    }
+    $(function () {
+      $.support.transition = transitionEnd()
+    })
+
+  }(window.jQuery);
   }
 
-  $(function () {
-    $.support.transition = transitionEnd()
-  })
-
-}(window.jQuery);
