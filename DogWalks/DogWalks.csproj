@@ -182,6 +182,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
+    <Content Include="Management\ManageComments.aspx" />
+    <Content Include="Management\management.css" />
     <Content Include="Scripts\jasny-bootstrap.js" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\defaultPageStyle.css" />
@@ -236,6 +238,7 @@
       <DependentUpon>WalkModel.edmx</DependentUpon>
       <LastGenOutput>WalkModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Management\Web.config" />
     <None Include="Properties\PublishProfiles\jose webserver final.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="rss.aspx" />
@@ -497,6 +500,13 @@
     </Compile>
     <Compile Include="Demo\HomePageTest.aspx.designer.cs">
       <DependentUpon>HomePageTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\ManageComments.aspx.cs">
+      <DependentUpon>ManageComments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\ManageComments.aspx.designer.cs">
+      <DependentUpon>ManageComments.aspx</DependentUpon>
     </Compile>
     <Compile Include="Management\ManageFeatures.aspx.cs">
       <DependentUpon>ManageFeatures.aspx</DependentUpon>
