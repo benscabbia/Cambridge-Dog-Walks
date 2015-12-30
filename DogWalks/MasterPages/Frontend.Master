@@ -57,7 +57,16 @@
                         <li><a runat="server" href="~/Contact">Contact</a></li>--%>
                         <li><a runat="server" href="~/Walks/ListWalks">View Walks</a></li>
                         <li><a runat="server" href="~/Walks/AddWalk">Create Walk</a></li>
-                      <li><a runat="server" href="~/rss">RSS</a></li>
+                        <li><a runat="server" href="~/rss">RSS</a></li>
+                        <asp:LoginView runat="server" ViewStateMode="Disabled">
+                          <RoleGroups>
+                            <asp:RoleGroup Roles="Administrator">
+                              <ContentTemplate>
+                                <li><a runat="server" href="~/Management/Default"><b>Manage</b></a></li>
+                              </ContentTemplate>
+                            </asp:RoleGroup>
+                          </RoleGroups>
+                        </asp:LoginView>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
@@ -86,9 +95,28 @@
       <asp:ContentPlaceHolder ID="MainContentFullWidth" runat="server">
       </asp:ContentPlaceHolder>
       <hr />
-      <div class="container">
+      <div class="container text-center">
         <footer>
-          <p>&copy; <%: DateTime.Now.Year %> - Cambridge Dog Walks</p>
+          <p>&copy; <%: DateTime.Now.Year %> - Cambridge Dog Walks 
+          <asp:LoginView ID="LoginView1" runat="server">
+            <AnonymousTemplate>
+            </AnonymousTemplate>
+            <LoggedInTemplate>
+              - <asp:LoginName ID="LoginName1" runat="server" FormatString="Logged in as {0}" /> -
+              <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+            </LoggedInTemplate>
+            <RoleGroups>
+              <asp:RoleGroup Roles="Administrator">
+                <ContentTemplate>
+                  - <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Management/Default.aspx">Manage Site</asp:HyperLink>
+                  or                                    
+                  <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                </ContentTemplate>
+              </asp:RoleGroup>
+            </RoleGroups>
+          </asp:LoginView>
+
+          </p>
         </footer>
       </div>
     </form>
