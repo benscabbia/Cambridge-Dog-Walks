@@ -167,7 +167,7 @@ namespace DogWalks.Walks
         {
           comment.WalkID = walkID;
           comment.CreateDateTime = DateTime.Now;
-          //comment.AuthorID = User.Identity.Name;
+          comment.AuthorID = User.Identity.Name;
           db.Comments.Add(comment);
           db.SaveChanges();
         }

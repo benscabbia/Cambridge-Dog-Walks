@@ -11,7 +11,7 @@
           </Key>
           <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WalkID" Type="int" Nullable="false" />
-          <Property Name="AuthorID" Type="int" />
+          <Property Name="AuthorID" Type="nvarchar" MaxLength="250" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
@@ -59,7 +59,7 @@
           <Property Name="WalkID" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="PictureUrl" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="UploaderID" Type="int" />
+          <Property Name="AuthorID" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="PostCodesUK">
           <Key>
@@ -78,7 +78,7 @@
           <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WalkID" Type="int" Nullable="false" />
           <Property Name="Score" Type="int" Nullable="false" />
-          <Property Name="AuthorID" Type="int" />
+          <Property Name="AuthorID" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="WalkFeature">
           <Key>
@@ -233,7 +233,7 @@
           </Key>
           <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WalkID" Type="Int32" Nullable="false" />
-          <Property Name="AuthorID" Type="Int32" />
+          <Property Name="AuthorID" Type="String" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
@@ -278,7 +278,7 @@
           <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WalkID" Type="Int32" Nullable="false" />
           <Property Name="Score" Type="Int32" Nullable="false" />
-          <Property Name="AuthorID" Type="Int32" />
+          <Property Name="AuthorID" Type="String" />
           <NavigationProperty Name="DogWalk" Relationship="WalkModel.FK_Rating_DogWalk" FromRole="Rating" ToRole="DogWalk" />
         </EntityType>
         <Association Name="FK_Comment_DogWalk">
@@ -327,8 +327,8 @@
           <Property Name="WalkID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="PictureUrl" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="UploaderID" Type="Int32" />
           <NavigationProperty Name="DogWalk" Relationship="WalkModel.FK_Image_DogWalk" FromRole="Picture" ToRole="DogWalk" />
+          <Property Name="AuthorID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Image_DogWalk">
           <End Type="WalkModel.DogWalk" Role="DogWalk" Multiplicity="1" />
@@ -442,7 +442,7 @@
           <EntitySetMapping Name="Pictures">
             <EntityTypeMapping TypeName="WalkModel.Picture">
               <MappingFragment StoreEntitySet="Picture">
-                <ScalarProperty Name="UploaderID" ColumnName="UploaderID" />
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
                 <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="WalkID" ColumnName="WalkID" />

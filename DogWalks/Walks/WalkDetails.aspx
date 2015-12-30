@@ -142,7 +142,7 @@
                   <blockquote class="comments-background">
                     <h3><b><%# Item.Title %></b></h3>
                     <p><%# Item.Body %></p>
-                    <p><small><%# Item.AuthorID %>Author Person, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
+                    <p><small><%# Item.AuthorID %>, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
                   </blockquote>
                 </div>
               </div>

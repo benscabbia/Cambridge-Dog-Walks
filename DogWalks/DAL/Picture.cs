@@ -18,7 +18,7 @@ namespace DogWalks.DAL
         public int WalkID { get; set; }
         public string Description { get; set; }
         public string PictureUrl { get; set; }
-        public Nullable<int> UploaderID { get; set; }
+        public string AuthorID { get; set; }
     
         public virtual DogWalk DogWalk { get; set; }
     }
