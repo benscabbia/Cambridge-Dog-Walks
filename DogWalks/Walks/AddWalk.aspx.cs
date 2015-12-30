@@ -11,9 +11,14 @@ namespace DogWalks.Walks
 {
   public partial class AddWalk : System.Web.UI.Page
   {
-
     protected void Page_Load(object sender, EventArgs e)
     {
+      //if user not logged in
+      if (!User.Identity.IsAuthenticated)
+      {
+        Response.Redirect("../Account/Login.aspx");        
+      }
+
       if (!this.IsPostBack)
       {
         this.Form.Enctype = "multipart/form-data";
