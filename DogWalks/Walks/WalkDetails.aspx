@@ -121,16 +121,19 @@
       </div>
     </ItemTemplate>
   </asp:FormView>
-
-
   <br /><br />
   <asp:Button ID="btnDelete" CssClass="btn btn-danger" CausesValidation="false" runat="server" Text="Delete" OnClick="btnDelete_Click" />
   <br /><br />
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContentChildFullWidth" runat="server">
   <div class="comments-section-background">
     <div class="container">
           <h1 class="white-text">Comments</h1>
+
+      <asp:LoginView ID="LoginView1" runat="server">
+        <AnonymousTemplate><h6 class="white-text">Sorry, you must be <a href="../Account/Login.aspx">logged in</a> to view discussion.</h6></AnonymousTemplate>
+        <LoggedInTemplate>
           <asp:Label ID="lbNoComments" runat="server" Text="No Comments" Visible="false" CssClass="white-text"></asp:Label>
           <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.DAL.Comment" SelectMethod="ListView1_GetData" InsertMethod="ListView1_InsertItem" insertitemposition="LastItem">
             <ItemTemplate>
@@ -171,10 +174,14 @@
                 </div>
             </InsertItemTemplate>           
           </asp:ListView>
+        </LoggedInTemplate>
+      </asp:LoginView>
+
 
         </div>
       </div>  
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="CustomScriptContentChild" runat="server">
   <script type="text/javascript">
     $('#myCarousel').carousel({

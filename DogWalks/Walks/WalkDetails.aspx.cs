@@ -13,9 +13,36 @@ namespace DogWalks.Walks
   public partial class WalkDetail : System.Web.UI.Page
   {    
 
+    //handle empty or false querystring
     protected void Page_Load(object sender, EventArgs e)
-    {
+    {      
+      var walk = Request.QueryString["WalkID"];
 
+      if (string.IsNullOrEmpty(walk))
+      {
+        Response.Redirect("../Walks/ListWalks.aspx");
+      }
+      else
+      {
+        try
+        {
+          int walkID = Int32.Parse(walk);
+          using (WalkContext db = new WalkContext())
+          {
+            var dogWalk = (from n in db.DogWalks
+                        where n.WalkID == walkID
+                        select n).SingleOrDefault();
+            if (dogWalk == null)
+            {
+              Response.Redirect("../Walks/ListWalks.aspx");
+            }
+          }
+         }      
+        catch(Exception ex)
+        {
+          Response.Redirect("../Walks/ListWalks.aspx");
+        }
+      }
     }
 
     // The id parameter should match the DataKeyNames value set on the control
@@ -122,7 +149,7 @@ namespace DogWalks.Walks
               
         if (walkComments.Count == 0)
         {
-          lbNoComments.Visible = true;
+          LoginView1.FindControl("lbNoComments").Visible = true;
         }
 
           return walkComments.AsQueryable();
@@ -140,6 +167,7 @@ namespace DogWalks.Walks
         {
           comment.WalkID = walkID;
           comment.CreateDateTime = DateTime.Now;
+          //comment.AuthorID = User.Identity.Name;
           db.Comments.Add(comment);
           db.SaveChanges();
         }

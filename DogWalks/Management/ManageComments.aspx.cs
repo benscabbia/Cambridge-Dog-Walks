@@ -43,7 +43,7 @@ namespace DogWalks.Management
             db.Comments.Remove(comment);
           }
           db.SaveChanges();
-          Response.Redirect("~/Management/ManageComments.aspx");
+          Response.Redirect("ManageComments.aspx");
         }
       }
     }
