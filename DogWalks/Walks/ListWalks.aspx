@@ -97,6 +97,18 @@
       <h3>No results found</h3>
     </EmptyDataTemplate>
   </asp:ListView>
+  <br />
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <asp:DataPager ID="DataPager1" runat="server" PageSize="10" PagedControlID="ListView1" >
+        <Fields>
+          <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-info" ShowFirstPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" />
+          <asp:NumericPagerField />
+          <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn btn-info" ShowLastPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False" />
+        </Fields>
+      </asp:DataPager>
+    </div>
+  </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="CustomScriptContentChild" runat="server">
 </asp:Content>
