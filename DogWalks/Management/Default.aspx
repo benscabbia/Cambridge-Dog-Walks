@@ -6,8 +6,24 @@
     <div class="col-md-12">
       <h2>Management Panel</h2>
       <br />
-      <asp:Button ID="Button1" runat="server" Text="Manage Comments" class="btn btn-primary" PostBackUrl="ManageComments.aspx" />
-      <asp:Button ID="Button2" runat="server" Text="Manage Features" class="btn btn-success" PostBackUrl="ManageFeatures.aspx" />
+      <asp:LoginView ID="LoginView1" runat="server">
+        <RoleGroups>
+          <%--admin--%>
+          <asp:RoleGroup Roles="Administrator">
+            <ContentTemplate>
+              <asp:Button ID="Button1" runat="server" Text="Manage Comments" class="btn btn-primary" PostBackUrl="ManageComments.aspx" />
+              <asp:Button ID="Button2" runat="server" Text="Manage Features" class="btn btn-success" PostBackUrl="ManageFeatures.aspx" />
+            </ContentTemplate>
+          </asp:RoleGroup>
+          <%--moderator--%>
+          <asp:RoleGroup Roles="Moderator">
+            <ContentTemplate>
+              <asp:Button ID="Button1" runat="server" Text="Manage Comments" class="btn btn-primary" PostBackUrl="ManageComments.aspx" />              
+            </ContentTemplate>
+          </asp:RoleGroup>
+        </RoleGroups>
+      </asp:LoginView>
+
     </div>
   </div>
 </asp:Content>

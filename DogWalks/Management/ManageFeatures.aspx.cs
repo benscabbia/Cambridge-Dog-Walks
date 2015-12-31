@@ -11,7 +11,11 @@ namespace DogWalks.Management
   {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+      //user is a moderator and not an administrator 
+      if (User.IsInRole("Moderator") && !User.IsInRole("Administrator"))
+      {
+        Response.Redirect("default.aspx");
+      }
     }
   }
 }

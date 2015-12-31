@@ -60,7 +60,7 @@
                         <li><a runat="server" href="~/rss">RSS</a></li>
                         <asp:LoginView runat="server" ViewStateMode="Disabled">
                           <RoleGroups>
-                            <asp:RoleGroup Roles="Administrator">
+                            <asp:RoleGroup Roles="Administrator, Moderator">
                               <ContentTemplate>
                                 <li><a runat="server" href="~/Management/Default"><b>Manage</b></a></li>
                               </ContentTemplate>
@@ -106,7 +106,7 @@
               <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
             </LoggedInTemplate>
             <RoleGroups>
-              <asp:RoleGroup Roles="Administrator">
+              <asp:RoleGroup Roles="Administrator, Moderator">
                 <ContentTemplate>
                   - <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Management/Default.aspx">Manage Site</asp:HyperLink>
                   or                                    
