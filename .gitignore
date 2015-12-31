@@ -195,3 +195,6 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 DogWalks/WalkPics/
+DogWalks/3Default.aspx
+DogWalks/3Default.aspx.cs
+DogWalks/3Default.aspx.designer.cs
