@@ -182,6 +182,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
+    <Content Include="Management\Default.aspx" />
     <Content Include="Management\ManageComments.aspx" />
     <Content Include="Management\management.css" />
     <Content Include="Scripts\jasny-bootstrap.js" />
@@ -500,6 +501,13 @@
     </Compile>
     <Compile Include="Demo\HomePageTest.aspx.designer.cs">
       <DependentUpon>HomePageTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Management\ManageComments.aspx.cs">
       <DependentUpon>ManageComments.aspx</DependentUpon>
