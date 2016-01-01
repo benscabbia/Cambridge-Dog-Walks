@@ -121,8 +121,20 @@
       </div>
     </ItemTemplate>
   </asp:FormView>
-  <br /><br />
-  <asp:Button ID="btnDelete" CssClass="btn btn-danger" CausesValidation="false" runat="server" Text="Delete" OnClick="btnDelete_Click" />
+
+  <asp:LoginView ID="LoginView2" runat="server">
+        <RoleGroups>
+          <%--admin--%>
+          <asp:RoleGroup Roles="Administrator">
+            <ContentTemplate>
+              <br /><br />
+              <asp:Button ID="btnDelete" CssClass="btn btn-danger" CausesValidation="false" runat="server" Text="Delete" OnClick="btnDelete_Click" />
+            </ContentTemplate>
+          </asp:RoleGroup>
+          <%--moderator--%>
+        </RoleGroups>
+      </asp:LoginView>
+
   <br /><br />
 </asp:Content>
 
