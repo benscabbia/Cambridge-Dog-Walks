@@ -90,9 +90,9 @@
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="UserProfileID" />
           </Key>
-          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserProfileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProfilePicture" Type="nvarchar" MaxLength="250" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
@@ -151,7 +151,7 @@
           <End Role="FavouriteWalk" Type="Self.FavouriteWalk" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserProfile">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="UserProfileID" />
             </Principal>
             <Dependent Role="FavouriteWalk">
               <PropertyRef Name="UserID" />
@@ -428,9 +428,9 @@
         </Association>
         <EntityType Name="UserProfile">
           <Key>
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="UserProfileID" />
           </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserProfileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProfilePicture" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -552,19 +552,19 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserProfileID" ColumnName="UserProfileID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="FavouriteWalk" TypeName="WalkModel.FavouriteWalk" StoreEntitySet="FavouriteWalk">
             <EndProperty Name="UserProfile">
-              <ScalarProperty Name="UserID" ColumnName="UserID" />
+              <ScalarProperty Name="UserProfileID" ColumnName="UserID" />
             </EndProperty>
             <EndProperty Name="DogWalk">
               <ScalarProperty Name="WalkID" ColumnName="WalkID" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
 using DogWalks.Models;
+using DogWalks.DAL;
 
 namespace DogWalks.Account
 {
@@ -23,6 +24,15 @@ namespace DogWalks.Account
                 //string code = manager.GenerateEmailConfirmationToken(user.Id);
                 //string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
                 //manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
+
+              using (var db = new WalkContext())
+              {               
+                var newUser = new UserProfile();
+                newUser.FKUserID = user.Id;
+                newUser.JoinDateTime = DateTime.Now;
+                db.UserProfiles.Add(newUser);
+                db.SaveChanges(); 
+              }
 
                 signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
                 IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
