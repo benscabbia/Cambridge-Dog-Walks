@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using DogWalks.Models;
+using DogWalks.DAL;
+using Microsoft.AspNet.Identity;
 
 namespace DogWalks.Account
 {
@@ -35,6 +37,12 @@ namespace DogWalks.Account
 
         protected void Page_Load()
         {
+          
+          
+          
+
+
+
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
             HasPhoneNumber = String.IsNullOrEmpty(manager.GetPhoneNumber(User.Identity.GetUserId()));
@@ -50,6 +58,31 @@ namespace DogWalks.Account
 
             if (!IsPostBack)
             {
+              //on first load, load all data into textboxes
+              using (var db = new WalkContext())
+              {
+                var currentUserID = User.Identity.GetUserId();
+                UserProfile userProfile = (from u in db.UserProfiles
+                                           where u.FKUserID == currentUserID
+                                           select u).Single();
+
+                tbFirstName.Text = userProfile.FirstName;
+                tbLastName.Text = userProfile.LastName;
+                tbAddress.Text = userProfile.Address;
+                tbPostcode.Text = userProfile.Postcode;
+                tbAboutMe.Text = userProfile.AboutMe;
+
+                  
+
+
+                var id = userProfile.UserProfileID;
+                var longId = userProfile.FKUserID;
+                var date = userProfile.JoinDateTime;
+              }
+
+
+
+
                 // Determine the sections to render
                 if (HasPassword(manager))
                 {

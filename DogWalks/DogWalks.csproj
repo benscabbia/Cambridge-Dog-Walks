@@ -167,7 +167,9 @@
     <Content Include="Account\Forgot.aspx" />
     <Content Include="Account\Lockout.aspx" />
     <Content Include="Account\Login.aspx" />
+    <Content Include="Account\Manage-backup.txt" />
     <Content Include="Account\Manage.aspx" />
+    <Content Include="Account\manageCS-backup.txt" />
     <Content Include="Account\ManageLogins.aspx" />
     <Content Include="Account\ManagePassword.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
