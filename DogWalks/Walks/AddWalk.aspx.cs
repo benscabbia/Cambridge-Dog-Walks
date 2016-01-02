@@ -13,16 +13,7 @@ namespace DogWalks.Walks
   {
     protected void Page_Load(object sender, EventArgs e)
     {
-      //if user not logged in
-      if (!User.Identity.IsAuthenticated)
-      {
-        Response.Redirect("../Account/Login.aspx");        
-      }
 
-      if (!this.IsPostBack)
-      {
-        this.Form.Enctype = "multipart/form-data";
-      }
     }
 
     protected void btnSave_Click(object sender, EventArgs e)

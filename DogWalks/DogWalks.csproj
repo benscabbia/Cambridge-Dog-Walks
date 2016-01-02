@@ -239,7 +239,6 @@
       <DependentUpon>WalkModel.edmx</DependentUpon>
       <LastGenOutput>WalkModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Management\Web.config" />
     <None Include="Properties\PublishProfiles\jose webserver final.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="rss.aspx" />
