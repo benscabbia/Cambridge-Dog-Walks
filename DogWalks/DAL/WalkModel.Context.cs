@@ -32,5 +32,6 @@ namespace DogWalks.DAL
         public virtual DbSet<PostCodesUK> PostCodesUKs { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Length> Lengths { get; set; }
+        public virtual DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

@@ -444,6 +444,9 @@
     <Compile Include="DAL\Rating.cs">
       <DependentUpon>WalkModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\UserProfile.cs">
+      <DependentUpon>WalkModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\WalkModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

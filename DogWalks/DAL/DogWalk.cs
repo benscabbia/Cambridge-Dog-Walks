@@ -20,6 +20,7 @@ namespace DogWalks.DAL
             this.Ratings = new HashSet<Rating>();
             this.Features = new HashSet<Feature>();
             this.Pictures = new HashSet<Picture>();
+            this.UserProfiles = new HashSet<UserProfile>();
         }
     
         public int WalkID { get; set; }
@@ -40,5 +41,6 @@ namespace DogWalks.DAL
         public virtual ICollection<Feature> Features { get; set; }
         public virtual ICollection<Picture> Pictures { get; set; }
         public virtual Length Length { get; set; }
+        public virtual ICollection<UserProfile> UserProfiles { get; set; }
     }
 }

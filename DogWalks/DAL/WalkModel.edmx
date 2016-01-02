@@ -33,6 +33,14 @@
           <Property Name="WebsiteUrl" Type="nvarchar" MaxLength="250" />
           <Property Name="AuthorID" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="FavouriteWalk">
+          <Key>
+            <PropertyRef Name="WalkID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="WalkID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Feature">
           <Key>
             <PropertyRef Name="FeatureID" />
@@ -80,6 +88,20 @@
           <Property Name="Score" Type="int" Nullable="false" />
           <Property Name="AuthorID" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProfilePicture" Type="nvarchar" MaxLength="250" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="Postcode" Type="varchar" MaxLength="8" />
+          <Property Name="FKUserID" Type="nvarchar" MaxLength="128" />
+          <Property Name="JoinDateTime" Type="datetime" />
+          <Property Name="AboutMe" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="WalkFeature">
           <Key>
             <PropertyRef Name="WalkID" />
@@ -109,6 +131,30 @@
             </Principal>
             <Dependent Role="DogWalk">
               <PropertyRef Name="LengthID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FavouriteWalk_DogWalk">
+          <End Role="DogWalk" Type="Self.DogWalk" Multiplicity="1" />
+          <End Role="FavouriteWalk" Type="Self.FavouriteWalk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DogWalk">
+              <PropertyRef Name="WalkID" />
+            </Principal>
+            <Dependent Role="FavouriteWalk">
+              <PropertyRef Name="WalkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FavouriteWalk_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="FavouriteWalk" Type="Self.FavouriteWalk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="FavouriteWalk">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -163,11 +209,13 @@
         <EntityContainer Name="WalkModelStoreContainer">
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DogWalk" EntityType="Self.DogWalk" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FavouriteWalk" EntityType="Self.FavouriteWalk" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Length" EntityType="Self.Length" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostCodesUK" EntityType="Self.PostCodesUK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WalkFeature" EntityType="Self.WalkFeature" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Comment_DogWalk" Association="Self.FK_Comment_DogWalk">
             <End Role="DogWalk" EntitySet="DogWalk" />
@@ -176,6 +224,14 @@
           <AssociationSet Name="FK_DogWalk_Length" Association="Self.FK_DogWalk_Length">
             <End Role="Length" EntitySet="Length" />
             <End Role="DogWalk" EntitySet="DogWalk" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FavouriteWalk_DogWalk" Association="Self.FK_FavouriteWalk_DogWalk">
+            <End Role="DogWalk" EntitySet="DogWalk" />
+            <End Role="FavouriteWalk" EntitySet="FavouriteWalk" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FavouriteWalk_UserProfile" Association="Self.FK_FavouriteWalk_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="FavouriteWalk" EntitySet="FavouriteWalk" />
           </AssociationSet>
           <AssociationSet Name="FK_Image_DogWalk" Association="Self.FK_Image_DogWalk">
             <End Role="DogWalk" EntitySet="DogWalk" />
@@ -226,6 +282,11 @@
             <End Role="Length" EntitySet="Lengths" />
             <End Role="DogWalk" EntitySet="DogWalks" />
           </AssociationSet>
+          <EntitySet Name="UserProfiles" EntityType="WalkModel.UserProfile" />
+          <AssociationSet Name="FavouriteWalk" Association="WalkModel.FavouriteWalk">
+            <End Role="DogWalk" EntitySet="DogWalks" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Comment">
           <Key>
@@ -233,7 +294,7 @@
           </Key>
           <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WalkID" Type="Int32" Nullable="false" />
-          <Property Name="AuthorID" Type="String" />
+          <Property Name="AuthorID" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
@@ -260,6 +321,7 @@
           <NavigationProperty Name="Length" Relationship="WalkModel.FK_DogWalk_Length" FromRole="DogWalk" ToRole="Length" />
           <Property Name="WebsiteUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="AuthorID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserProfiles" Relationship="WalkModel.FavouriteWalk" FromRole="DogWalk" ToRole="UserProfile" />
         </EntityType>
         <EntityType Name="Feature">
           <Key>
@@ -278,7 +340,7 @@
           <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WalkID" Type="Int32" Nullable="false" />
           <Property Name="Score" Type="Int32" Nullable="false" />
-          <Property Name="AuthorID" Type="String" />
+          <Property Name="AuthorID" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="DogWalk" Relationship="WalkModel.FK_Rating_DogWalk" FromRole="Rating" ToRole="DogWalk" />
         </EntityType>
         <Association Name="FK_Comment_DogWalk">
@@ -363,6 +425,25 @@
               <PropertyRef Name="LengthID" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProfilePicture" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Postcode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="FKUserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="JoinDateTime" Type="DateTime" Precision="3" />
+          <Property Name="AboutMe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DogWalks" Relationship="WalkModel.FavouriteWalk" FromRole="UserProfile" ToRole="DogWalk" />
+        </EntityType>
+        <Association Name="FavouriteWalk">
+          <End Type="WalkModel.DogWalk" Role="DogWalk" Multiplicity="*" />
+          <End Type="WalkModel.UserProfile" Role="UserProfile" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -460,6 +541,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="WalkModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="AboutMe" ColumnName="AboutMe" />
+                <ScalarProperty Name="JoinDateTime" ColumnName="JoinDateTime" />
+                <ScalarProperty Name="FKUserID" ColumnName="FKUserID" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FavouriteWalk" TypeName="WalkModel.FavouriteWalk" StoreEntitySet="FavouriteWalk">
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserID" ColumnName="UserID" />
+            </EndProperty>
+            <EndProperty Name="DogWalk">
+              <ScalarProperty Name="WalkID" ColumnName="WalkID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
