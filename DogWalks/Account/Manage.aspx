@@ -34,6 +34,10 @@
     </asp:PlaceHolder>
   </div>
 
+  <asp:Panel ID="updatedPanel" runat="server" Visible="false">
+          <asp:Label ID="successLabel" runat="server" CssClass="text-success" Text="Your profile has been updated successfully"></asp:Label>            
+  </asp:Panel>
+
   <div class="row">
     <div class="col-md-12">
         <h4>Change your account settings</h4>

@@ -37,6 +37,7 @@ namespace DogWalks.Account
 
     protected void Page_Load()
     {
+      updatedPanel.Visible = false;
       Form.Enctype = "multipart/form-data";
 
       var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -181,18 +182,18 @@ namespace DogWalks.Account
 
           imgProfile.ImageUrl = !string.IsNullOrEmpty(userProfile.ProfilePicture) ? userProfile.ProfilePicture : string.Empty;
         }
+
+        updatedPanel.Visible = true;
         db.SaveChanges();
+
       }
     }
 
     private void removePreviousPicture(UserProfile userProfile)
     {
-      //deletes physical picture stored on server and database relative path
+      //deletes physical picture stored on server
       string filename = Server.MapPath(userProfile.ProfilePicture);
-      if (!string.IsNullOrEmpty(filename))
-      {
-        System.IO.File.Delete(filename);
-      }
+      System.IO.File.Delete(filename);      
     }    
   }
 }
