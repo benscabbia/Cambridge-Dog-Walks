@@ -173,10 +173,11 @@ namespace DogWalks.Account
               string extension = System.IO.Path.GetExtension(myPicture.FileName);
               myPicture.SaveAs(System.IO.Path.Combine(physicalFolder, fileName + extension));  //save image on local
               userProfile.ProfilePicture = virtualFolder + fileName + extension; //set picture url                                
+              
+              imgProfile.ImageUrl = !string.IsNullOrEmpty(userProfile.ProfilePicture) ? userProfile.ProfilePicture : string.Empty;            
             }
             db.SaveChanges();
 
-            imgProfile.ImageUrl = !string.IsNullOrEmpty(userProfile.ProfilePicture) ? userProfile.ProfilePicture : string.Empty;            
           }
         }
     }

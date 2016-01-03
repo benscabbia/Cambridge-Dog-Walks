@@ -107,7 +107,7 @@
                     </div>
                     <div class="input-group-btn">
                       <div class="btn btn-default btn-file">
-                        <span class="fileinput-new">Select</span>
+                        <span class="fileinput-new">Upload Picture</span>
                         <span class="fileinput-exists">Change</span>
                         <input type="file" id="myFile" name="myFile">
                       </div>
