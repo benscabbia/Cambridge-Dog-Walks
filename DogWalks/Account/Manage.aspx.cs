@@ -71,13 +71,7 @@ namespace DogWalks.Account
                 tbAddress.Text = userProfile.Address;
                 tbPostcode.Text = userProfile.Postcode;
                 tbAboutMe.Text = userProfile.AboutMe;
-
-                  
-
-
-                var id = userProfile.UserProfileID;
-                var longId = userProfile.FKUserID;
-                var date = userProfile.JoinDateTime;
+                 
               }
 
 
