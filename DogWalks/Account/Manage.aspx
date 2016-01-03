@@ -36,7 +36,6 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div class="form-horizontal">
         <h4>Change your account settings</h4>
         <hr />
 
@@ -74,14 +73,30 @@
             </div>
             <%--Aboutme--%>
             <div class="form-group">
-              <asp:Label ID="Label1" runat="server" Text="About Me" CssClass="control-label col-md-1 "></asp:Label>
+              <asp:Label ID="lbAboutMe" runat="server" Text="About Me" CssClass="control-label col-md-1 "></asp:Label>
               <div class="col-md-11">
                 <asp:TextBox ID="tbAboutMe" TextMode="MultiLine" Rows="4" runat="server" CssClass="form-control"></asp:TextBox>
               </div>
             </div>
+            <%--password--%>
+            <div class="form-group">
+              <asp:Label ID="lbPassword" runat="server" Text="Password" CssClass="control-label col-md-1 "></asp:Label>
+              <div class="col-md-11">
+                <asp:Button ID="btChangePassword" runat="server" Text="Change Password" CssClass="btn btn-default" PostBackUrl="ManagePassword.aspx" />
+
+              </div>
+            </div>
+            <div class="col-md-offset-1">
+              <asp:Button ID="btUpdate" runat="server" Text="Update Profile" CssClass="btn btn-success" OnClick="btUpdate_Click"/>
+            </div>
           </div>
 
+
+
           <div class="col-md-4">
+            <div class="thumbnail">
+              <asp:Image ID="Image1" runat="server" ImageUrl="~/WalkPics/b49d8c8f-673a-4724-a47b-c6dec13f9e71.JPG" />
+            </div>
             <div class="form-group">
               <%--<asp:Label ID="lbImage" runat="server" Text="Image" CssClass="control-label col-md-1"></asp:Label>
               <div class="col-md-11">--%>
@@ -108,20 +123,20 @@
             </div>
           </div>
 
-          </div>
         </div>
       </div>
     </div>
   
   <%--#### next section ####--%>
-  <div class="row">
+<%--  <div class="row">
     <div class="col-md-12">
       <dl class="dl-horizontal">
         <dt>Password:</dt>
         <dd>
-          <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Change]" Visible="false" ID="ChangePassword" runat="server" />
-          <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Create]" Visible="false" ID="CreatePassword" runat="server" />
-        </dd>
+          
+                <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Change]" Visible="false" ID="ChangePassword" runat="server" CssClass="form-control" />
+                <asp:HyperLink NavigateUrl="/Account/ManagePassword" Text="[Create]" Visible="false" ID="CreatePassword" runat="server" />
+        </dd>--%>
         <%--<dt>External Logins:</dt>
                     <dd><%: LoginsCount %>
                         <asp:HyperLink NavigateUrl="/Account/ManageLogins" Text="[Manage]" runat="server" />
@@ -172,10 +187,10 @@
         --%>
         <% } %>
         <%--</dd>--%>
-      </dl>
+    <%--  </dl>
 
     </div>
-  </div>
+  </div>--%>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="CustomScriptContentChild" runat="server">

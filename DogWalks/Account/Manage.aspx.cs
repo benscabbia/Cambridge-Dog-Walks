@@ -37,12 +37,6 @@ namespace DogWalks.Account
 
         protected void Page_Load()
         {
-          
-          
-          
-
-
-
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
             HasPhoneNumber = String.IsNullOrEmpty(manager.GetPhoneNumber(User.Identity.GetUserId()));
@@ -74,19 +68,16 @@ namespace DogWalks.Account
                  
               }
 
-
-
-
-                // Determine the sections to render
-                if (HasPassword(manager))
-                {
-                    ChangePassword.Visible = true;
-                }
-                else
-                {
-                    CreatePassword.Visible = true;
-                    ChangePassword.Visible = false;
-                }
+              // Determine the sections to render
+              //if (HasPassword(manager))
+              //{
+              //    ChangePassword.Visible = true;
+              //}
+              //else
+              //{
+              //    CreatePassword.Visible = true;
+              //    ChangePassword.Visible = false;
+              //}
 
                 // Render success message
                 var message = Request.QueryString["m"];
@@ -150,6 +141,29 @@ namespace DogWalks.Account
             manager.SetTwoFactorEnabled(User.Identity.GetUserId(), true);
 
             Response.Redirect("/Account/Manage");
+        }
+
+        protected void btUpdate_Click(object sender, EventArgs e)
+        {
+          using (var db = new WalkContext())
+          {
+            var currentUserID = User.Identity.GetUserId();
+
+            UserProfile userProfile = (from u in db.UserProfiles
+                                       where u.FKUserID == currentUserID
+                                       select u).Single();
+
+
+
+            userProfile.FirstName = tbFirstName.Text;
+ 
+            userProfile.LastName = tbLastName.Text;
+            userProfile.Address = tbAddress.Text;
+            userProfile.Postcode = tbPostcode.Text;
+            userProfile.AboutMe = tbAboutMe.Text;
+            db.SaveChanges();
+
+          }
         }
     }
 }

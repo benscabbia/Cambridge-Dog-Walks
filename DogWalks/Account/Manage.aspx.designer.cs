@@ -94,13 +94,13 @@ namespace DogWalks.Account {
         protected global::System.Web.UI.WebControls.TextBox tbPostcode;
         
         /// <summary>
-        /// Label1 control.
+        /// lbAboutMe control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lbAboutMe;
         
         /// <summary>
         /// tbAboutMe control.
@@ -112,21 +112,39 @@ namespace DogWalks.Account {
         protected global::System.Web.UI.WebControls.TextBox tbAboutMe;
         
         /// <summary>
-        /// ChangePassword control.
+        /// lbPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ChangePassword;
+        protected global::System.Web.UI.WebControls.Label lbPassword;
         
         /// <summary>
-        /// CreatePassword control.
+        /// btChangePassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink CreatePassword;
+        protected global::System.Web.UI.WebControls.Button btChangePassword;
+        
+        /// <summary>
+        /// btUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btUpdate;
+        
+        /// <summary>
+        /// Image1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image1;
     }
 }
