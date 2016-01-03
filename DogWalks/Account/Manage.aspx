@@ -2,6 +2,29 @@
 
 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
+<asp:Content ContentPlaceHolderID="HeadContentChild" runat="server">
+  <script src="../Scripts/jasny-bootstrap.js"></script>
+  <link href="../Content/jasny-bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    /* made select/change button have round corner */
+    /*used by jasny form upload*/
+    .fileinput-new .input-group .input-group-btn .btn.btn-file {
+      -webkit-border-radius: 0 4px 4px 0;
+      -moz-border-radius: 0 4px 4px 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .fileinput .fileinput-filename {
+      overflow: visible;
+    }
+
+      .fileinput .fileinput-filename .dropdown-menu > li {
+        padding: 3px 20px;
+      }
+  </style>
+</asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContentChild" runat="server">
   <h2><%: Title %>.</h2>
 
@@ -59,11 +82,37 @@
           </div>
 
           <div class="col-md-4">
+            <div class="form-group">
+              <%--<asp:Label ID="lbImage" runat="server" Text="Image" CssClass="control-label col-md-1"></asp:Label>
+              <div class="col-md-11">--%>
+              <div class="col-md-12">
+                <div class="fileinput fileinput-new setMaxWidth" data-provides="fileinput">
+                  <div class="input-group">
+                    <div class="form-control uneditable-input">
+                      <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                      <span class="fileinput-filename"></span>
+                    </div>
+                    <div class="input-group-btn">
+                      <div class="btn btn-default btn-file">
+                        <span class="fileinput-new">Select</span>
+                        <span class="fileinput-exists">Change</span>
+                        <input type="file" id="myFile" name="myFile" multiple="multiple">
+                      </div>
+                      <button type="button" class="btn btn-default fileinput-exists" data-dismiss="fileinput" title="remove">
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           </div>
         </div>
       </div>
     </div>
-  </div>
+  
   <%--#### next section ####--%>
   <div class="row">
     <div class="col-md-12">
@@ -127,8 +176,19 @@
 
     </div>
   </div>
+</asp:Content>
 
-
-
-
+<asp:Content ContentPlaceHolderID="CustomScriptContentChild" runat="server">
+  <script>
+    $(function () {
+      $(document).on('change.bs.fileinput', '.fileinput', function (e) {
+        var $this = $(this),
+            $input = $this.find('input[type=file]'),
+            $span = $this.find('.fileinput-filename');        
+        if ($input[0].files !== undefined && $input[0].files.length == 1) {
+          $span.removeClass('dropdown').html($.map($input[0].files, function (val) { return val.name; }));
+        } 
+      });
+    });
+  </script>
 </asp:Content>
