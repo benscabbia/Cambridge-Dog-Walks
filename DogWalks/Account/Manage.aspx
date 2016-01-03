@@ -95,11 +95,9 @@
 
           <div class="col-md-4">
             <div class="thumbnail">
-              <asp:Image ID="Image1" runat="server" ImageUrl="~/WalkPics/b49d8c8f-673a-4724-a47b-c6dec13f9e71.JPG" />
+              <asp:Image ID="imgProfile" runat="server" />
             </div>
             <div class="form-group">
-              <%--<asp:Label ID="lbImage" runat="server" Text="Image" CssClass="control-label col-md-1"></asp:Label>
-              <div class="col-md-11">--%>
               <div class="col-md-12">
                 <div class="fileinput fileinput-new setMaxWidth" data-provides="fileinput">
                   <div class="input-group">
@@ -111,7 +109,7 @@
                       <div class="btn btn-default btn-file">
                         <span class="fileinput-new">Select</span>
                         <span class="fileinput-exists">Change</span>
-                        <input type="file" id="myFile" name="myFile" multiple="multiple">
+                        <input type="file" id="myFile" name="myFile">
                       </div>
                       <button type="button" class="btn btn-default fileinput-exists" data-dismiss="fileinput" title="remove">
                         Remove

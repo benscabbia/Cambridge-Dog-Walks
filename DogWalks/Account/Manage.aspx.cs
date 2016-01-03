@@ -37,6 +37,8 @@ namespace DogWalks.Account
 
         protected void Page_Load()
         {
+          Form.Enctype = "multipart/form-data";
+
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
             HasPhoneNumber = String.IsNullOrEmpty(manager.GetPhoneNumber(User.Identity.GetUserId()));
@@ -60,6 +62,7 @@ namespace DogWalks.Account
                                            where u.FKUserID == currentUserID
                                            select u).Single();
 
+                imgProfile.ImageUrl = !string.IsNullOrEmpty(userProfile.ProfilePicture) ? userProfile.ProfilePicture : string.Empty;            
                 tbFirstName.Text = userProfile.FirstName;
                 tbLastName.Text = userProfile.LastName;
                 tbAddress.Text = userProfile.Address;
@@ -153,16 +156,27 @@ namespace DogWalks.Account
                                        where u.FKUserID == currentUserID
                                        select u).Single();
 
-
-
             userProfile.FirstName = tbFirstName.Text;
- 
             userProfile.LastName = tbLastName.Text;
             userProfile.Address = tbAddress.Text;
             userProfile.Postcode = tbPostcode.Text;
             userProfile.AboutMe = tbAboutMe.Text;
+
+            //must add logic to delete old picture
+            HttpPostedFile myPicture = Request.Files.Count > 0 ? Request.Files[0] : null;
+
+            if (myPicture != null && myPicture.ContentLength > 0 )
+            {
+              string virtualFolder = "~/Account/ProfilePicts/";
+              string physicalFolder = Server.MapPath(virtualFolder);
+              string fileName = Guid.NewGuid().ToString();
+              string extension = System.IO.Path.GetExtension(myPicture.FileName);
+              myPicture.SaveAs(System.IO.Path.Combine(physicalFolder, fileName + extension));  //save image on local
+              userProfile.ProfilePicture = virtualFolder + fileName + extension; //set picture url                                
+            }
             db.SaveChanges();
 
+            imgProfile.ImageUrl = !string.IsNullOrEmpty(userProfile.ProfilePicture) ? userProfile.ProfilePicture : string.Empty;            
           }
         }
     }
