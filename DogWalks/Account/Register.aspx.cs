@@ -31,7 +31,15 @@ namespace DogWalks.Account
                 newUser.FKUserID = user.Id;
                 newUser.JoinDateTime = DateTime.Now;
                 db.UserProfiles.Add(newUser);
-                db.SaveChanges(); 
+                db.SaveChanges();
+
+                //add a username based on their ID
+                var addedUser = (from u in db.UserProfiles
+                                 where u.FKUserID == user.Id
+                                 select u).Single();
+
+                addedUser.FirstName = "user" + addedUser.UserProfileID;
+                db.SaveChanges();
               }
 
                 signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
