@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using DogWalks.DAL;
 using System.Web.ModelBinding;
 using System.Collections;
+using Microsoft.AspNet.Identity;
 
 namespace DogWalks.Walks
 {
@@ -81,8 +82,6 @@ namespace DogWalks.Walks
         //remove features
         foreach (var feature in walk.Features.ToList())
         {
-          //db.Features.Re
-
           walk.Features.Remove(feature);
         }        
 
@@ -128,7 +127,6 @@ namespace DogWalks.Walks
         }
           db.SaveChanges();
       }
-
     }
 
     // The return type can be changed to IEnumerable, however to support
@@ -137,43 +135,104 @@ namespace DogWalks.Walks
     //     int startRowIndex
     //     out int totalRowCount
     //     string sortByExpression
-    public IQueryable ListView1_GetData()
+    public IQueryable CommentsListView_GetData()
     {
       using (var db = new WalkContext())
       {
         int id = Convert.ToInt32(Request.QueryString["WalkID"]);
 
-        var walkComments = (from c in db.Comments
-                            where c.WalkID == id
-                            select c).ToList();
-              
-        if (walkComments.Count == 0)
+        List<CommentsProfileModel> commentsProfile = new List<CommentsProfileModel>();
+
+        //used for debugging purposes to count number of actual comments per walk
+        //var walkComments = (from c in db.Comments
+        //                    where c.WalkID == id
+        //                    select c).ToList();
+
+        var walkAnonymousResult = (from c in db.Comments
+                                  join u in db.UserProfiles
+                                    on c.AuthorID equals u.UserProfileID
+                                  where c.WalkID == id
+                                  select new
+                                  {
+                                    CommentID = c.CommentID,
+                                    Title = c.Title,
+                                    Body = c.Body,
+                                    CreateDateTime = c.CreateDateTime,
+                                    UserProfileID = u.UserProfileID,
+                                    ProfilePicture = u.ProfilePicture,
+                                    FirstName = u.FirstName,
+                                    LastName = u.LastName,
+                                  }).ToList();
+
+        foreach (var i in walkAnonymousResult)
+        {
+          commentsProfile.Add(new CommentsProfileModel(i.CommentID, i.Title, i.Body, i.CreateDateTime, i.UserProfileID, i.ProfilePicture, i.FirstName, i.LastName));
+        }
+
+        if (commentsProfile.Count < 1)
         {
           LoginView1.FindControl("lbNoComments").Visible = true;
         }
 
-          return walkComments.AsQueryable();
+         //sort the list before sending to listview (date descending)
+        commentsProfile.Sort((x, y) => y.CreateDateTime.CompareTo(x.CreateDateTime));
+
+        return commentsProfile.AsQueryable();
       }
     }
-
-    public void ListView1_InsertItem([QueryString("WalkID")] int walkID)
+    
+    public void CommentsListView_InsertItem([QueryString("WalkID")] int walkID)
     {
+      var currentUserID = User.Identity.GetUserId();
+      
+
       var comment = new DogWalks.DAL.Comment();
+
       TryUpdateModel(comment);
       if (ModelState.IsValid)
       {
         // Save changes here
         using(var db=new WalkContext())
-        {
+        {          
           comment.WalkID = walkID;
           comment.CreateDateTime = DateTime.Now;
-          comment.AuthorID = User.Identity.Name;
+
+          var profile = (from u in db.UserProfiles
+                         where u.FKUserID == currentUserID
+                         select u).SingleOrDefault();
+          
+          comment.AuthorID = profile.UserProfileID;
           db.Comments.Add(comment);
           db.SaveChanges();
         }
         Response.Redirect("WalkDetails?WalkID=" + walkID);
        
       }
+    }
+  }
+
+  //class used by commentslistview. Objects provide further details combining user profiles with their posted comments
+  public class CommentsProfileModel
+  {
+    public int CommentID { get; set; }
+    public string Title { get; set; }
+    public string Body { get; set; }
+    public DateTime CreateDateTime { get; set; }
+    public int UserProfileID { get; set; }
+    public string ProfilePicture { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+
+    public CommentsProfileModel(int commentID, string title, string body, DateTime createDateTime, int userProfileID, string profilePicture, string firstName, string lastName)
+    {
+      this.CommentID = commentID;
+      this.Title = title;
+      this.Body = body;
+      this.CreateDateTime = createDateTime;
+      this.UserProfileID = userProfileID;
+      this.ProfilePicture = profilePicture;
+      this.FirstName = firstName;
+      this.LastName = lastName;
     }
   }
 }

@@ -11,7 +11,7 @@
           </Key>
           <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WalkID" Type="int" Nullable="false" />
-          <Property Name="AuthorID" Type="nvarchar" MaxLength="250" />
+          <Property Name="AuthorID" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CreateDateTime" Type="datetime" Nullable="false" />
@@ -294,7 +294,7 @@
           </Key>
           <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WalkID" Type="Int32" Nullable="false" />
-          <Property Name="AuthorID" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="AuthorID" Type="Int32" Nullable="false" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
@@ -320,7 +320,7 @@
           <Property Name="LengthID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Length" Relationship="WalkModel.FK_DogWalk_Length" FromRole="DogWalk" ToRole="Length" />
           <Property Name="WebsiteUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="AuthorID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorID" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="UserProfiles" Relationship="WalkModel.FavouriteWalk" FromRole="DogWalk" ToRole="UserProfile" />
         </EntityType>
         <EntityType Name="Feature">

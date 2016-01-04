@@ -10,7 +10,6 @@ using Microsoft.Owin.Security;
 using Owin;
 using DogWalks.Models;
 using DogWalks.DAL;
-using Microsoft.AspNet.Identity;
 
 namespace DogWalks.Account
 {

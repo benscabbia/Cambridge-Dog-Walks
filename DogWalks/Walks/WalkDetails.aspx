@@ -147,14 +147,14 @@
         <AnonymousTemplate><h6 class="white-text">Sorry, you must be <a href="../Account/Login.aspx">logged in</a> to view discussion.</h6></AnonymousTemplate>
         <LoggedInTemplate>
           <asp:Label ID="lbNoComments" runat="server" Text="No Comments" Visible="false" CssClass="white-text"></asp:Label>
-          <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.DAL.Comment" SelectMethod="ListView1_GetData" InsertMethod="ListView1_InsertItem" insertitemposition="LastItem">
+          <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.Walks.CommentsProfileModel" SelectMethod="CommentsListView_GetData" InsertMethod="CommentsListView_InsertItem" insertitemposition="LastItem">
             <ItemTemplate>
               <div class="row">
                 <div class="col-md-12">
                   <blockquote class="comments-background">
                     <h3><b><%# Item.Title %></b></h3>
                     <p><%# Item.Body %></p>
-                    <p><small><%# Item.AuthorID %>, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
+                    <p><small><%# Item.FirstName %>, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
                   </blockquote>
                 </div>
               </div>
