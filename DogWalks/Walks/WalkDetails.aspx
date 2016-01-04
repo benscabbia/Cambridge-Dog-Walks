@@ -151,7 +151,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContentChildFullWidth" runat="server">
   <div class="comments-section-background">
     <div class="container">
-          <h1 class="white-text">Comments</h1>
+          <h1 class="white-text"><asp:Label ID="lblNumberOfComments" runat="server" ></asp:Label> Comments</h1>
 
       <asp:LoginView ID="LoginView1" runat="server">
         <AnonymousTemplate><h6 class="white-text">Sorry, you must be <a href="../Account/Login.aspx">logged in</a> to view discussion.</h6></AnonymousTemplate>
@@ -161,7 +161,7 @@
             <ItemTemplate>
               <div class="row">
                 <div class="col-md-12 comments-background center-profile-image">
-                  <div class="col-md-1 center-profile-image">
+                  <div class="col-md-2 center-profile-image">
                     <div class="center-profile-image ">
                       <div class="thumbnail">
                         <asp:Image ID="Image3" runat="server" ImageUrl="<%# Item.ProfilePicture %>" />

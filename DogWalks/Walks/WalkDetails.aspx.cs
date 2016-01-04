@@ -16,7 +16,8 @@ namespace DogWalks.Walks
 
     //handle empty or false querystring
     protected void Page_Load(object sender, EventArgs e)
-    {      
+    {
+
       var walk = Request.QueryString["WalkID"];
 
       if (string.IsNullOrEmpty(walk))
@@ -172,6 +173,10 @@ namespace DogWalks.Walks
         if (commentsProfile.Count < 1)
         {
           LoginView1.FindControl("lbNoComments").Visible = true;
+        }
+        else
+        {
+          lblNumberOfComments.Text = commentsProfile.Count.ToString();
         }
 
          //sort the list before sending to listview (date descending)
