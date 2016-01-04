@@ -151,7 +151,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContentChildFullWidth" runat="server">
   <div class="comments-section-background">
     <div class="container">
-          <h1 class="white-text"><asp:Label ID="lblNumberOfComments" runat="server" ></asp:Label> Comments</h1>
+          <h1 class="white-text"><asp:Label ID="lblNumberOfComments" runat="server" ></asp:Label> Comment<asp:Label ID="lblSingleOrPluralComments" runat="server"></asp:Label> </h1>
 
       <asp:LoginView ID="LoginView1" runat="server">
         <AnonymousTemplate><h6 class="white-text">Sorry, you must be <a href="../Account/Login.aspx">logged in</a> to view discussion.</h6></AnonymousTemplate>
@@ -171,7 +171,7 @@
                   <div class="col-md-10 center-profile-image">
                     <h3><b><%# Item.Title %></b></h3>
                     <p><%# Item.Body %></p>
-                    <p><small><%# Item.FirstName %> <%# Item.LastName %>, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
+                    <p><small><a href="../UserProfile=<%# Item.UserProfileID %>"><%# Item.FirstName %> <%# Item.LastName %></a>, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
                   </div>
                 </div>
               </div>

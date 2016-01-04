@@ -178,6 +178,10 @@ namespace DogWalks.Walks
         {
           lblNumberOfComments.Text = commentsProfile.Count.ToString();
         }
+        if (commentsProfile.Count != 1)
+        {
+          lblSingleOrPluralComments.Text = "s";
+        }
 
          //sort the list before sending to listview (date descending)
         commentsProfile.Sort((x, y) => y.CreateDateTime.CompareTo(x.CreateDateTime));
