@@ -27,7 +27,7 @@ namespace DogWalks.Account
 
               using (var db = new WalkContext())
               {               
-                var newUser = new UserProfile();
+                UserProfile newUser = new UserProfile();
                 newUser.FKUserID = user.Id;
                 newUser.JoinDateTime = DateTime.Now;
                 db.UserProfiles.Add(newUser);

@@ -164,14 +164,14 @@
                   <div class="col-md-2 center-profile-image">
                     <div class="center-profile-image ">
                       <div class="thumbnail">
-                        <asp:Image ID="Image3" runat="server" ImageUrl="<%# Item.ProfilePicture %>" />
+                        <a href="../ViewUserProfile?=UserProfileID=<%# Item.UserProfileID %>"><asp:Image ID="Image3" runat="server" ImageUrl="<%# Item.ProfilePicture %>" /></a>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-10 center-profile-image">
                     <h3><b><%# Item.Title %></b></h3>
                     <p><%# Item.Body %></p>
-                    <p><small><a href="../UserProfile=<%# Item.UserProfileID %>"><%# Item.FirstName %> <%# Item.LastName %></a>, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
+                    <p><small><a href="../ViewUserProfile?UserProfileID=<%# Item.UserProfileID %>"><%# Item.FirstName %> <%# Item.LastName %></a>, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
                   </div>
                 </div>
               </div>

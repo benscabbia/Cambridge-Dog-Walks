@@ -280,6 +280,7 @@
     <Content Include="Site.Master" />
     <Content Include="ToDo.txt" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="ViewUserProfile.aspx" />
     <Content Include="WalkPics\b49d8c8f-673a-4724-a47b-c6dec13f9e71.JPG" />
     <Content Include="Walks\AddWalk.aspx" />
     <Content Include="Walks\ListWalks.aspx" />
@@ -581,6 +582,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUserProfile.aspx.cs">
+      <DependentUpon>ViewUserProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewUserProfile.aspx.designer.cs">
+      <DependentUpon>ViewUserProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Walks\AddWalk.aspx.cs">
       <DependentUpon>AddWalk.aspx</DependentUpon>
