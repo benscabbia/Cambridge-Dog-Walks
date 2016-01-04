@@ -29,6 +29,8 @@
 
     .comments-background {
       background: #f5f5f5;
+      color: #6f6f6f;
+
     }
 
     .comments-section-background{
@@ -38,6 +40,14 @@
 
     .white-text{
       color: white;
+    }
+
+    .center-profile-image{
+      float:none;
+      display:inline-block;
+      vertical-align:middle;
+      margin-right:-4px;
+      padding-top:5px;
     }
   </style>
   <br />
@@ -150,14 +160,22 @@
           <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.Walks.CommentsProfileModel" SelectMethod="CommentsListView_GetData" InsertMethod="CommentsListView_InsertItem" insertitemposition="LastItem">
             <ItemTemplate>
               <div class="row">
-                <div class="col-md-12">
-                  <blockquote class="comments-background">
+                <div class="col-md-12 comments-background center-profile-image">
+                  <div class="col-md-1 center-profile-image">
+                    <div class="center-profile-image ">
+                      <div class="thumbnail">
+                        <asp:Image ID="Image3" runat="server" ImageUrl="<%# Item.ProfilePicture %>" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-10 center-profile-image">
                     <h3><b><%# Item.Title %></b></h3>
                     <p><%# Item.Body %></p>
-                    <p><small><%# Item.FirstName %>, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
-                  </blockquote>
+                    <p><small><%# Item.FirstName %> <%# Item.LastName %>, <%# Item.CreateDateTime.ToShortDateString() %></small></p>
+                  </div>
                 </div>
               </div>
+              <br />
             </ItemTemplate>
             <InsertItemTemplate>
               <hr />
