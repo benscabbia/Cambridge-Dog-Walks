@@ -20,14 +20,26 @@
             <h5><b>Name: </b><%# Item.FirstName %> <%# Item.LastName%></h5>
             <h5><b>Member Since: </b><%# Eval("JoinDateTime", "{0:MM/dd/yyyy}") %></h5>
             <h5><b>Number of Comments: </b><asp:Label ID="lblNumOfComments" runat="server"></asp:Label></h5>
-            <h5><b>Favourite Walks: </b></h5>
-            <h5><b>Uploaded Dog Walks: </b></h5>                   
+            <h5><b>About Me: </b></h5>
+            <p><%# Item.AboutMe %></p>
+
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <h5><b>About Me: </b></h5>
-            <p><%# Item.AboutMe %></p>
+            <h5><b>Favourite Walks: </b></h5>
+            <br />
+            <h5>
+              <b>Uploaded Dog Walks: </b>
+              <br /><br />
+              <ul>
+                <asp:Repeater ID="RepeaterUploadedWalks" runat="server" ItemType="DogWalks.DAL.DogWalk">
+                  <ItemTemplate>
+                    <li><a href='../Walks/WalkDetails?WalkID=<%#Item.WalkID %>'><%# Item.Title %></a></li>
+                  </ItemTemplate>
+                </asp:Repeater>
+              </ul>
+            </h5>
           </div>
         </div>
       

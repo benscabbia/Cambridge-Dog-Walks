@@ -13,6 +13,7 @@ namespace DogWalks
   public partial class ViewUserProfile : System.Web.UI.Page
   {
     string profileID;
+    int userID;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -29,7 +30,7 @@ namespace DogWalks
       {
         try
         {
-          int userID = Int32.Parse(profileID);
+          userID = Int32.Parse(profileID);
           using (WalkContext db = new WalkContext())
           {
             var profile = (from n in db.UserProfiles
@@ -65,14 +66,6 @@ namespace DogWalks
         var userProfile = (from u in db.UserProfiles
                            where u.UserProfileID == UserProfileID
                            select u).Single();
-
-        if (UserProfileFormView.CurrentMode == FormViewMode.ReadOnly)
-        {
-
-
-        }
-
-
         return userProfile;        
       }
     }
@@ -85,26 +78,32 @@ namespace DogWalks
         if (UserProfileFormView.Row.RowType == DataControlRowType.DataRow)
         {
           //Just Changed the index of cells based on your requirement
-          Label lbl = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblNumOfComments");
-          if (lbl != null)          
+          using (var db = new WalkContext())
           {
-            using (var db = new WalkContext())
-            {
-              int userID;
-              if (int.TryParse(profileID, out userID))
-              {
-              var comments = (from c in db.Comments
-                              where c.AuthorID == userID
-                              select c).ToList();
+            //Number of comments posted by user
+            Label lblComments = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblNumOfComments");
+            if (lblComments != null)
+            { 
+                var comments = (from c in db.Comments
+                                where c.AuthorID == userID
+                                select c).ToList();
 
-              lbl.Text = comments.Count.ToString();
-              }              
+                lblComments.Text = comments.Count.ToString();              
             }
+
+            //Uploaded Walks by user
+            var userDogWalks = (from w in db.DogWalks
+                                where w.AuthorID == userID
+                                select w).ToList();
+
+            Repeater repeaterUploadedWalks = (Repeater)UserProfileFormView.Row.Cells[0].FindControl("RepeaterUploadedWalks");
+            repeaterUploadedWalks.DataSource = userDogWalks;
+            repeaterUploadedWalks.DataBind();                 
           }
 
 
         }
       }
-    }
+    }    
   }
 }
