@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DogWalks.DAL;
-
+using Microsoft.AspNet.Identity;
 
 namespace DogWalks.Walks
 {
@@ -26,7 +26,13 @@ namespace DogWalks.Walks
         dogWalk.LengthID = Convert.ToInt32(LengthList.SelectedValue);
         dogWalk.Location = tbLocation.Text;
         dogWalk.WebsiteUrl = tbWebsite.Text;
-        dogWalk.AuthorID = User.Identity.Name;
+
+        //get user ID from UserProfiles table
+        var userID = User.Identity.GetUserId();
+        var profileID = (from u in db.UserProfiles
+                      where u.FKUserID == userID
+                      select u).Single();
+        dogWalk.AuthorID = profileID.UserProfileID;
 
         TagLogic(db, dogWalk);
         ImageLogic(dogWalk);               

@@ -34,7 +34,7 @@ namespace DogWalks.DAL
         public decimal Longitude { get; set; }
         public int LengthID { get; set; }
         public string WebsiteUrl { get; set; }
-        public string AuthorID { get; set; }
+        public Nullable<int> AuthorID { get; set; }
     
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Rating> Ratings { get; set; }

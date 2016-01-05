@@ -31,7 +31,7 @@
           <Property Name="Longitude" Type="numeric" Precision="9" Scale="6" Nullable="false" />
           <Property Name="LengthID" Type="int" Nullable="false" />
           <Property Name="WebsiteUrl" Type="nvarchar" MaxLength="250" />
-          <Property Name="AuthorID" Type="nvarchar" MaxLength="250" />
+          <Property Name="AuthorID" Type="int" />
         </EntityType>
         <EntityType Name="FavouriteWalk">
           <Key>
@@ -320,7 +320,7 @@
           <Property Name="LengthID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Length" Relationship="WalkModel.FK_DogWalk_Length" FromRole="DogWalk" ToRole="Length" />
           <Property Name="WebsiteUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="AuthorID" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="AuthorID" Type="Int32" />
           <NavigationProperty Name="UserProfiles" Relationship="WalkModel.FavouriteWalk" FromRole="DogWalk" ToRole="UserProfile" />
         </EntityType>
         <EntityType Name="Feature">
