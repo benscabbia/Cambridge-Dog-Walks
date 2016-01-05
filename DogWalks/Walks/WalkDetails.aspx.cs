@@ -14,12 +14,11 @@ namespace DogWalks.Walks
   public partial class WalkDetail : System.Web.UI.Page
   {    
 
-    //handle empty or false querystring
     protected void Page_Load(object sender, EventArgs e)
     {
-
       var walk = Request.QueryString["WalkID"];
 
+      //handle empty querystring
       if (string.IsNullOrEmpty(walk))
       {
         Response.Redirect("../Walks/ListWalks.aspx");
@@ -34,12 +33,44 @@ namespace DogWalks.Walks
             var dogWalk = (from n in db.DogWalks
                         where n.WalkID == walkID
                         select n).SingleOrDefault();
+
+            
+            //dogwalk not found on server
             if (dogWalk == null)
             {
               Response.Redirect("../Walks/ListWalks.aspx");
             }
+            else
+            {
+              //manage Favourite/Unfavourite buttons visibility
+              bool userLoggedIn = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+
+              //if user is logged in
+              if(userLoggedIn)
+              {
+                var userID = User.Identity.GetUserId();
+
+                var user = (from u in db.UserProfiles
+                            where u.FKUserID == userID
+                            select u).Single();
+
+                  var userFavouriteWalks = user.DogWalks;
+
+                  var result = userFavouriteWalks.SingleOrDefault(w => w.WalkID == walkID);
+                  if (result == null)
+                  {
+                    LoginView3.FindControl("btnFavourite").Visible = true;
+                    LoginView3.FindControl("btnUnFavourite").Visible = false;
+                  }
+                  else
+                  {
+                    LoginView3.FindControl("btnFavourite").Visible = false;
+                    LoginView3.FindControl("btnUnFavourite").Visible = true;
+                  }
+              }
+            }
           }
-         }      
+        }      
         catch(Exception ex)
         {
           Response.Redirect("../Walks/ListWalks.aspx");
@@ -216,6 +247,37 @@ namespace DogWalks.Walks
         }
         Response.Redirect("WalkDetails?WalkID=" + walkID);
        
+      }
+    }
+
+    protected void btnFavourite_Click(object sender, EventArgs e)
+    {
+      using (var db = new WalkContext())
+      {       
+        var user = User.Identity.GetUserId();
+
+        var userProfile = (from u in db.UserProfiles
+                           where u.FKUserID == user
+                           select u).Single();
+
+        if (userProfile != null)
+        {
+          var walkID = Request.QueryString["WalkID"];
+          int id;
+
+          if (int.TryParse(walkID, out id)) 
+          { 
+            var walk = (from w in db.DogWalks
+                        where w.WalkID == id
+                        select w).Single();
+
+            userProfile.DogWalks.Add(walk);
+            db.SaveChanges();
+
+            LoginView3.FindControl("btnFavourite").Visible = false;
+            LoginView3.FindControl("btnUnFavourite").Visible = true;
+          };
+        }
       }
     }
   }

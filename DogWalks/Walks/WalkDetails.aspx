@@ -132,6 +132,19 @@
     </ItemTemplate>
   </asp:FormView>
 
+  <%--add walk to favourites--%>
+  <div class="row">
+    <div class="col-md-12">
+      <asp:LoginView ID="LoginView3" runat="server">
+        <LoggedInTemplate>
+          <br />
+          <asp:Button ID="btnFavourite" runat="server" Text="Add to Favourite" CssClass="btn btn-success" OnClick="btnFavourite_Click" />
+          <asp:Button ID="btnUnFavourite" runat="server" Text="Unfavourite" CssClass="btn btn-warning" />
+        </LoggedInTemplate>
+      </asp:LoginView>
+    </div>
+  </div>
+
   <asp:LoginView ID="LoginView2" runat="server">
         <RoleGroups>
           <%--admin--%>

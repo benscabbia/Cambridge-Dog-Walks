@@ -92,16 +92,18 @@ namespace DogWalks
             }
 
             //Uploaded Walks by user
-            var userDogWalks = (from w in db.DogWalks
-                                where w.AuthorID == userID
-                                select w).ToList();
-
             Repeater repeaterUploadedWalks = (Repeater)UserProfileFormView.Row.Cells[0].FindControl("RepeaterUploadedWalks");
-            repeaterUploadedWalks.DataSource = userDogWalks;
-            repeaterUploadedWalks.DataBind();                 
+
+            if (repeaterUploadedWalks != null)
+            {
+              var userDogWalks = (from w in db.DogWalks
+                                  where w.AuthorID == userID
+                                  select w).ToList();
+
+              repeaterUploadedWalks.DataSource = userDogWalks;
+              repeaterUploadedWalks.DataBind();                 
+            }
           }
-
-
         }
       }
     }    
