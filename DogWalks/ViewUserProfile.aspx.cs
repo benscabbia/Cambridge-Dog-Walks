@@ -14,6 +14,41 @@ namespace DogWalks
   {
     protected void Page_Load(object sender, EventArgs e)
     {
+      var profileID = Request.QueryString["UserProfileID"];
+
+      if (string.IsNullOrEmpty(profileID))
+      {
+        lblNotFound.Visible = true;
+        PanelUserProfile.Visible = false;
+      }
+      else
+      {
+        try
+        {
+          int userID = Int32.Parse(profileID);
+          using (WalkContext db = new WalkContext())
+          {
+            var profile = (from n in db.UserProfiles
+                           where n.UserProfileID == userID
+                           select n).Single();
+            if (profile == null)
+            {
+              lblNotFound.Visible = true;
+              PanelUserProfile.Visible = false;
+            }
+            else
+            {
+              lblNotFound.Visible = false;
+              PanelUserProfile.Visible = true;
+            }
+          }
+        }
+        catch (Exception ex)
+        {
+          lblNotFound.Visible = true;
+          PanelUserProfile.Visible = false;
+        }
+      }
 
     }
 
