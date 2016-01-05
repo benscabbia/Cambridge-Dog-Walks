@@ -26,12 +26,22 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">
-            <h5><b>Favourite Walks: </b></h5>
+          <div class="col-md-3">
+            <h5><b>My Favourite Walks: </b>
             <br />
+              <ul>
+              <asp:Repeater ID="RepeaterFavouriteWalks" runat="server" ItemType="DogWalks.DAL.DogWalk">
+                <ItemTemplate>
+                   <li><a href='../Walks/WalkDetails?WalkID=<%#Item.WalkID %>'><%# Item.Title %></a></li>
+                </ItemTemplate>
+              </asp:Repeater>
+                </ul>
+            </h5>
+            </div>
+          <div class="col-md-3">
             <h5>
               <b>Uploaded Dog Walks: </b>
-              <br /><br />
+              <br />
               <ul>
                 <asp:Repeater ID="RepeaterUploadedWalks" runat="server" ItemType="DogWalks.DAL.DogWalk">
                   <ItemTemplate>
