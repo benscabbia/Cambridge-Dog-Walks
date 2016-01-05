@@ -139,7 +139,7 @@
         <LoggedInTemplate>
           <br />
           <asp:Button ID="btnFavourite" runat="server" Text="Add to Favourite" CssClass="btn btn-success" OnClick="btnFavourite_Click" />
-          <asp:Button ID="btnUnFavourite" runat="server" Text="Unfavourite" CssClass="btn btn-warning" />
+          <asp:Button ID="btnUnFavourite" runat="server" Text="Unfavourite" CssClass="btn btn-warning" OnClick="btnUnFavourite_Click" />
         </LoggedInTemplate>
       </asp:LoginView>
     </div>

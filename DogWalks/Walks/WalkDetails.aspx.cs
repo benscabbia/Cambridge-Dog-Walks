@@ -225,7 +225,6 @@ namespace DogWalks.Walks
     {
       var currentUserID = User.Identity.GetUserId();
       
-
       var comment = new DogWalks.DAL.Comment();
 
       TryUpdateModel(comment);
@@ -279,6 +278,46 @@ namespace DogWalks.Walks
           };
         }
       }
+    }
+
+    protected void btnUnFavourite_Click(object sender, EventArgs e)
+    {
+      using (var db = new WalkContext())
+      {
+        var user = User.Identity.GetUserId();
+
+        var userProfile = (from u in db.UserProfiles
+                           where u.FKUserID == user
+                           select u).Single();
+
+        if (userProfile != null)
+        {
+          var walkID = Request.QueryString["WalkID"];
+          int id;
+          if (int.TryParse(walkID, out id))
+          { 
+            var userFavouriteWalks = userProfile.DogWalks;
+            var currentWalk = userFavouriteWalks.SingleOrDefault(w => w.WalkID == id);
+
+            //user has favourited walk
+            if (currentWalk != null)
+            {
+              userProfile.DogWalks.Remove(currentWalk);
+              db.SaveChanges();
+
+              LoginView3.FindControl("btnFavourite").Visible = true;
+              LoginView3.FindControl("btnUnFavourite").Visible = false;
+            }
+          }
+
+
+
+        
+        }
+
+      }
+
+
     }
   }
 
