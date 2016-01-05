@@ -12,9 +12,13 @@ namespace DogWalks
 {
   public partial class ViewUserProfile : System.Web.UI.Page
   {
+    string profileID;
+
     protected void Page_Load(object sender, EventArgs e)
     {
-      var profileID = Request.QueryString["UserProfileID"];
+     
+      
+      profileID = Request.QueryString["UserProfileID"];    
 
       if (string.IsNullOrEmpty(profileID))
       {
@@ -49,7 +53,7 @@ namespace DogWalks
           PanelUserProfile.Visible = false;
         }
       }
-
+      
     }
 
     // The id parameter should match the DataKeyNames value set on the control
@@ -62,8 +66,44 @@ namespace DogWalks
                            where u.UserProfileID == UserProfileID
                            select u).Single();
 
+        if (UserProfileFormView.CurrentMode == FormViewMode.ReadOnly)
+        {
+
+
+        }
+
 
         return userProfile;        
+      }
+    }
+
+    protected void UserProfileFormView_DataBound(object sender, EventArgs e)
+    {
+      if (UserProfileFormView.CurrentMode == FormViewMode.ReadOnly)
+      {
+        //Check the RowType to where the Control is placed
+        if (UserProfileFormView.Row.RowType == DataControlRowType.DataRow)
+        {
+          //Just Changed the index of cells based on your requirement
+          Label lbl = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblNumOfComments");
+          if (lbl != null)          
+          {
+            using (var db = new WalkContext())
+            {
+              int userID;
+              if (int.TryParse(profileID, out userID))
+              {
+              var comments = (from c in db.Comments
+                              where c.AuthorID == userID
+                              select c).ToList();
+
+              lbl.Text = comments.Count.ToString();
+              }              
+            }
+          }
+
+
+        }
       }
     }
   }

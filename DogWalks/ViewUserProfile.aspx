@@ -5,7 +5,7 @@
   <br />
   <h2><asp:Label ID="lblNotFound" runat="server" Text="User profile could not be found" Visible="true"></asp:Label></h2>
   <asp:Panel ID="PanelUserProfile" Visible="false" runat="server">
-    <asp:FormView ID="UserProfileFormView" runat="server" ItemType="DogWalks.DAL.UserProfile" SelectMethod="UserProfileFormView_GetItem">
+    <asp:FormView ID="UserProfileFormView" runat="server" ItemType="DogWalks.DAL.UserProfile" SelectMethod="UserProfileFormView_GetItem" OnDataBound="UserProfileFormView_DataBound">
       <ItemTemplate>
          <h2>User Profile</h2>
         <div class="row">
@@ -19,7 +19,7 @@
             <br />
             <h5><b>Name: </b><%# Item.FirstName %> <%# Item.LastName%></h5>
             <h5><b>Member Since: </b><%# Eval("JoinDateTime", "{0:MM/dd/yyyy}") %></h5>
-            <h5><b>Number of Comments: </b></h5>
+            <h5><b>Number of Comments: </b><asp:Label ID="lblNumOfComments" runat="server"></asp:Label></h5>
             <h5><b>Favourite Walks: </b></h5>
             <h5><b>Uploaded Dog Walks: </b></h5>                   
           </div>
