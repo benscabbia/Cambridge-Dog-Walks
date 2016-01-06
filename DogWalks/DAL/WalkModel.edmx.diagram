@@ -19,6 +19,7 @@
         <AssociationConnector Association="WalkModel.FK_DogWalk_Length" />
         <EntityTypeShape EntityType="WalkModel.UserProfile" Width="1.5" PointX="7.25" PointY="8.75" />
         <AssociationConnector Association="WalkModel.FavouriteWalk" />
+        <AssociationConnector Association="WalkModel.FK_Rating_UserProfile" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

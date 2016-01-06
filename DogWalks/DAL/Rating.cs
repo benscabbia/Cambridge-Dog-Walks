@@ -16,9 +16,10 @@ namespace DogWalks.DAL
     {
         public int RatingID { get; set; }
         public int WalkID { get; set; }
-        public int Score { get; set; }
+        public double Score { get; set; }
         public int AuthorID { get; set; }
     
         public virtual DogWalk DogWalk { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
     }
 }

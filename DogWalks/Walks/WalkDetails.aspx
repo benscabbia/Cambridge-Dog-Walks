@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="WalkDetails.aspx.cs" Inherits="DogWalks.Walks.WalkDetail" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContentChild" runat="server">
 </asp:Content>
 
@@ -117,6 +119,7 @@
 
       <br />
 
+      <%--features--%>
       <div class="row">
         <div class="col-md-12">
           <b>Features: </b>
@@ -131,6 +134,20 @@
       </div>
     </ItemTemplate>
   </asp:FormView>
+
+  <%--rating--%>
+  <input id="starRating" type="number" class="rating" min=0 max=5 step=0.2 data-size="lg" runat="server" >
+
+
+  <asp:RadioButtonList ID="RadioButtonList1" runat="server" RepeatDirection="Horizontal" AutoPostBack="True">
+    <asp:ListItem Value="1">1</asp:ListItem>
+    <asp:ListItem Value="2">2</asp:ListItem>
+    <asp:ListItem Value="3">3</asp:ListItem>
+    <asp:ListItem Value="4">4</asp:ListItem>
+    <asp:ListItem Value="5">5</asp:ListItem>
+  </asp:RadioButtonList>
+
+
 
   <%--add walk to favourites--%>
   <div class="row">

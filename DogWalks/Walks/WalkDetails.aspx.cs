@@ -18,6 +18,38 @@ namespace DogWalks.Walks
     {
       var walk = Request.QueryString["WalkID"];
 
+      if (IsPostBack && User.Identity.IsAuthenticated)
+      {
+        int walkID;
+        if (int.TryParse(walk, out walkID))
+        {
+          using (var db = new WalkContext())
+          {
+            var newRating = new Rating();
+            newRating.WalkID = walkID;
+
+            var userID = User.Identity.GetUserId();
+            var userProfileID = (from u in db.UserProfiles
+                             where u.FKUserID == userID
+                             select u).Single().UserProfileID;
+
+            newRating.AuthorID = userProfileID;
+            newRating.Score = float.Parse(RadioButtonList1.SelectedValue);
+            
+            //existing ratings for current walk
+            var userRating = (from r in db.Ratings
+                           where r.WalkID == walkID && r.AuthorID == userProfileID                           
+                           select r).SingleOrDefault();
+
+            if (userRating != null) db.Ratings.Remove(userRating);
+
+            db.Ratings.Add(newRating);
+            db.SaveChanges();
+            
+          }
+        }
+      }
+
       //handle empty querystring
       if (string.IsNullOrEmpty(walk))
       {
@@ -42,6 +74,13 @@ namespace DogWalks.Walks
             }
             else
             {
+              //populate star rating
+              var averageRatings = (from r in db.Ratings
+                                    where r.WalkID == walkID
+                                    select r.Score).DefaultIfEmpty().Average();
+
+              if(averageRatings > 0) starRating.Value = averageRatings.ToString();
+
               //manage Favourite/Unfavourite buttons visibility
               bool userLoggedIn = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
 

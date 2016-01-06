@@ -85,7 +85,7 @@
           </Key>
           <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WalkID" Type="int" Nullable="false" />
-          <Property Name="Score" Type="int" Nullable="false" />
+          <Property Name="Score" Type="float" Nullable="false" />
           <Property Name="AuthorID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserProfile">
@@ -182,6 +182,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Rating_UserProfile">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserProfileID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WalkFeature_DogWalk">
           <End Role="DogWalk" Type="Self.DogWalk" Multiplicity="1" />
           <End Role="WalkFeature" Type="Self.WalkFeature" Multiplicity="*" />
@@ -241,6 +253,10 @@
             <End Role="DogWalk" EntitySet="DogWalk" />
             <End Role="Rating" EntitySet="Rating" />
           </AssociationSet>
+          <AssociationSet Name="FK_Rating_UserProfile" Association="Self.FK_Rating_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
           <AssociationSet Name="FK_WalkFeature_DogWalk" Association="Self.FK_WalkFeature_DogWalk">
             <End Role="DogWalk" EntitySet="DogWalk" />
             <End Role="WalkFeature" EntitySet="WalkFeature" />
@@ -286,6 +302,10 @@
           <AssociationSet Name="FavouriteWalk" Association="WalkModel.FavouriteWalk">
             <End Role="DogWalk" EntitySet="DogWalks" />
             <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_UserProfile" Association="WalkModel.FK_Rating_UserProfile">
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+            <End Role="Rating" EntitySet="Ratings" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Comment">
@@ -339,9 +359,10 @@
           </Key>
           <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WalkID" Type="Int32" Nullable="false" />
-          <Property Name="Score" Type="Int32" Nullable="false" />
+          <Property Name="Score" Type="Double" Nullable="false" />
           <Property Name="AuthorID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DogWalk" Relationship="WalkModel.FK_Rating_DogWalk" FromRole="Rating" ToRole="DogWalk" />
+          <NavigationProperty Name="UserProfile" Relationship="WalkModel.FK_Rating_UserProfile" FromRole="Rating" ToRole="UserProfile" />
         </EntityType>
         <Association Name="FK_Comment_DogWalk">
           <End Type="WalkModel.DogWalk" Role="DogWalk" Multiplicity="1" />
@@ -440,10 +461,23 @@
           <Property Name="JoinDateTime" Type="DateTime" Precision="3" />
           <Property Name="AboutMe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DogWalks" Relationship="WalkModel.FavouriteWalk" FromRole="UserProfile" ToRole="DogWalk" />
+          <NavigationProperty Name="Ratings" Relationship="WalkModel.FK_Rating_UserProfile" FromRole="UserProfile" ToRole="Rating" />
         </EntityType>
         <Association Name="FavouriteWalk">
           <End Type="WalkModel.DogWalk" Role="DogWalk" Multiplicity="*" />
           <End Type="WalkModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Rating_UserProfile">
+          <End Type="WalkModel.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="WalkModel.Rating" Role="Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserProfileID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>

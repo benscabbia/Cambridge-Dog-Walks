@@ -17,6 +17,7 @@ namespace DogWalks.DAL
         public UserProfile()
         {
             this.DogWalks = new HashSet<DogWalk>();
+            this.Ratings = new HashSet<Rating>();
         }
     
         public int UserProfileID { get; set; }
@@ -30,5 +31,6 @@ namespace DogWalks.DAL
         public string AboutMe { get; set; }
     
         public virtual ICollection<DogWalk> DogWalks { get; set; }
+        public virtual ICollection<Rating> Ratings { get; set; }
     }
 }
