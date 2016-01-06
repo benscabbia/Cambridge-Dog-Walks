@@ -8,11 +8,13 @@ using DogWalks.DAL;
 using System.Web.ModelBinding;
 using System.Collections;
 using Microsoft.AspNet.Identity;
+using System.Web.UI.HtmlControls;
 
 namespace DogWalks.Walks
 {
   public partial class WalkDetail : System.Web.UI.Page
-  {    
+  {
+    protected string inputValue { get; set; }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -34,7 +36,9 @@ namespace DogWalks.Walks
                              select u).Single().UserProfileID;
 
             newRating.AuthorID = userProfileID;
-            newRating.Score = float.Parse(RadioButtonList1.SelectedValue);
+            RadioButtonList radioList = (RadioButtonList)LoginView3.FindControl("RadioButtonList1");
+
+            newRating.Score = float.Parse(radioList.SelectedValue);
             
             //existing ratings for current walk
             var userRating = (from r in db.Ratings
@@ -74,14 +78,7 @@ namespace DogWalks.Walks
             }
             else
             {
-              //populate star rating
-              var averageRatings = (from r in db.Ratings
-                                    where r.WalkID == walkID
-                                    select r.Score).DefaultIfEmpty().Average();
-
-              if(averageRatings > 0) starRating.Value = averageRatings.ToString();
-
-              //manage Favourite/Unfavourite buttons visibility
+           
               bool userLoggedIn = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
 
               //if user is logged in
@@ -93,6 +90,9 @@ namespace DogWalks.Walks
                             where u.FKUserID == userID
                             select u).Single();
 
+
+
+                //manage Favourite/Unfavourite buttons visibility
                   var userFavouriteWalks = user.DogWalks;
 
                   var result = userFavouriteWalks.SingleOrDefault(w => w.WalkID == walkID);
@@ -359,7 +359,7 @@ namespace DogWalks.Walks
 
     }
   }
-
+  
   //class used by commentslistview. Objects provide further details combining user profiles with their posted comments
   public class CommentsProfileModel
   {

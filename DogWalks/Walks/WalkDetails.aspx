@@ -136,18 +136,6 @@
   </asp:FormView>
 
   <%--rating--%>
-  <input id="starRating" type="number" class="rating" min=0 max=5 step=0.2 data-size="lg" runat="server" >
-
-
-  <asp:RadioButtonList ID="RadioButtonList1" runat="server" RepeatDirection="Horizontal" AutoPostBack="True">
-    <asp:ListItem Value="1">1</asp:ListItem>
-    <asp:ListItem Value="2">2</asp:ListItem>
-    <asp:ListItem Value="3">3</asp:ListItem>
-    <asp:ListItem Value="4">4</asp:ListItem>
-    <asp:ListItem Value="5">5</asp:ListItem>
-  </asp:RadioButtonList>
-
-
 
   <%--add walk to favourites--%>
   <div class="row">
@@ -155,6 +143,9 @@
       <asp:LoginView ID="LoginView3" runat="server">
         <LoggedInTemplate>
           <br />
+
+          <input id="starRating" type="number" class="rating" min=0 max=5 step=0.5 data-size="lg" value="<%# this.inputValue %>">
+
           <asp:Button ID="btnFavourite" runat="server" Text="Add to Favourite" CssClass="btn btn-success" OnClick="btnFavourite_Click" />
           <asp:Button ID="btnUnFavourite" runat="server" Text="Unfavourite" CssClass="btn btn-warning" OnClick="btnUnFavourite_Click" />
         </LoggedInTemplate>
@@ -259,5 +250,33 @@
       $('#carousel-items:first-child ').addClass('active');
       $('.carousel-indicators li:first-child').addClass('active');
     });
+
+    //used by star rating
+    $(document).ready(function () {      
+      $("#starRating").rating();
+    });
+
+    $("#starRating").on('rating.change', function (event, value, caption) {
+      var walkID = getUrlVars()["WalkID"];
+      var score = $('#starRating').val();
+
+      $.get("SaveRating.aspx",
+      {
+        Score: score,
+        WalkID: walkID
+      });
+    });
+
+    //function to get query string
+    function getUrlVars() {
+      var vars = [], hash;
+      var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+      for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+      }
+      return vars;
+    }
   </script>
 </asp:Content>

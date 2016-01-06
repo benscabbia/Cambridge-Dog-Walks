@@ -24,6 +24,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,6 +72,8 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
@@ -290,6 +293,7 @@
     <Content Include="WalkPics\b49d8c8f-673a-4724-a47b-c6dec13f9e71.JPG" />
     <Content Include="Walks\AddWalk.aspx" />
     <Content Include="Walks\ListWalks.aspx" />
+    <Content Include="Walks\SaveRating.aspx" />
     <Content Include="Walks\Search.aspx" />
     <Content Include="Walks\testpage.aspx" />
     <Content Include="Walks\WalkDetails.aspx" />
@@ -609,6 +613,13 @@
     </Compile>
     <Compile Include="Walks\ListWalks.aspx.designer.cs">
       <DependentUpon>ListWalks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Walks\SaveRating.aspx.cs">
+      <DependentUpon>SaveRating.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Walks\SaveRating.aspx.designer.cs">
+      <DependentUpon>SaveRating.aspx</DependentUpon>
     </Compile>
     <Compile Include="Walks\Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>
