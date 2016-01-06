@@ -114,7 +114,11 @@ namespace DogWalks.Walks
           var inRangeWalks = new List<InRangeWalks>();
           foreach (var walk in searchQuery)
           {
-            inRangeWalks.Add(new InRangeWalks(-1, walk));
+            float averageRatings = (float)(from r in db.Ratings
+                                           where r.WalkID == walk.WalkID
+                                           select r.Score).DefaultIfEmpty().Average();
+
+            inRangeWalks.Add(new InRangeWalks(-1, walk, averageRatings));
           }
 
           tbSearch.Text = "";//remove text
@@ -143,9 +147,14 @@ namespace DogWalks.Walks
               break;
           }
           var inRangeWalks = new List<InRangeWalks>();
+
           foreach (var walk in query)
-          {
-            inRangeWalks.Add(new InRangeWalks(-1, walk));
+          {            
+            float averageRatings = (float)(from r in db.Ratings
+                                  where r.WalkID == walk.WalkID
+                                  select r.Score).DefaultIfEmpty().Average();
+
+            inRangeWalks.Add(new InRangeWalks(-1, walk, averageRatings));
           }
          return inRangeWalks.AsQueryable();
         }
@@ -164,6 +173,7 @@ namespace DogWalks.Walks
   {
     private double distanceFromPostcode;
     private DogWalk walk;
+    private float averageRating;
 
     public InRangeWalks(DogWalk walk)
     {
@@ -174,8 +184,15 @@ namespace DogWalks.Walks
       this.distanceFromPostcode = distanceFromPostcode;
       this.walk = walk;
     }
+    public InRangeWalks(double distanceFromPostcode, DogWalk walk, float averageRating)
+    {
+      this.distanceFromPostcode = distanceFromPostcode;
+      this.walk = walk;
+      this.averageRating = averageRating;
+    }
 
     public double DistanceFromPostcode { get { return distanceFromPostcode; } }
     public DogWalk Walk { get { return walk; } }
+    public double AverageRating { get { return averageRating; } }
   }
 }

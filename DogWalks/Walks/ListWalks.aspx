@@ -79,7 +79,10 @@
         </div>
 
         <div class="col-md-9">
-          <a href="../Walks/WalkDetails?WalkID=<%# Item.Walk.WalkID %>"><h3><b><%# Item.Walk.Title %></b></h3></a>
+          <div class="row">
+            <div class="col-md-6"><a href="../Walks/WalkDetails?WalkID=<%# Item.Walk.WalkID %>"><h3><b><%# Item.Walk.Title %></b></h3></a> </div>
+            <div class="col-md-6"><div style="padding-top:10px"><input id="starRating" value="<%# Item.AverageRating %>" type="number" class="rating" min=0 max=5 step=0.5 readonly="true" data-size="xs"></div></div>
+          </div>
           <h6><b>Location:</b> <%# Item.Walk.Location%>, <%# Item.Walk.Postcode%></h6>
           <%--Had to apply 'fake space' to avoid exception if description is <300--%>
           <p><%# Item.Walk.Description.ToString().PadRight(300).Substring(0,300).TrimEnd()%> . . .</p>
