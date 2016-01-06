@@ -86,7 +86,7 @@
           <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WalkID" Type="int" Nullable="false" />
           <Property Name="Score" Type="int" Nullable="false" />
-          <Property Name="AuthorID" Type="nvarchar" MaxLength="250" />
+          <Property Name="AuthorID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -340,7 +340,7 @@
           <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WalkID" Type="Int32" Nullable="false" />
           <Property Name="Score" Type="Int32" Nullable="false" />
-          <Property Name="AuthorID" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="AuthorID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DogWalk" Relationship="WalkModel.FK_Rating_DogWalk" FromRole="Rating" ToRole="DogWalk" />
         </EntityType>
         <Association Name="FK_Comment_DogWalk">
