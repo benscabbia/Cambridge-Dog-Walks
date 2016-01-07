@@ -15,6 +15,7 @@ namespace DogWalks.Walks
   public partial class WalkDetail : System.Web.UI.Page
   {
     protected string inputValue { get; set; }
+    bool userLoggedIn = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -44,8 +45,6 @@ namespace DogWalks.Walks
             }
             else
             {
-           
-              bool userLoggedIn = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
 
               //if user is logged in
               if(userLoggedIn)
@@ -105,11 +104,39 @@ namespace DogWalks.Walks
                    where n.WalkID == WalkID
                    select n).SingleOrDefault();
 
-        //foreach(var f in walk.Features){
-            //lbFeatures.Text += f.FeatureName + "<br/>";
-        //}
        return walk;
       }          
+    }
+
+    protected void FormView1_DataBound(object sender, EventArgs e)
+    {
+      if (FormView1.CurrentMode == FormViewMode.ReadOnly)
+      {
+        //Check the RowType to where the Control is placed
+        if (FormView1.Row.RowType == DataControlRowType.DataRow)
+        {
+          //Just Changed the index of cells based on your requirement
+          Label lbl = (Label)FormView1.Row.Cells[0].FindControl("lblCreatedBy");
+          if (lbl != null)
+          {
+            var walk = int.Parse(Request.QueryString["WalkID"]);
+            using (var db = new WalkContext())
+            {
+              var walkAuthorID = (from w in db.DogWalks
+                                  where w.WalkID == walk
+                                  select w.AuthorID).SingleOrDefault();
+
+              var authorProfile = (from u in db.UserProfiles
+                                   where u.UserProfileID == walkAuthorID
+                                   select u).SingleOrDefault();
+
+              //ensures each walk has a name
+              string name = authorProfile.FirstName + " " + authorProfile.LastName;            
+              lbl.Text = string.IsNullOrWhiteSpace(name) ? "user" + walkAuthorID : name;
+            }
+          }
+        }
+      }
     }
 
     //delete a walk
@@ -327,6 +354,7 @@ namespace DogWalks.Walks
         }
       }
     }
+
   }
   
   //class used by commentslistview. Objects provide further details combining user profiles with their posted comments

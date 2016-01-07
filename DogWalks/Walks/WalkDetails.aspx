@@ -82,7 +82,7 @@
 
   </style>
   <br />
-  <asp:FormView ID="FormView1" runat="server" ItemType="DogWalks.DAL.DogWalk" SelectMethod="FormView1_GetItem">
+  <asp:FormView ID="FormView1" runat="server" ItemType="DogWalks.DAL.DogWalk" SelectMethod="FormView1_GetItem" OnDataBound="FormView1_DataBound">
     <ItemTemplate>
      
       <div class="row">
@@ -140,7 +140,7 @@
                 </asp:Repeater>
               </p>
               <p><asp:Label ID="lbPostcodeDistance" runat="server" Text='<%# "<b>Useful Website: </b>" + Item.WebsiteUrl %>' Visible=<%# (string.IsNullOrEmpty(Item.WebsiteUrl)) ? false : true %>></asp:Label> </p>
-              <p><b>Created by: </b><%# Item.AuthorID %>, on the <%# Item.CreateDateTime.ToShortDateString() %></p>
+              <p><b>Created by: </b><a href="../ViewUserProfile?UserProfileID=<%# Item.AuthorID %>"><asp:Label ID="lblCreatedBy" runat="server"></asp:Label></a>, on the <%# Item.CreateDateTime.ToShortDateString() %></p>
             </div>
           </div>
         </div>
