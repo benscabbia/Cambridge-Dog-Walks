@@ -20,40 +20,6 @@ namespace DogWalks.Walks
     {
       var walk = Request.QueryString["WalkID"];
 
-      if (IsPostBack && User.Identity.IsAuthenticated)
-      {
-        int walkID;
-        if (int.TryParse(walk, out walkID))
-        {
-          using (var db = new WalkContext())
-          {
-            var newRating = new Rating();
-            newRating.WalkID = walkID;
-
-            var userID = User.Identity.GetUserId();
-            var userProfileID = (from u in db.UserProfiles
-                             where u.FKUserID == userID
-                             select u).Single().UserProfileID;
-
-            newRating.AuthorID = userProfileID;
-            RadioButtonList radioList = (RadioButtonList)LoginView3.FindControl("RadioButtonList1");
-
-            newRating.Score = float.Parse(radioList.SelectedValue);
-            
-            //existing ratings for current walk
-            var userRating = (from r in db.Ratings
-                           where r.WalkID == walkID && r.AuthorID == userProfileID                           
-                           select r).SingleOrDefault();
-
-            if (userRating != null) db.Ratings.Remove(userRating);
-
-            db.Ratings.Add(newRating);
-            db.SaveChanges();
-            
-          }
-        }
-      }
-
       //handle empty querystring
       if (string.IsNullOrEmpty(walk))
       {
