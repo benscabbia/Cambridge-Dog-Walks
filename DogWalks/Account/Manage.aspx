@@ -91,8 +91,8 @@
               </div>
             </div>
             <div class="col-md-offset-1">
-              <asp:Button ID="btUpdate" runat="server" Text="Update Profile" CssClass="btn btn-success" OnClick="btUpdate_Click"/>
-            </div>
+              <asp:Button ID="btUpdate" runat="server" Text="Update Profile" CssClass="btn btn-success" OnClick="btUpdate_Click"/>              
+            </div>           
           </div>
 
 
@@ -124,7 +124,15 @@
               </div>
             </div>
           </div>
-
+          
+          <div class="row">
+            <div class="col-md-12">
+              <br /><br />
+              <div class="col-md-offset-1 ">
+                <p>To see how a user views your profile, please <asp:HyperLink ID="HyperLink1" runat="server">click here</asp:HyperLink></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

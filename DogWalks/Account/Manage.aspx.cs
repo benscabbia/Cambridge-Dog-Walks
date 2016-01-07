@@ -62,6 +62,8 @@ namespace DogWalks.Account
                                      where u.FKUserID == currentUserID
                                      select u).Single();
 
+          HyperLink1.NavigateUrl = "../ViewUserProfile?UserProfileID=" + userProfile.UserProfileID;
+
           imgProfile.ImageUrl = !string.IsNullOrEmpty(userProfile.ProfilePicture) ? userProfile.ProfilePicture : string.Empty;
           tbFirstName.Text = userProfile.FirstName;
           tbLastName.Text = userProfile.LastName;
