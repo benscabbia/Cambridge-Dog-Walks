@@ -49,42 +49,42 @@
           <div class="col-md-8">
             <%--First Name--%>
             <div class="form-group">
-              <asp:Label ID="lbFirstName" runat="server" Text="First Name" CssClass="control-label col-md-1"></asp:Label>
+              <asp:Label ID="lbFirstName" runat="server" Text="First Name" CssClass="control-label col-md-1" AssociatedControlID="tbFirstName"></asp:Label>
               <div class="col-md-11">
                 <asp:TextBox ID="tbFirstName" CssClass="form-control" runat="server"></asp:TextBox>
               </div>
             </div>
             <%--Last Name--%>
             <div class="form-group">
-              <asp:Label ID="lbLastName" runat="server" Text="Last Name" CssClass="control-label col-md-1 "></asp:Label>
+              <asp:Label ID="lbLastName" runat="server" Text="Last Name" CssClass="control-label col-md-1" AssociatedControlID="tbLastName"></asp:Label>
               <div class="col-md-11">
                 <asp:TextBox ID="tbLastName" runat="server" CssClass="form-control"></asp:TextBox>
               </div>
             </div>
             <%--Address--%>
             <div class="form-group">
-              <asp:Label ID="lbAddress" runat="server" Text="Address" CssClass="control-label col-md-1"></asp:Label>
+              <asp:Label ID="lbAddress" runat="server" Text="Address" CssClass="control-label col-md-1" AssociatedControlID="tbAddress"></asp:Label>
               <div class="col-md-11">
                 <asp:TextBox ID="tbAddress" runat="server" CssClass="form-control"></asp:TextBox>
               </div>
             </div>
             <%--Postcode--%>
             <div class="form-group">
-              <asp:Label ID="lbPostcode" runat="server" Text="Postcode" CssClass="control-label col-md-1 "></asp:Label>
+              <asp:Label ID="lbPostcode" runat="server" Text="Postcode" CssClass="control-label col-md-1" AssociatedControlID="tbPostcode"></asp:Label>
               <div class="col-md-11">
                 <asp:TextBox ID="tbPostcode" runat="server" CssClass="form-control"></asp:TextBox>
               </div>
             </div>
             <%--Aboutme--%>
             <div class="form-group">
-              <asp:Label ID="lbAboutMe" runat="server" Text="About Me" CssClass="control-label col-md-1 "></asp:Label>
+              <asp:Label ID="lbAboutMe" runat="server" Text="About Me" CssClass="control-label col-md-1" AssociatedControlID="tbAboutMe"></asp:Label>
               <div class="col-md-11">
                 <asp:TextBox ID="tbAboutMe" TextMode="MultiLine" Rows="4" runat="server" CssClass="form-control"></asp:TextBox>
               </div>
             </div>
             <%--password--%>
             <div class="form-group">
-              <asp:Label ID="lbPassword" runat="server" Text="Password" CssClass="control-label col-md-1 "></asp:Label>
+              <asp:Label ID="lbPassword" runat="server" Text="Password" CssClass="control-label col-md-1"></asp:Label>
               <div class="col-md-11">
                 <asp:Button ID="btChangePassword" runat="server" Text="Change Password" CssClass="btn btn-default" PostBackUrl="ManagePassword.aspx" />
 

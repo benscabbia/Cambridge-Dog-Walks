@@ -52,21 +52,21 @@
   <div class="form-horizontal">
     <%--title--%>
     <div class="form-group">
-      <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1"></asp:Label>
+      <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1" AssociatedControlID="tbTitle"></asp:Label>
       <div class="col-md-11">
         <asp:TextBox ID="tbTitle" CssClass="form-control setMaxWidth" runat="server"></asp:TextBox>
       </div>
     </div>
     <%--description--%>
     <div class="form-group">
-      <asp:Label ID="lbDescription" runat="server" Text="Description" CssClass="control-label col-md-1 "></asp:Label>
+      <asp:Label ID="lbDescription" runat="server" Text="Description" CssClass="control-label col-md-1" AssociatedControlID="tbDescription"></asp:Label>
       <div class="col-md-11">
-        <asp:TextBox ID="tbDescription" runat="server" TextMode="MultiLine" Height="50px" CssClass="form-control setMaxWidth"></asp:TextBox>
+        <asp:TextBox ID="tbDescription" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control setMaxWidth"></asp:TextBox>
       </div>
     </div>
     <%--length--%>
     <div class="form-group">
-      <asp:Label ID="lbLength" runat="server" Text="Length" CssClass="control-label col-md-1"></asp:Label>
+      <asp:Label ID="lbLength" runat="server" Text="Length" CssClass="control-label col-md-1" AssociatedControlID="LengthList"></asp:Label>
       <div class="col-md-4">
         <asp:DropDownList ID="LengthList" runat="server" SelectMethod="LengthList_GetData" OnSelectedIndexChanged="LengthList_SelectedIndexChanged" AutoPostBack="true"
           CssClass="form-control setMaxWidth" DataTextField="LengthName" DataValueField="LengthID">
@@ -76,14 +76,14 @@
     </div>
     <%--location--%>
     <div class="form-group">
-      <asp:Label ID="lbLocation" runat="server" Text="Location" CssClass="control-label col-md-1"></asp:Label>
+      <asp:Label ID="lbLocation" runat="server" Text="Location" CssClass="control-label col-md-1" AssociatedControlID="tbLocation"></asp:Label>
       <div class="col-md-11">
         <asp:TextBox ID="tbLocation" runat="server" TextMode="MultiLine" CssClass="form-control setMaxWidth"></asp:TextBox>
       </div>
     </div>
     <%--postcode--%>
     <div class="form-group">
-      <asp:Label ID="lbPostcode" runat="server" Text="Postcode" CssClass="control-label col-md-1"></asp:Label>
+      <asp:Label ID="lbPostcode" runat="server" Text="Postcode" CssClass="control-label col-md-1" AssociatedControlID="tbPostcode"></asp:Label>
       <div class="col-md-11">
         <asp:TextBox ID="tbPostcode" runat="server" CssClass="form-control setMaxWidth"></asp:TextBox>
       </div>
@@ -99,7 +99,7 @@
     </div>
     <%--websiteUrl--%>
     <div class="form-group">
-      <asp:Label ID="Label2" runat="server" Text="Website Link" CssClass="control-label col-md-1"></asp:Label>
+      <asp:Label ID="Label2" runat="server" Text="Website Link" CssClass="control-label col-md-1" AssociatedControlID="tbWebsite"></asp:Label>
       <div class="col-md-11">
         <asp:TextBox ID="tbWebsite" runat="server" CssClass="form-control setMaxWidth"></asp:TextBox>
       </div>
