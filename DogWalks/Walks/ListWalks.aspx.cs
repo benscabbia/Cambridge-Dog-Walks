@@ -122,8 +122,7 @@ namespace DogWalks.Walks
           }
 
           tbSearch.Text = "";//remove text
-          return inRangeWalks.AsQueryable();
-        
+          return inRangeWalks.AsQueryable();        
         }
 
         else
@@ -147,7 +146,7 @@ namespace DogWalks.Walks
               break;
           }
           var inRangeWalks = new List<InRangeWalks>();
-
+          
           foreach (var walk in query)
           {            
             float averageRatings = (float)(from r in db.Ratings
@@ -155,6 +154,13 @@ namespace DogWalks.Walks
                                   select r.Score).DefaultIfEmpty().Average();
 
             inRangeWalks.Add(new InRangeWalks(-1, walk, averageRatings));
+          }
+
+          //order by ratings
+          if (categoryList == 4)
+          {
+            if (order == "DESC") return inRangeWalks.AsQueryable().OrderBy(C => C.AverageRating);
+            return inRangeWalks.AsQueryable().OrderByDescending(C => C.AverageRating);
           }
          return inRangeWalks.AsQueryable();
         }
