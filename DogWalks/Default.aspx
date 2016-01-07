@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/Frontend.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="DogWalks.Default1" %>
+﻿<%@ Page Title="Default" Language="C#" MasterPageFile="~/MasterPages/Frontend.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="DogWalks.Default1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
   <link href="Content/defaultPageStyle.css" rel="stylesheet" />
 </asp:Content>

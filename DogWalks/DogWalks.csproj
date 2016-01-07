@@ -192,6 +192,7 @@
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\star-rating.css" />
+    <Content Include="favicon.png" />
     <Content Include="HomePagePics\home-cover.jpg" />
     <Content Include="HomePagePics\longest-walks.jpg" />
     <Content Include="HomePagePics\newest-walks.jpg" />
@@ -292,7 +293,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="original-Default.aspx" />
-    <Content Include="favicon.ico" />
+    <Content Include="favicon2.ico" />
     <Content Include="Global.asax" />
     <Content Include="Site.Master" />
     <Content Include="ToDo.txt" />

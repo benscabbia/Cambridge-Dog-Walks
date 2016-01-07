@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="AddWalk.aspx.cs" Inherits="DogWalks.Walks.AddWalk" %>
+﻿<%@ Page Title="Add Walk" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="AddWalk.aspx.cs" Inherits="DogWalks.Walks.AddWalk" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContentChild" runat="server">
   <style type="text/css">

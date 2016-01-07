@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="ManageFeatures.aspx.cs" Inherits="DogWalks.Management.ManageFeatures" %>
+﻿<%@ Page Title="Manage Features" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="ManageFeatures.aspx.cs" Inherits="DogWalks.Management.ManageFeatures" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContentChild" runat="server">
     <link href="../Management/management.css" rel="stylesheet" />
 </asp:Content>

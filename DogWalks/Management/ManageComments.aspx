@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="ManageComments.aspx.cs" Inherits="DogWalks.Management.ManageComments" %>
+﻿<%@ Page Title="Manage Comments" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="ManageComments.aspx.cs" Inherits="DogWalks.Management.ManageComments" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContentChild" runat="server">
   <link href="../Management/management.css" rel="stylesheet" />
 </asp:Content>

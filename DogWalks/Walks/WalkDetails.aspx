@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="WalkDetails.aspx.cs" Inherits="DogWalks.Walks.WalkDetail" %>
+﻿<%@ Page Title="Walk Details" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="WalkDetails.aspx.cs" Inherits="DogWalks.Walks.WalkDetail" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
