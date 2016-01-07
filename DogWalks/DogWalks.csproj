@@ -232,6 +232,7 @@
     <Content Include="Account\Web.config" />
     <Content Include="MasterPages\Frontend.Master" />
     <Content Include="MasterPages\FrontendChild.master" />
+    <Content Include="WebServices\SaveRatingService.svc" />
     <EntityDeploy Include="DAL\WalkModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WalkModel.Designer.cs</LastGenOutput>
@@ -641,6 +642,9 @@
     </Compile>
     <Compile Include="Walks\WalkDetails.aspx.designer.cs">
       <DependentUpon>WalkDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebServices\SaveRatingService.svc.cs">
+      <DependentUpon>SaveRatingService.svc</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

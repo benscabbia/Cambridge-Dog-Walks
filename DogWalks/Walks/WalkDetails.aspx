@@ -172,20 +172,26 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContentChildFullWidth" runat="server">
   <div class="comments-section-background">
     <div class="container">
-          <h1 class="white-text"><asp:Label ID="lblNumberOfComments" runat="server" ></asp:Label> Comment<asp:Label ID="lblSingleOrPluralComments" runat="server"></asp:Label> </h1>
+      <h1 class="white-text">
+        <asp:Label ID="lblNumberOfComments" runat="server"></asp:Label>
+        Comment<asp:Label ID="lblSingleOrPluralComments" runat="server"></asp:Label>
+      </h1>
 
       <asp:LoginView ID="LoginView1" runat="server">
-        <AnonymousTemplate><h6 class="white-text">Sorry, you must be <a href="../Account/Login.aspx">logged in</a> to view discussion.</h6></AnonymousTemplate>
+        <AnonymousTemplate>
+          <h6 class="white-text">Sorry, you must be <a href="../Account/Login.aspx">logged in</a> to view discussion.</h6>
+        </AnonymousTemplate>
         <LoggedInTemplate>
           <asp:Label ID="lbNoComments" runat="server" Text="No Comments" Visible="false" CssClass="white-text"></asp:Label>
-          <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.Walks.CommentsProfileModel" SelectMethod="CommentsListView_GetData" InsertMethod="CommentsListView_InsertItem" insertitemposition="LastItem">
+          <asp:ListView ID="ListView1" runat="server" DataKeyNames="CommentID" ItemType="DogWalks.Walks.CommentsProfileModel" SelectMethod="CommentsListView_GetData" InsertMethod="CommentsListView_InsertItem" InsertItemPosition="LastItem">
             <ItemTemplate>
               <div class="row">
                 <div class="col-md-12 comments-background center-profile-image">
                   <div class="col-md-2 center-profile-image">
                     <div class="center-profile-image ">
                       <div class="thumbnail">
-                        <a href="../ViewUserProfile?=UserProfileID=<%# Item.UserProfileID %>"><asp:Image ID="Image3" runat="server" ImageUrl="<%# Item.ProfilePicture %>" /></a>
+                        <a href="../ViewUserProfile?=UserProfileID=<%# Item.UserProfileID %>">
+                          <asp:Image ID="Image3" runat="server" ImageUrl="<%# Item.ProfilePicture %>" /></a>
                       </div>
                     </div>
                   </div>
@@ -201,39 +207,43 @@
             <InsertItemTemplate>
               <hr />
               <h2 class="white-text">Add Comment:</h2>
-                <div class="form-horizontal">
-                  <%--title--%>
-                  <div class="form-group">
-                    <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1 white-text"></asp:Label>
-                    <div class="col-md-11">
-                      <asp:TextBox ID="tbTitle" CssClass="form-control" Text="<%# BindItem.Title %>" runat="server"></asp:TextBox>
-                    </div>
-                  </div>
-
-                  <%--comment--%>
-                  <div class="form-group">
-                    <asp:Label ID="Label2" runat="server" Text="Comment" CssClass="control-label col-md-1 white-text"></asp:Label>
-                    <div class="col-md-11">
-                      <asp:TextBox ID="tbBody" CssClass="form-control" Text="<%# BindItem.Body %>" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-offset-1 col-md-11">
-                      <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Add Comment" CommandName="Insert" />
-                    </div>
+              <div class="form-horizontal">
+                <%--title--%>
+                <div class="form-group">
+                  <asp:Label ID="Label1" runat="server" Text="Title" CssClass="control-label col-md-1 white-text"></asp:Label>
+                  <div class="col-md-11">
+                    <asp:TextBox ID="tbTitle" CssClass="form-control" Text="<%# BindItem.Title %>" runat="server"></asp:TextBox>
                   </div>
                 </div>
-            </InsertItemTemplate>           
+
+                <%--comment--%>
+                <div class="form-group">
+                  <asp:Label ID="Label2" runat="server" Text="Comment" CssClass="control-label col-md-1 white-text"></asp:Label>
+                  <div class="col-md-11">
+                    <asp:TextBox ID="tbBody" CssClass="form-control" Text="<%# BindItem.Body %>" runat="server" TextMode="MultiLine" Rows="4"></asp:TextBox>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-offset-1 col-md-11">
+                    <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Add Comment" CommandName="Insert" />
+                  </div>
+                </div>
+              </div>
+            </InsertItemTemplate>
           </asp:ListView>
         </LoggedInTemplate>
       </asp:LoginView>
-
-
-        </div>
-      </div>  
+    </div>
+  </div>
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="CustomScriptContentChild" runat="server">
+  <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
+    <Services>
+      <asp:ServiceReference Path="~/WebServices/SaveRatingService.svc" />
+    </Services>
+  </asp:ScriptManagerProxy>
+
   <script type="text/javascript">
     $('#myCarousel').carousel({
       interval: 10000
@@ -259,12 +269,15 @@
     $("#starRating").on('rating.change', function (event, value, caption) {
       var walkID = getUrlVars()["WalkID"];
       var score = $('#starRating').val();
+      
+      //save rating using service
+      SaveRatingService.Save(score, walkID);
 
-      $.get("SaveRating.aspx",
-      {
-        Score: score,
-        WalkID: walkID
-      });
+      //$.get("SaveRating.aspx",
+      //{
+      //  Score: score,
+      //  WalkID: walkID
+      //});
     });
 
     //function to get query string

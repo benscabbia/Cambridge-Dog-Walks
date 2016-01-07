@@ -90,7 +90,17 @@ namespace DogWalks.Walks
                             where u.FKUserID == userID
                             select u).Single();
 
+                //populate star rating
+                var averageRatings = (from r in db.Ratings
+                                      where r.WalkID == walkID
+                                      select r.Score).DefaultIfEmpty().Average();
+                 
+                //inputVALUE NOT WORKING - I NEED TO GRAB USER RATING IF EXISTANT AND LET THEM INPUTTED IT
+                var userPreviousRating = (from r in db.Ratings
+                                          where r.WalkID == walkID & r.AuthorID == user.UserProfileID
+                                          select r.Score).SingleOrDefault();
 
+                if (userPreviousRating > 0) { this.inputValue = userPreviousRating.ToString(); }
 
                 //manage Favourite/Unfavourite buttons visibility
                   var userFavouriteWalks = user.DogWalks;
@@ -348,15 +358,8 @@ namespace DogWalks.Walks
               LoginView3.FindControl("btnUnFavourite").Visible = false;
             }
           }
-
-
-
-        
         }
-
       }
-
-
     }
   }
   
