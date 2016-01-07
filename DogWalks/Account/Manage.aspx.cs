@@ -36,8 +36,8 @@ namespace DogWalks.Account
 
     protected void Page_Load()
     {
-      updatedPanel.Visible = false;
       Form.Enctype = "multipart/form-data";
+      updatedPanel.Visible = false;
 
       var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
@@ -70,7 +70,6 @@ namespace DogWalks.Account
           tbAddress.Text = userProfile.Address;
           tbPostcode.Text = userProfile.Postcode;
           tbAboutMe.Text = userProfile.AboutMe;
-
         }
 
         // Determine the sections to render
@@ -152,6 +151,7 @@ namespace DogWalks.Account
     {
       using (var db = new WalkContext())
       {
+        var test = Form.Enctype;
         var currentUserID = User.Identity.GetUserId();
 
         UserProfile userProfile = (from u in db.UserProfiles

@@ -286,8 +286,7 @@ namespace DogWalks.Walks
           db.Comments.Add(comment);
           db.SaveChanges();
         }
-        Response.Redirect("WalkDetails?WalkID=" + walkID);
-       
+        //Response.Redirect("WalkDetails?WalkID=" + walkID);       
       }
     }
 

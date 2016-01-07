@@ -13,7 +13,7 @@ namespace DogWalks.Walks
   {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+      Form.Enctype = "multipart/form-data";
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
