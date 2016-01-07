@@ -107,7 +107,7 @@ namespace DogWalks.Walks
         else if (!string.IsNullOrWhiteSpace(tbSearch.Text))
         {
           string searchValue = tbSearch.Text;
-          var searchQuery = (from w in db.DogWalks.Include("Pictures")
+          var searchQuery = (from w in db.DogWalks.Include("Pictures").Include("Length")
                              where w.Title.Contains(searchValue)
                              select w).ToList();
 
@@ -131,7 +131,7 @@ namespace DogWalks.Walks
           int categoryList = Convert.ToInt32(CategoryList.SelectedValue);
           string order = SortOrder.SelectedValue;
 
-          IQueryable<DogWalk> query = db.DogWalks.Include("Pictures");
+          IQueryable<DogWalk> query = db.DogWalks.Include("Pictures").Include("Length");
 
           //0=sortby, 1=title, 2=create time, 3=length, 4=average rating
           switch (categoryList)
