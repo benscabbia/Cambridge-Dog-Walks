@@ -55,6 +55,6 @@ namespace DogWalks.WebServices
         return;
       }
     }
-    // Add more operations here and mark them with [OperationContract]
   }
 }
+

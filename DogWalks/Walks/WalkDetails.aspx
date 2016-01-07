@@ -2,7 +2,7 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContentChild" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContentChild" runat="server">  
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentChild" runat="server">
@@ -172,14 +172,13 @@
   <%--rating--%>
   <%--add walk to favourites and star rating system--%>
   <div class="row">
-    <div class="col-md-12 text-center">
+    <div class="col-md-12">
       <asp:LoginView ID="LoginView3" runat="server">
            <LoggedInTemplate>          
-          <div class="row">
+          <div class="col-md-offset-4 col-md-8">
             <input id="starRating" type="number" class="rating" min=0 max=5 step=0.5 data-size="lg" value="<%# this.inputValue %>">
           </div>
-          <div class="row">
-                <br />     
+          <div class="row text-center">
             <asp:Button ID="btnFavourite" runat="server" Text="Add to Favourite" CssClass="btn btn-success btn-lg" OnClick="btnFavourite_Click" />
             <asp:Button ID="btnUnFavourite" runat="server" Text="Unfavourite" CssClass="btn btn-warning btn-lg" OnClick="btnUnFavourite_Click" />
           </div>
@@ -322,7 +321,6 @@
       
       //save rating using service
       SaveRatingService.Save(score, walkID);
-
       //$.get("SaveRating.aspx",
       //{
       //  Score: score,
@@ -340,6 +338,6 @@
         vars[hash[0]] = hash[1];
       }
       return vars;
-    }
+    }      
   </script>
 </asp:Content>
