@@ -29,6 +29,7 @@
       margin: 20px;
     }
 
+    /*used by comments*/
     .comments-background {
       background: #f5f5f5;
       color: #6f6f6f;
@@ -55,6 +56,30 @@
     .profile-img-max-width{
       max-width:154px;
     }
+
+    /*used by features*/
+
+
+    .feature-container {
+      vertical-align: top;
+      display: inline-block;
+      text-align: center;
+      width: 120px;
+    }
+
+    .feature-img-style img {
+      width: 100px;
+      height: 100px;
+      background-color: grey;
+    }
+
+    .caption {
+      display: block;
+    }
+
+
+
+
   </style>
   <br />
   <asp:FormView ID="FormView1" runat="server" ItemType="DogWalks.DAL.DogWalk" SelectMethod="FormView1_GetItem">
@@ -122,16 +147,21 @@
       </div>
 
       <br />
-
+      <hr />
       <%--features--%>
       <div class="row">
-        <div class="col-md-12">
-          <b>Features: </b>
+        <div class="col-md-12 text-center">
           <br />
           <asp:Repeater ID="Repeater4" runat="server" DataSource="<%# Item.Features %>">
             <ItemTemplate>
-              <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("PictureUrl") %>' />
-              <%--<asp:Label ID="lbTest" runat="server" Text='<%# Eval("FeatureName") %>'></asp:Label>--%>
+              <div class="feature-container">
+                <span class="feature-img-style">
+                  <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("PictureUrl") %>' />
+                </span>
+                <span class="caption">
+                  <p><%# Eval("FeatureName") %></p>
+                </span>
+              </div>
             </ItemTemplate>
           </asp:Repeater>
         </div>
@@ -140,22 +170,38 @@
   </asp:FormView>
 
   <%--rating--%>
-
-  <%--add walk to favourites--%>
+  <%--add walk to favourites and star rating system--%>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 text-center">
       <asp:LoginView ID="LoginView3" runat="server">
-        <LoggedInTemplate>
-          <br />
-
-          <input id="starRating" type="number" class="rating" min=0 max=5 step=0.5 data-size="lg" value="<%# this.inputValue %>">
-
-          <asp:Button ID="btnFavourite" runat="server" Text="Add to Favourite" CssClass="btn btn-success" OnClick="btnFavourite_Click" />
-          <asp:Button ID="btnUnFavourite" runat="server" Text="Unfavourite" CssClass="btn btn-warning" OnClick="btnUnFavourite_Click" />
+           <LoggedInTemplate>          
+          <div class="row">
+            <input id="starRating" type="number" class="rating" min=0 max=5 step=0.5 data-size="lg" value="<%# this.inputValue %>">
+          </div>
+          <div class="row">
+                <br />     
+            <asp:Button ID="btnFavourite" runat="server" Text="Add to Favourite" CssClass="btn btn-success btn-lg" OnClick="btnFavourite_Click" />
+            <asp:Button ID="btnUnFavourite" runat="server" Text="Unfavourite" CssClass="btn btn-warning btn-lg" OnClick="btnUnFavourite_Click" />
+          </div>
+          
         </LoggedInTemplate>
+        <%--<LoggedInTemplate>          
+          <div class="col-md-offset-3 col-md-9">
+            <input id="starRating" type="number" class="rating" min=0 max=5 step=0.5 data-size="lg" value="<%# this.inputValue %>">
+          </div>
+          <div class="row">
+            <div class="col-md-offset-5 col-md-7">
+                <br />     
+            <asp:Button ID="btnFavourite" runat="server" Text="Add to Favourite" CssClass="btn btn-success btn-lg" OnClick="btnFavourite_Click" />
+            <asp:Button ID="btnUnFavourite" runat="server" Text="Unfavourite" CssClass="btn btn-warning btn-lg" OnClick="btnUnFavourite_Click" />
+          </div>
+          </div>
+          
+        </LoggedInTemplate>--%>
       </asp:LoginView>
     </div>
   </div>
+
 
   <asp:LoginView ID="LoginView2" runat="server">
         <RoleGroups>
