@@ -15,6 +15,61 @@ namespace DogWalks.Walks
   {
     protected void Page_Load(object sender, EventArgs e)
     {
+      if(!IsPostBack)
+      {
+        var queryString = Request.QueryString["Filter"];
+        int filter;
+        int catIndex = -1;
+
+        if(!string.IsNullOrEmpty(queryString) && int.TryParse(queryString, out filter))
+        {
+          switch (filter)
+          {
+            //newest walks
+            case 1: 
+              catIndex = 2;
+              break;      
+        
+            //top rated walks 
+            case 2:
+              catIndex = 4;
+              break;
+
+            //longest walks
+            case 3:
+              catIndex = 3;
+              break;
+
+            //Postcode search
+            case 4:
+              catIndex = 5;
+              break;
+
+            //Alphabetically
+            case 5:
+              catIndex = 1;
+              break;
+          }
+        }
+        if(catIndex > 0 && catIndex <=5)
+        {
+          CategoryList.SelectedIndex = catIndex;
+
+          if (CategoryList.SelectedIndex == 5)
+          {
+            PanelSearch.Visible = false;
+            PanelPostcode.Visible = true;
+          }
+          else
+          {
+            PanelPostcode.Visible = false;
+            PanelSearch.Visible = true;
+            tbPostcode.Text = "";
+            if (CategoryList.SelectedIndex == 3) SortOrder.SelectedIndex = 1;
+          }
+        }
+      }
+
       if (IsPostBack)
       {
         if (CategoryList.SelectedIndex == 5)
@@ -69,7 +124,7 @@ namespace DogWalks.Walks
             double userPostcodeLong = (double)postcodeCoords.Longitude;
 
             //grab all dogwalks in system
-            List<DogWalk> grabAllWalks = (from w in db.DogWalks.Include("Pictures")
+            List<DogWalk> grabAllWalks = (from w in db.DogWalks.Include("Pictures").Include("Length")
                                           select w).ToList();
             
             var inRangeWalks = new List<InRangeWalks>();            

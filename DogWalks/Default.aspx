@@ -19,74 +19,72 @@
 
   <%--middle section part 2--%>
   <div id="middle" class="container">
-    <h2>Let's find a great walk - TODO.</h2>
+    <h2>Let's find a great walk!</h2>
     <div class="row">
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <img style="height: 200px; width: 100%; display: block;" src="#" />
-          <div class="caption">
+          <div class="caption text-center">
             <h3>Newest Walks</h3>
-            <p>ras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+            <p><a href="../Walks/ListWalks?Filter=1" class="btn btn-primary" role="button">View</a></p>
           </div>
         </div>
       </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img style="height: 200px; width: 100%; display: block;" src="#" />
-          <div class="caption">
-            <h3>Top Rated walks</h3>
-            <p>ras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img style="height: 200px; width: 100%; display: block;" src="#" />
-          <div class="caption">
-            <h3>Longest Walks</h3>
-            <p>ras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <%--bottom section part 3--%>
-    <div id="bottom" class="row">
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <img style="height: 200px; width: 100%; display: block;" src="#"/>
-          <div class="caption">
-            <h3>Newest Walks</h3>
-            <p>ras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+          <img style="height: 200px; width: 100%; display: block;" src="#" />
+          <div class="caption text-center">
+            <h3>Top Rated Walks</h3>
+            <p><a href="../Walks/ListWalks?Filter=2" class="btn btn-primary" role="button">View</a></p>
           </div>
         </div>
       </div>
+
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <img style="height: 200px; width: 100%; display: block;" src="#"/>
-          <div class="caption">
-            <h3>Top Rated walks</h3>
-            <p>ras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img style="height: 200px; width: 100%; display: block;" src="#"/>
-          <div class="caption">
+          <img style="height: 200px; width: 100%; display: block;" src="#" />
+          <div class="caption text-center">
             <h3>Longest Walks</h3>
-            <p>ras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+            <p><a href="../Walks/ListWalks?Filter=3" class="btn btn-primary" role="button">View</a></p>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="container">
+  <%--bottom section part 3--%>
+    <div id="bottom" class="row">
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <img style="height: 200px; width: 100%; display: block;" src="#" />
+          <div class="caption text-center">
+            <h3>Postcode Radius Search</h3>
+            <p><a href="../Walks/ListWalks?Filter=4" class="btn btn-primary" role="button">View</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <img style="height: 200px; width: 100%; display: block;" src="#" />
+          <div class="caption text-center">
+            <h3>Search Alphabetically</h3>
+            <p><a href="../Walks/ListWalks?Filter=5" class="btn btn-primary" role="button">View</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-4">
+       <div class="thumbnail">
+          <img style="height: 200px; width: 100%; display: block;" src="#" />
+          <div class="caption text-center">
+            <h3>View all Walks</h3>
+            <p><a href="../Walks/ListWalks.aspx" class="btn btn-primary" role="button">View</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="CustomScriptContent" runat="server">

@@ -11,7 +11,7 @@
     <div class="col-md-3">
       <asp:DropDownList ID="CategoryList" runat="server" AutoPostBack="true" CssClass="form-control" OnSelectedIndexChanged="CategoryList_SelectedIndexChanged">
         <asp:ListItem Enabled="False" Value="0">Sort By</asp:ListItem>
-        <asp:ListItem Value="1">Title</asp:ListItem>
+        <asp:ListItem Value="1">Name of Walk</asp:ListItem>
         <asp:ListItem Selected="True" Value="2">Date Created</asp:ListItem>
         <asp:ListItem Value="3">Length</asp:ListItem>
         <asp:ListItem Value="4">Average Rating</asp:ListItem>
