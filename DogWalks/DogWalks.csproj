@@ -192,6 +192,13 @@
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\star-rating.css" />
+    <Content Include="HomePagePics\home-cover.jpg" />
+    <Content Include="HomePagePics\longest-walks.jpg" />
+    <Content Include="HomePagePics\newest-walks.jpg" />
+    <Content Include="HomePagePics\postcode-search.jpg" />
+    <Content Include="HomePagePics\search-alphabetically.jpg" />
+    <Content Include="HomePagePics\top-rated-walks.jpg" />
+    <Content Include="HomePagePics\view-all-walks.jpg" />
     <Content Include="Management\Default.aspx" />
     <Content Include="Management\ManageComments.aspx" />
     <Content Include="Management\management.css" />

@@ -68,3 +68,8 @@ html, body, form{
     background: rgb(68, 68, 68); /*//IE*/
     background: rgba(0, 0, 0, 0.01); /*//NON-IE*/
 }
+
+/*used ruby the 6 categories*/
+div.category{cursor:pointer;}
+div.category:hover{ background-color:#d1d1d1;}
+/*div.category:hover{ background-color:#a05300;}*/
