@@ -240,6 +240,7 @@
     <Content Include="Account\Web.config" />
     <Content Include="MasterPages\Frontend.Master" />
     <Content Include="MasterPages\FrontendChild.master" />
+    <Content Include="SystemPics\no-image-profile.png" />
     <Content Include="WebServices\SaveRatingService.svc" />
     <EntityDeploy Include="DAL\WalkModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

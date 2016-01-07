@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-md-3">
             <div class="thumbnail">
-              <asp:Image ID="imgProfilePic" runat="server" ImageUrl="<%# Item.ProfilePicture %>" />
+              <asp:Image ID="imgProfilePic" runat="server" ImageUrl='<%# Item.ProfilePicture != null ? Item.ProfilePicture : "~/SystemPics/no-image-profile.png" %>' />
             </div>
           </div>
           <div class="col-md-9">
