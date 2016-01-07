@@ -240,7 +240,8 @@
                     <div class="center-profile-image ">
                       <div class="thumbnail profile-img-max-width">
                         <a href="../ViewUserProfile?=UserProfileID=<%# Item.UserProfileID %>">
-                          <asp:Image ID="Image3" runat="server" ImageUrl="<%# Item.ProfilePicture %>" /></a>
+                          <%--<asp:Image ID="Image3" runat="server" ImageUrl="<%# Item.ProfilePicture %>" /></a>--%>
+                          <asp:Image ID="Image3" runat="server" ImageUrl='<%# Item.ProfilePicture != null ? Item.ProfilePicture : "~/SystemPics/no-image-profile.png" %>' /></a>
                       </div>
                     </div>
                   </div>
