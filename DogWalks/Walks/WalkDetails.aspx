@@ -51,6 +51,10 @@
       margin-right:-4px;
       padding-top:5px;
     }
+
+    .profile-img-max-width{
+      max-width:154px;
+    }
   </style>
   <br />
   <asp:FormView ID="FormView1" runat="server" ItemType="DogWalks.DAL.DogWalk" SelectMethod="FormView1_GetItem">
@@ -189,7 +193,7 @@
                 <div class="col-md-12 comments-background center-profile-image">
                   <div class="col-md-2 center-profile-image">
                     <div class="center-profile-image ">
-                      <div class="thumbnail">
+                      <div class="thumbnail profile-img-max-width">
                         <a href="../ViewUserProfile?=UserProfileID=<%# Item.UserProfileID %>">
                           <asp:Image ID="Image3" runat="server" ImageUrl="<%# Item.ProfilePicture %>" /></a>
                       </div>
