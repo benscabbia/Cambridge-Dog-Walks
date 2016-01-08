@@ -38,6 +38,31 @@
       .fileinput .fileinput-filename .dropdown-menu > li {
         padding: 3px 20px;
       }
+
+    /*used by autocomplete*/
+    .completionList {
+      padding: 0px;
+      margin: 0px;
+      color: black;
+      overflow: auto;
+      text-align: left;
+      border: 2px solid lightskyblue;
+      list-style-type: none;
+      cursor: default;
+      height: 200px;
+      background-color: white;
+    }
+
+    .item {
+      height: 17px;
+      cursor: pointer;
+    }
+
+    .itemHighLight {
+      color: White;
+      background-color: lightskyblue;
+      cursor: pointer;
+    }
   </style>
 
   <script src="../Scripts/jasny-bootstrap.js"></script>
@@ -47,7 +72,28 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentChild" runat="server">
   <asp:UpdatePanel runat="server">
     <ContentTemplate>
+         
 
+  <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
+     <Services>
+      <asp:ServiceReference Path="~/WebServices/PostcodeFill.svc" />
+    </Services>
+  </asp:ScriptManagerProxy>
+
+          <ajaxToolkit:AutoCompleteExtender 
+          ID="ace1" 
+          TargetControlID="tbPostcode" 
+          runat="server" 
+          ServiceMethod="GetPostcodes" 
+          ServicePath="~/WebServices/PostcodeFill.svc" 
+          EnableCaching="true" 
+          MinimumPrefixLength="1" 
+          CompletionListCssClass="completionList" 
+          CompletionListItemCssClass="item" 
+          CompletionListHighlightedItemCssClass="itemHighLight"
+          CompletionInterval="10"
+            
+          ></ajaxToolkit:AutoCompleteExtender>
 
       <h2>Insert New Dog Walk</h2>
 
@@ -142,7 +188,7 @@
       <br />
 
       <asp:Label ID="lbConsole" runat="server" Text="Label" Visible="false"></asp:Label>
-    </ContentTemplate>
+   </ContentTemplate>
     <Triggers>
       <asp:PostBackTrigger ControlID="btnSave" />
     </Triggers>

@@ -44,9 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit, Version=15.1.3.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\NotesPractice\NotesPractice\bin\AjaxControlToolkit.dll</HintPath>
+    <Reference Include="AjaxControlToolkit, Version=15.1.4.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.15.1.4.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -192,6 +192,7 @@
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\star-rating.css" />
+    <Content Include="Demo\autoComplete1.aspx" />
     <Content Include="favicon.png" />
     <Content Include="HomePagePics\home-cover.jpg" />
     <Content Include="HomePagePics\longest-walks.jpg" />
@@ -241,6 +242,7 @@
     <Content Include="MasterPages\Frontend.Master" />
     <Content Include="MasterPages\FrontendChild.master" />
     <Content Include="SystemPics\no-image-profile.png" />
+    <Content Include="WebServices\PostcodeFill.svc" />
     <Content Include="WebServices\SaveRatingService.svc" />
     <EntityDeploy Include="DAL\WalkModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -492,6 +494,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Demo\autoComplete1.aspx.cs">
+      <DependentUpon>autoComplete1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Demo\autoComplete1.aspx.designer.cs">
+      <DependentUpon>autoComplete1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Demo\CarouselCodeBehindTest1.aspx.cs">
       <DependentUpon>CarouselCodeBehindTest1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -651,6 +660,9 @@
     </Compile>
     <Compile Include="Walks\WalkDetails.aspx.designer.cs">
       <DependentUpon>WalkDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebServices\PostcodeFill.svc.cs">
+      <DependentUpon>PostcodeFill.svc</DependentUpon>
     </Compile>
     <Compile Include="WebServices\SaveRatingService.svc.cs">
       <DependentUpon>SaveRatingService.svc</DependentUpon>
