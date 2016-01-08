@@ -22,22 +22,23 @@ namespace DogWalks.WebServices
     [OperationContract]
     //Specifying message exchange format is JSON 
     [WebInvoke(ResponseFormat = WebMessageFormat.Json)]
-    public List<string> GetPostcodes(string prefixText)
+    public IQueryable<string> GetPostcodes(string prefixText)
     {
       using (var db = new WalkContext())
       {
-      var x = (from n in db.PostCodesUKs
-              where n.Postcode.Substring(0, prefixText.Length).ToLower() == prefixText.ToLower()
-              select n);
+        var formatted = prefixText.Replace(" ", "").ToLower();
 
-      List<string> postcode = new List<string>();
-      foreach (var item in x)
-      {
-        postcode.Add(item.Postcode.ToString());
+        var x = (from n in db.PostCodesUKs
+                 where n.PostcodeNoSpace.Substring(0, prefixText.Length).ToLower() == formatted
+                 select n.Postcode).Take(20);
+
+        List<string> postcode = new List<string>();
+        foreach (var item in x)
+        {
+          postcode.Add(item.ToString());
+        }
+        return postcode.AsQueryable();
       }
-      return postcode;
-      }
-      
     }
 
     // Add more operations here and mark them with [OperationContract]
