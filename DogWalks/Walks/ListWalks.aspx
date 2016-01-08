@@ -7,6 +7,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentChild" runat="server">
       <h2>Let's find the perfect walk!</h2>
       <br />
+  <asp:UpdatePanel runat="server">
+    <ContentTemplate>
 
       <div class="row">
         <div class="col-md-3">
@@ -126,8 +128,28 @@
             </Fields>
           </asp:DataPager>
         </div>
-      </div>
-
+      </div>   
+   </ContentTemplate>
+  </asp:UpdatePanel>  
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="CustomScriptContentChild" runat="server">
+  <script>
+    //due to issues caused by the updatePanel to the star rating (star rating was not rendering), the function below
+    //will ensure that during a partial postback, the function will replace the un-rendered input and directly insert
+    //html in it's place. It also correctly fills out the star-rating system
+    function pageLoad(sender, args) {
+      if (args.get_isPartialLoad())
+      {
+        $(function () {
+          $('input[type="number"]').each(function () {
+            var value = $(this).val();            
+            var width = value * 20;
+            var elem = "<div class='star-rating rating-xs rating-disabled'><div class='clear-rating' title='Clear'><i class='glyphicon glyphicon-minus-sign'></i></div><div class='rating-container rating-gly-star' data-content=''><div class='rating-stars' data-content='' style='width: " + width +"%;'></div><input id='starRating' value='" + value + "' type='number' class='rating form-control hide' min='0' max='5' step='0.5' readonly='true' data-size='xs'></div><div class='caption'><span class='label label-default'>" + value + " Stars</span></div></div>"
+            $(this).replaceWith(elem);
+          })
+        });
+      }
+    };
+  </script>
 </asp:Content>
