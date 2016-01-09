@@ -38,6 +38,8 @@
                 <h2>User Stats</h2>
               </div>
               <div class="panel-body">
+                <h5><asp:Label ID="lblUserScore" CssClass="figurePadding" runat="server"></asp:Label> User Reputation</h5>
+                <hr />
                <h5><asp:Label ID="lblPropOfComments" CssClass="figurePadding" runat="server"></asp:Label> Proportion of Comments</h5>
                 <hr />
                <h5><asp:Label ID="lblPropOfWalks" CssClass="figurePadding" runat="server"></asp:Label>Proportion of Dog Walks Uploaded</h5>
@@ -47,9 +49,7 @@
                 <div class="text-center">
                  <h5>Average Rating</h5>
                  <input id="starRating" type="number" class="rating" min="0" max="5" step="0.5" readonly="true" data-size="sm" runat="server">
-                </div>
-                <hr />
-                <h5><asp:Label ID="lblUserRank" CssClass="figurePadding" runat="server"></asp:Label>User Rank</h5>
+                </div>                                
               </div>
             </div>
           </asp:Panel>

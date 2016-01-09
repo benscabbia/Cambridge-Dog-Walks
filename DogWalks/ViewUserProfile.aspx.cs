@@ -155,8 +155,6 @@ namespace DogWalks
                 if (loggedinUserID != null)
                 {
                   //not viewing it's own profile
-                  if (loggedinUserID.UserProfileID != userID)
-                  {
                     var nOfComments = (from c in db.Comments
                                          where c.AuthorID == loggedinUserID.UserProfileID
                                          select c).Count();
@@ -167,6 +165,17 @@ namespace DogWalks
                                         where r.AuthorID == loggedinUserID.UserProfileID
                                         select r).Count();
 
+                    Label userScore = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblUserScore");
+                    if (userScore != null)
+                    {
+                      //calculating user score
+                      // walk = 5 points, comment = 3 points, rating = 2
+                      userScore.Text = ((nOfWalks * 5 + nOfComments * 3 + nOfRatings * 2) * 10).ToString();
+                    }
+
+
+                  if (loggedinUserID.UserProfileID != userID)
+                  {
                     if (nOfComments > 0 && nOfWalks > 0 && nOfRatings > 0)
                     {
                       panelStats.Visible = true;
