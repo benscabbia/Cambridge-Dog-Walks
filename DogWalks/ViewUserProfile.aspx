@@ -24,7 +24,7 @@
          
             <h2>User Profile</h2>
             <h5><b>Name: </b><%# Item.FirstName %> <%# Item.LastName%></h5>
-            <h5><b>Member Since: </b><%# Eval("JoinDateTime", "{0:dd/mm/yyyy}") %></h5>
+            <h5><b>Member Since: </b><%# Eval("JoinDateTime", "{0:d}") %></h5>
             <h5><b>Number of Comments: </b><asp:Label ID="lblNumOfComments" runat="server"></asp:Label></h5>
             <h5><b>About Me: </b></h5>
             <p><%# Item.AboutMe %></p>
@@ -64,9 +64,7 @@
                   <h5>Keep using Cambs Dog Walks to view other people's stats!</h5>
                   <h5>Actions left to complete:</h5>
                   <ul>
-                    <li><h5>at least 1 walk</h5></li>
-                    <li><h5>at least 1 comments</h5></li>
-                    <li><h5>at least 1 rating</h5></li>
+                    <h5><asp:Label ID="lblActionsLeft" runat="server"></asp:Label></h5>
                   </ul>        
                   
                   </div>

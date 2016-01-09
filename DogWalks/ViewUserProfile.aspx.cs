@@ -170,9 +170,28 @@ namespace DogWalks
                                         where r.AuthorID == loggedinUserID.UserProfileID
                                         select r).Count();
 
+                    //what user must do to unlock the stats panel
+                    Label lblActionsLeft = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblActionsLeft");
+                    if (lblActionsLeft != null)
+                    {
+                      if (nOfComments < 1) lblActionsLeft.Text += "<li>at least 1 comment</li>";
+                      if (nOfWalks < 1) lblActionsLeft.Text += "<li>at least 1 walk</li>";
+                      if (nOfRatings < 1) lblActionsLeft.Text += "<li>at least 1 rating</li>";
+
+                      var missingProperties = profileComplete(db);
+
+                      if (missingProperties != null)
+                      {
+                        foreach (string property in missingProperties)
+                        {
+                          lblActionsLeft.Text += "<li>" + property + "</li>";
+                        }
+                      }
+                    }
+
                   if (loggedinUserID.UserProfileID != userID)
                   {
-                    if (nOfComments > 0 && nOfWalks > 0 && nOfRatings > 0)
+                    if (nOfComments > 0 && nOfWalks > 0 && nOfRatings > 0 && isProfileComplete(db))
                     {
                       panelStats.Visible = true;
                       panelBlank.Visible = false;
@@ -220,7 +239,7 @@ namespace DogWalks
                 var nOfWalks = db.DogWalks.Where(w => w.AuthorID == userID).Count();
                 var nOfRatings = db.Ratings.Where(r => r.AuthorID == userID).Count();
 
-                //calculating user score
+                //calculating user reputation = (5w + 3c + 2r) * 10 * m, w=nOfWalks, c=nOfComments, r=nOfRatings, m=multiplier
                 // walk = 5 points, comment = 3 points, rating = 2
                 var multiplier = result;
                 if (result == 0) multiplier++;
@@ -263,6 +282,33 @@ namespace DogWalks
           }
         }
       }
+    }
+    public List<string> profileComplete(WalkContext db)
+    {
+      var user = User.Identity.GetUserId();
+      List<string> missingProperties = new List<string>();
+      if (user != null)
+      {
+        var profile = db.UserProfiles.Where(u => u.FKUserID == user).SingleOrDefault();
+
+        if (profile != null)
+        {
+          if (string.IsNullOrEmpty(profile.FirstName)) missingProperties.Add("First Name");
+          if (string.IsNullOrEmpty(profile.LastName)) missingProperties.Add("Last Name");
+          if (string.IsNullOrEmpty(profile.Address)) missingProperties.Add("Address");
+          if (string.IsNullOrEmpty(profile.Postcode)) missingProperties.Add("Postcode");
+          if (string.IsNullOrEmpty(profile.AboutMe)) missingProperties.Add("About Me");
+          if (string.IsNullOrEmpty(profile.ProfilePicture)) missingProperties.Add("Profile Picture");
+        }
+      }
+      return missingProperties;
+    }
+
+    public bool isProfileComplete(WalkContext db)
+    {
+      var missingProperty = profileComplete(db);
+      if (missingProperty.Count < 1) return true;
+      return false;
     }    
   }
 }
