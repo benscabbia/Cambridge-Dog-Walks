@@ -45,11 +45,11 @@
                <h5><asp:Label ID="lblPropOfWalks" CssClass="figurePadding" runat="server"></asp:Label>Proportion of Dog Walks Uploaded</h5>
                 <hr />
                <h5><asp:Label ID="lblPropOfRatings" CssClass="figurePadding" runat="server"></asp:Label>Proportion of Ratings given</h5>
-                <hr />
-                <div class="text-center">
-                 <h5>Average Rating</h5>
-                 <input id="starRating" type="number" class="rating" min="0" max="5" step="0.5" readonly="true" data-size="sm" runat="server">
-                </div>                                
+                <hr />          
+                 <div class="text-center">
+                 <h5>Overall average rating for uploaded walks</h5>
+                 <input id="dogWalkRating" type="number" class="rating" min="0" max="5" step="0.5" readonly="true" data-size="sm" runat="server">
+                </div>                            
               </div>
             </div>
           </asp:Panel>
@@ -60,8 +60,9 @@
                 <h2>Locked Feature</h2>
                 </div>
                 <div class="panel-body">
-                  <h5>We value our users privacy.</h5>
-                  <h5>To view other people's stats, you must have:</h5>
+                  <h5>You're almost there...</h5>
+                  <h5>Keep using Cambs Dog Walks to view other people's stats!</h5>
+                  <h5>Actions left to complete:</h5>
                   <ul>
                     <li><h5>at least 1 walk</h5></li>
                     <li><h5>at least 1 comments</h5></li>

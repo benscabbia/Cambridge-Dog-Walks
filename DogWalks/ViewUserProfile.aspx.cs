@@ -80,6 +80,8 @@ namespace DogWalks
 
     protected void UserProfileFormView_DataBound(object sender, EventArgs e)
     {
+      float result = 0; //used by the user reputation and star rating
+
       if (UserProfileFormView.CurrentMode == FormViewMode.ReadOnly)
       {
         //Check the RowType to where the Control is placed
@@ -100,17 +102,7 @@ namespace DogWalks
               lblComments.Text = userComments.ToString();
             }
 
-            Label userScore = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblUserScore");
-            if (userScore != null)
-            {
-              var nOfComments = db.Comments.Where(c => c.AuthorID == userID).Count();
-              var nOfWalks = db.DogWalks.Where(w => w.AuthorID == userID).Count();
-              var nOfRatings = db.Ratings.Where(r => r.AuthorID == userID).Count();
-
-              //calculating user score
-              // walk = 5 points, comment = 3 points, rating = 2
-              userScore.Text = ((nOfWalks * 5 + nOfComments * 3 + nOfRatings * 2) * 10).ToString();
-            }
+            
 
             //Proportion of Comments
             Label lblPropComments = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblPropOfComments");
@@ -195,22 +187,48 @@ namespace DogWalks
 
               }
 
-            //Average Rating
-            System.Web.UI.HtmlControls.HtmlInputGenericControl starRating = (System.Web.UI.HtmlControls.HtmlInputGenericControl)UserProfileFormView.Row.Cells[0].FindControl("starRating");
-            if (starRating != null)
-            {
-              var userRatings = (from r in db.Ratings
-                                 where r.AuthorID == userID
-                                 select r);
-
-              int numberRatings = userRatings.Count();
-
-              if (numberRatings > 0)
+              //Calculates the Overall average rating for the users uploaded walks             
+              System.Web.UI.HtmlControls.HtmlInputGenericControl dogWalkRating = (System.Web.UI.HtmlControls.HtmlInputGenericControl)UserProfileFormView.Row.Cells[0].FindControl("dogWalkRating");
+              if (dogWalkRating != null)
               {
-                var average = userRatings.Average(u => u.Score);
-                starRating.Value = average > 0 ? average.ToString("#.##") : "";
+                var allUserWalks = (from w in db.DogWalks where w.AuthorID == userID select w.WalkID).ToList();
+
+                int nOfWalks = 0;
+                float totalScore = 0;
+                foreach (int walkID in allUserWalks)
+                {
+                  float selectWalkRatingsScore = (float)(from r in db.Ratings where r.WalkID == walkID select r.Score).DefaultIfEmpty().Average();
+                  if (selectWalkRatingsScore > 0)
+                  {
+                    nOfWalks++;
+                    totalScore += selectWalkRatingsScore;
+                  }
+                }
+
+                if (totalScore > 0)
+                {
+                  result = (totalScore / nOfWalks);
+
+                  dogWalkRating.Value = result.ToString("#.#");
+                }
               }
-            }
+
+              Label userScore = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblUserScore");
+              if (userScore != null)
+              {
+                var nOfComments = db.Comments.Where(c => c.AuthorID == userID).Count();
+                var nOfWalks = db.DogWalks.Where(w => w.AuthorID == userID).Count();
+                var nOfRatings = db.Ratings.Where(r => r.AuthorID == userID).Count();
+
+                //calculating user score
+                // walk = 5 points, comment = 3 points, rating = 2
+                var multiplier = result;
+                if (result == 0) multiplier++;
+
+                var reputation = (nOfWalks * 5 + nOfComments * 3 + nOfRatings * 2) * 10 * multiplier;
+                var roundedReputation = Math.Round(reputation/10, MidpointRounding.AwayFromZero) * 10;
+                userScore.Text = roundedReputation.ToString();
+              }
 
             //Uploaded Walks by user
             Repeater repeaterUploadedWalks = (Repeater)UserProfileFormView.Row.Cells[0].FindControl("RepeaterUploadedWalks");
