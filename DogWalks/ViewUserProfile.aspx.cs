@@ -99,6 +99,19 @@ namespace DogWalks
 
               lblComments.Text = userComments.ToString();
             }
+
+            Label userScore = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblUserScore");
+            if (userScore != null)
+            {
+              var nOfComments = db.Comments.Where(c => c.AuthorID == userID).Count();
+              var nOfWalks = db.DogWalks.Where(w => w.AuthorID == userID).Count();
+              var nOfRatings = db.Ratings.Where(r => r.AuthorID == userID).Count();
+
+              //calculating user score
+              // walk = 5 points, comment = 3 points, rating = 2
+              userScore.Text = ((nOfWalks * 5 + nOfComments * 3 + nOfRatings * 2) * 10).ToString();
+            }
+
             //Proportion of Comments
             Label lblPropComments = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblPropOfComments");
             if (lblPropComments != null)
@@ -164,15 +177,6 @@ namespace DogWalks
                     var nOfRatings = (from r in db.Ratings
                                         where r.AuthorID == loggedinUserID.UserProfileID
                                         select r).Count();
-
-                    Label userScore = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblUserScore");
-                    if (userScore != null)
-                    {
-                      //calculating user score
-                      // walk = 5 points, comment = 3 points, rating = 2
-                      userScore.Text = ((nOfWalks * 5 + nOfComments * 3 + nOfRatings * 2) * 10).ToString();
-                    }
-
 
                   if (loggedinUserID.UserProfileID != userID)
                   {
