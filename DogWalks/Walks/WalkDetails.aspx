@@ -196,6 +196,25 @@
     </div>
   </div>
 
+  <br /><br />
+  <hr />
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>Share this walk!</h2>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=google.com" target="_blank">
+        <input type="button" value="Share on Facebook" class="btn btn-primary" />
+      </a>
+      <a href="https://plus.google.com/share?url=http://www.stackoverflow.com" target="_blank">
+        <input type="button" value="Share on Google+" class="btn btn-danger" />
+      </a>
+      <a href="https://twitter.com/share" class="twitter-share-button" target="_blank">
+        <input type="button" value="Share on Twitter" class="btn btn-info" />
+      </a>
+      <a href="mailto:?subject=Blog Feedback" target="_blank">
+        <input type="button" value="Share by email" class="btn btn-default" />
+      </a>
+    </div>
+  </div>
 
   <asp:LoginView ID="LoginView2" runat="server">
         <RoleGroups>
@@ -210,7 +229,7 @@
         </RoleGroups>
       </asp:LoginView>
 
-  <br /><br />
+  <br />
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContentChildFullWidth" runat="server">
