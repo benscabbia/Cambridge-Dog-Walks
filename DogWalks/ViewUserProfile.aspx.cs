@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.ModelBinding;
 using DogWalks.DAL;
+using Microsoft.AspNet.Identity;
+
 
 
 namespace DogWalks
@@ -17,13 +19,17 @@ namespace DogWalks
 
     protected void Page_Load(object sender, EventArgs e)
     {
-     
-      
-      profileID = Request.QueryString["UserProfileID"];    
-
-      if (string.IsNullOrEmpty(profileID))
+      profileID = Request.QueryString["UserProfileID"];
+      if (!User.Identity.IsAuthenticated)
       {
+        lblNotAuthenticated.Visible = true;
+        lblNotFound.Visible = false;
+        PanelUserProfile.Visible = false;
+      }
+      else if(string.IsNullOrEmpty(profileID)){
+
         lblNotFound.Visible = true;
+        lblNotAuthenticated.Visible = false;
         PanelUserProfile.Visible = false;
       }
       else
@@ -40,10 +46,12 @@ namespace DogWalks
             {
               lblNotFound.Visible = true;
               PanelUserProfile.Visible = false;
+              lblNotAuthenticated.Visible = false;
             }
             else
             {
               lblNotFound.Visible = false;
+              lblNotAuthenticated.Visible = false;
               PanelUserProfile.Visible = true;
             }
           }
@@ -82,13 +90,113 @@ namespace DogWalks
           {
             //Number of comments posted by user
             Label lblComments = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblNumOfComments");
+            int userComments = 0;
             if (lblComments != null)
-            { 
-                var comments = (from c in db.Comments
+            {
+              userComments = (from c in db.Comments
                                 where c.AuthorID == userID
-                                select c).ToList();
+                                select c).Count();
 
-                lblComments.Text = comments.Count.ToString();              
+              lblComments.Text = userComments.ToString();
+            }
+            //Proportion of Comments
+            Label lblPropComments = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblPropOfComments");
+            if (lblPropComments != null)
+            {
+              var totalComments = (from c in db.Comments
+                              select c).Count();
+
+              lblPropComments.Text = userComments.ToString() + " / " + totalComments.ToString();
+
+            }
+
+            //Proportion of Dog Walks Uploaded
+            Label lblPropWalks = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblPropOfWalks");
+            if (lblPropWalks != null)
+            {
+              var totalDogWalks = (from c in db.DogWalks
+                                   select c).Count();
+
+              var totalUserDogWalks = (from c in db.DogWalks
+                                       where c.AuthorID == userID
+                                       select c).Count();
+
+              lblPropWalks.Text = totalUserDogWalks.ToString() + " / " + totalDogWalks.ToString(); 
+
+            }
+
+            //Proportion of Ratings given
+            Label lblPropRatings = (Label)UserProfileFormView.Row.Cells[0].FindControl("lblPropOfRatings");
+            if (lblPropRatings != null)
+            {
+              var totalRatings = (from r in db.Ratings
+                                  select r).Count();
+
+              var userRatings = (from r in db.Ratings
+                                 where r.AuthorID == userID
+                                 select r).Count();
+
+              lblPropRatings.Text = userRatings.ToString() + " / " + totalRatings.ToString(); 
+            }
+
+            //user stats profile visibility
+            Panel panelStats = (Panel)UserProfileFormView.Row.Cells[0].FindControl("PanelStats");
+            Panel panelBlank = (Panel)UserProfileFormView.Row.Cells[0].FindControl("PanelBlank");
+            
+
+             //check logged-in user stats to see if they can view user stats
+              var userIdentity = User.Identity.GetUserId();
+              if (userIdentity != null && panelStats != null && panelBlank != null)
+              {
+                var loggedinUserID = (from u in db.UserProfiles
+                                      where u.FKUserID == userIdentity
+                                      select u).SingleOrDefault();
+
+                if (loggedinUserID != null)
+                {
+                  //not viewing it's own profile
+                  if (loggedinUserID.UserProfileID != userID)
+                  {
+                    var nOfComments = (from c in db.Comments
+                                         where c.AuthorID == loggedinUserID.UserProfileID
+                                         select c).Count();
+                    var nOfWalks = (from w in db.DogWalks
+                                      where w.AuthorID == loggedinUserID.UserProfileID
+                                      select w).Count();
+                    var nOfRatings = (from r in db.Ratings
+                                        where r.AuthorID == loggedinUserID.UserProfileID
+                                        select r).Count();
+
+                    if (nOfComments > 0 && nOfWalks > 0 && nOfRatings > 0)
+                    {
+                      panelStats.Visible = true;
+                      panelBlank.Visible = false;
+                    }
+                    else
+                    {
+                      panelStats.Visible = false;
+                      panelBlank.Visible = true;
+                    }
+                  }
+                }
+
+              }
+
+            //Average Rating
+            System.Web.UI.HtmlControls.HtmlInputGenericControl starRating = (System.Web.UI.HtmlControls.HtmlInputGenericControl)UserProfileFormView.Row.Cells[0].FindControl("starRating");
+            if (starRating != null)
+            {
+              var userRatings = (from r in db.Ratings
+                                 where r.AuthorID == userID
+                                 select r);
+
+              int numberRatings = userRatings.Count();
+
+              if (numberRatings > 0)
+              {
+                var average = userRatings.Average(u => u.Score);
+                starRating.Value = average > 0 ? average.ToString("#.##") : "";
+              }
             }
 
             //Uploaded Walks by user
