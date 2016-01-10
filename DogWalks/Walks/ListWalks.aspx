@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="List Walks" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="ListWalks.aspx.cs" Inherits="DogWalks.Walks.ListWalks" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContentChild" runat="server">
-
+  <style>
+    .errorMessage
+    {
+      color:red;
+    }
+  </style>
 </asp:Content>
 
 
@@ -46,7 +51,8 @@
         <%--Logic is still TODO--%>
         <asp:Panel ID="PanelPostcode" runat="server" Visible="false">
           <div class="col-md-5">
-            <asp:TextBox ID="tbPostcode" CssClass="form-control" runat="server" placeholder="Enter Postcode"></asp:TextBox>
+            <asp:TextBox ID="tbPostcode" CssClass="form-control" runat="server" placeholder="Enter Postcode"></asp:TextBox>            
+            <asp:RegularExpressionValidator ControlToValidate="tbPostcode" ErrorMessage="Postcode must be valid" Text="Postcode must be valid" ValidationExpression="(?:[A-Za-z]\d ?\d[A-Za-z]{2})|(?:[A-Za-z][A-Za-z\d]\d ?\d[A-Za-z]{2})|(?:[A-Za-z]{2}\d{2} ?\d[A-Za-z]{2})|(?:[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]{2})|(?:[A-Za-z]{2}\d[A-Za-z] ?\d[A-Za-z]{2})" ID="RegularExpressionValidator1" runat="server" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
           </div>
           <div class="col-md-4">
             <div class="input-group">
