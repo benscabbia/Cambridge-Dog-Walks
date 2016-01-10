@@ -18,32 +18,42 @@ namespace DogWalks.Walks
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-      using (WalkContext db = new WalkContext())
+    //  Page.Validate();
+
+      if (Page.IsValid)
       {
-        DogWalk dogWalk = new DogWalk();
-        dogWalk.Title = tbTitle.Text;
-        dogWalk.Description = tbDescription.Text;
-        dogWalk.LengthID = Convert.ToInt32(LengthList.SelectedValue);
-        dogWalk.Location = tbLocation.Text;
-        dogWalk.WebsiteUrl = tbWebsite.Text;
+        using (WalkContext db = new WalkContext())
+        {
+          DogWalk dogWalk = new DogWalk();
+          dogWalk.Title = tbTitle.Text;
+          dogWalk.Description = tbDescription.Text;
+          dogWalk.LengthID = Convert.ToInt32(LengthList.SelectedValue);
+          dogWalk.Location = tbLocation.Text;
+          dogWalk.WebsiteUrl = tbWebsite.Text;
 
-        //get user ID from UserProfiles table
-        var userID = User.Identity.GetUserId();
-        var profileID = (from u in db.UserProfiles
-                      where u.FKUserID == userID
-                      select u).Single();
-        dogWalk.AuthorID = profileID.UserProfileID;
+          //get user ID from UserProfiles table
+          var userID = User.Identity.GetUserId();
+          var profileID = (from u in db.UserProfiles
+                           where u.FKUserID == userID
+                           select u).Single();
 
-        TagLogic(db, dogWalk);
-        ImageLogic(dogWalk);               
-        PostCodeLogic(db, dogWalk);
+          dogWalk.AuthorID = profileID.UserProfileID;
 
-        dogWalk.CreateDateTime = DateTime.Now;
-        dogWalk.UpdateDateTime = dogWalk.CreateDateTime;
+          if(cblTags.Items.Count > 0)TagLogic(db, dogWalk);
 
-        db.DogWalks.Add(dogWalk);
-        db.SaveChanges();
-        Response.Redirect("~/Walks/ListWalks.aspx");
+          
+          ImageLogic(dogWalk);
+          
+
+          PostCodeLogic(db, dogWalk);
+
+          dogWalk.CreateDateTime = DateTime.Now;
+          dogWalk.UpdateDateTime = dogWalk.CreateDateTime;
+
+          db.DogWalks.Add(dogWalk);
+          db.SaveChanges();
+          Response.Redirect("~/Walks/ListWalks.aspx");
+        }
       }
     }
 
@@ -55,6 +65,7 @@ namespace DogWalks.Walks
       for (int i = 0; i < Request.Files.Count; i++)
       {
         HttpPostedFile image = Request.Files[i];
+
         if (image.ContentLength > 0)
         {
           //var image = file.FileName;
@@ -71,9 +82,18 @@ namespace DogWalks.Walks
 
           picture.PictureUrl = virtualFolder + fileName + extension; //set picture url
          
-          picture.Description = "an image of the walk"; //set description (temp)
+          picture.Description = "ID:" + dogWalk.WalkID + " , Title:S" + dogWalk.Title; //set description (temp)
 
           dogWalk.Pictures.Add(picture); //add the image to pictures
+        }
+        else
+        {
+          Picture placeHolder = new Picture();
+          placeHolder.WalkID = dogWalk.WalkID;
+          placeHolder.PictureUrl = "~/SystemPics/no-image-walk.jpg";
+          placeHolder.Description = "Server Image";
+        
+          dogWalk.Pictures.Add(placeHolder);
         }
       }
     }
@@ -97,7 +117,7 @@ namespace DogWalks.Walks
         dogWalk.Features.Add(db.Features.FirstOrDefault(i => i.FeatureID == item));
 
       }
-      lbConsole.Text = tagitem;
+      //lbConsole.Text = tagitem;
     }
 
     //method which contains postcode logic
@@ -109,9 +129,19 @@ namespace DogWalks.Walks
       var postCodeCoords = (from p in db.PostCodesUKs
                             where p.PostcodeNoSpace == postcode
                             select p).SingleOrDefault();
-
-      decimal postcodeLat = postCodeCoords.Latitude;
-      decimal postcodeLong = postCodeCoords.Longitude;
+      decimal postcodeLat;
+      decimal postcodeLong;
+      if (postCodeCoords != null)
+      {
+        postcodeLat = postCodeCoords.Latitude;
+        postcodeLong = postCodeCoords.Longitude;
+      }
+      else
+      {
+        var cambridgePostcode = db.PostCodesUKs.Where(p => p.Postcode == "CB3 0AX").Single();
+        postcodeLat = cambridgePostcode.Latitude;
+        postcodeLong = cambridgePostcode.Longitude;
+      }
 
       dogWalk.Postcode = postCodeCoords.Postcode; //correctly formatted postcode
       dogWalk.Latitude = postcodeLat;
@@ -158,8 +188,7 @@ namespace DogWalks.Walks
                        select l.Description).Single();
         lbLengthDescription.Text = query;
       }
-
-    }  
+    }
   }
 }
 
