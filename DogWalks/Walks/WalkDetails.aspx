@@ -221,7 +221,9 @@
         <ItemTemplate>
           <div class="might-also-like-feature-container">
             <span class="might-also-like-img-style">
-              <a href="../Walks/WalkDetails?WalkID=<%# Eval("WalkID") %>" ><asp:Image ID="Image1" runat="server" ImageUrl=<%# Get_MightAlsoLikeImageUrl((Object)Eval("Pictures")) %> /></a>
+              <a href="../Walks/WalkDetails?WalkID=<%# Eval("WalkID") %>">
+                <asp:Image ID="Image1" runat="server" ImageUrl=<%# Get_MightAlsoLikeImageUrl((Object)Eval("Pictures")) %> />
+              </a>
             </span>
             <span class="caption">
               <p><a href="../Walks/WalkDetails?WalkID=<%# Eval("WalkID") %>"><%# Eval("Title") %></a></p>

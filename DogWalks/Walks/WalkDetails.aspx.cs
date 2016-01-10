@@ -99,15 +99,8 @@ namespace DogWalks.Walks
                 {
                   var randomWalks = getWalksOfLength.OrderBy(x => Guid.NewGuid()).Take(3).ToArray();
 
-
-
                   ReapeaterYouMightLike.DataSource = randomWalks;
                   ReapeaterYouMightLike.DataBind();
-
-                  foreach (var w in randomWalks)
-                  {
-                    //lblSimilarWalks.Text += w. + ", ";
-                  }
                 }
               }
             }
