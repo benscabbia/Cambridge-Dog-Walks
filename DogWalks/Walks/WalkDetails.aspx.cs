@@ -65,6 +65,13 @@ namespace DogWalks.Walks
                                           where r.WalkID == walkID & r.AuthorID == user.UserProfileID
                                           select r.Score).SingleOrDefault();
 
+                //user is the creator of the dogwalk, hide ratings
+                if (user.UserProfileID == dogWalk.AuthorID) 
+                {
+                  Panel panelStarRating = (Panel)LoginView3.FindControl("PanelStarRating");
+                  if (panelStarRating != null) panelStarRating.Visible = false;
+                }
+
                 if (userPreviousRating > 0) { this.inputValue = userPreviousRating.ToString(); }
 
                 //manage Favourite/Unfavourite buttons visibility

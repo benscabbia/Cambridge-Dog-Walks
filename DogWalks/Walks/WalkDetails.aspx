@@ -178,10 +178,13 @@
   <div class="row">
     <div class="col-md-12">
       <asp:LoginView ID="LoginView3" runat="server">
-        <LoggedInTemplate>
-          <div class="col-md-offset-4 col-md-8">
-            <input id="starRating" type="number" class="rating" min="0" max="5" step="0.5" data-size="lg" value=<%= inputValue %>>
-          </div>
+        <LoggedInTemplate> 
+          <br />
+          <asp:Panel ID="PanelStarRating" Visible="true" runat="server">
+            <div class="col-md-offset-4 col-md-8">
+              <input id="starRating" type="number" class="rating" min="0" max="5" step="0.5" data-size="lg" value="<%= inputValue %>">
+            </div>
+          </asp:Panel>
 
           <asp:UpdatePanel runat="server">
             <ContentTemplate>
