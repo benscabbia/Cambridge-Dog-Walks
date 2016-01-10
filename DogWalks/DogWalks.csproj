@@ -242,6 +242,7 @@
     <Content Include="MasterPages\Frontend.Master" />
     <Content Include="MasterPages\FrontendChild.master" />
     <Content Include="SystemPics\no-image-profile.png" />
+    <Content Include="SystemPics\no-image-walk.jpg" />
     <Content Include="WebServices\PostcodeFill.svc" />
     <Content Include="WebServices\SaveRatingService.svc" />
     <EntityDeploy Include="DAL\WalkModel.edmx">

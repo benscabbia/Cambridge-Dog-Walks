@@ -226,7 +226,25 @@ namespace DogWalks.Walks
     protected void CategoryList_SelectedIndexChanged(object sender, EventArgs e)
     {
       ListView1.DataBind();
-    }   
+    }
+
+    protected void ListView1_DataBound(object sender, ListViewItemEventArgs e)
+    {
+      if (e.Item.ItemType == ListViewItemType.DataItem)
+      {
+        var lbUploadedBy = (Label)e.Item.FindControl("lbUploadedBy");
+        if (lbUploadedBy != null)
+        {
+          using (var db = new WalkContext())
+          {
+            InRangeWalks currentWalk = (InRangeWalks)e.Item.DataItem;            
+            var author = db.UserProfiles.Where(u => u.UserProfileID == currentWalk.Walk.AuthorID).SingleOrDefault();
+            lbUploadedBy.Text = "<a href='" + "../ViewUserProfile?UserProfileID=" + author.UserProfileID + "'>" + author.FirstName + " " + author.LastName + "</a>";
+          }
+        }
+      }    
+    }
+
   }
 
   //used to temporarily store walks with the relative distance to the inputted postcode
