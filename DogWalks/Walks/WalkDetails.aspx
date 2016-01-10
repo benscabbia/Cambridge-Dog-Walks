@@ -80,6 +80,20 @@
       display: block;
     }
 
+    /*Used by You might also like...*/
+    .might-also-like-img-style img{
+      width: 140px;
+      height: 100px;
+      background-color: grey;
+    }
+
+    .might-also-like-feature-container{
+      vertical-align: top;
+      display: inline-block;
+      text-align: center;
+      width: 160px;
+    }
+
 
 
 
@@ -107,7 +121,6 @@
                 <ItemTemplate>
                   <div id="carousel-items" class="item">
                     <asp:Image ID="Image2" runat="server" ImageUrl='<%# Eval("PictureUrl") %>' />
-
                   </div>
                 </ItemTemplate>
               </asp:Repeater>
@@ -199,7 +212,27 @@
     </div>
   </div>
 
-  <br /><br />
+  <hr />
+
+  <div class="row text-center">
+    <div class="col-md-12">
+      <h2>You  might also like...</h2>
+      <asp:Repeater ID="ReapeaterYouMightLike" runat="server">
+        <ItemTemplate>
+          <div class="might-also-like-feature-container">
+            <span class="might-also-like-img-style">
+              <a href="../Walks/WalkDetails?WalkID=<%# Eval("WalkID") %>" ><asp:Image ID="Image1" runat="server" ImageUrl=<%# Get_MightAlsoLikeImageUrl((Object)Eval("Pictures")) %> /></a>
+            </span>
+            <span class="caption">
+              <p><a href="../Walks/WalkDetails?WalkID=<%# Eval("WalkID") %>"><%# Eval("Title") %></a></p>
+            </span>
+          </div>
+        </ItemTemplate>
+      </asp:Repeater>
+    </div>
+  </div>
+
+  <br />
   <hr />
   <div class="row">
     <div class="col-md-12 text-center">

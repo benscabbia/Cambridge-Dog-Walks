@@ -13,9 +13,6 @@ namespace DogWalks
   {
     protected void Page_Load(object sender, EventArgs e)
     {
-      WalkContext db = new WalkContext();
-
     }
-
   }
 }

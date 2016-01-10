@@ -20,7 +20,7 @@ namespace DogWalks.Walks
     protected void Page_Load(object sender, EventArgs e)
     {
       var walk = Request.QueryString["WalkID"];
-
+      int walkID;
       //handle empty querystring
       if (string.IsNullOrEmpty(walk))
       {
@@ -30,7 +30,7 @@ namespace DogWalks.Walks
       {
         try
         {
-          int walkID = Int32.Parse(walk);
+          walkID = Int32.Parse(walk);
           using (WalkContext db = new WalkContext())
           {
             var dogWalk = (from n in db.DogWalks
@@ -75,19 +75,40 @@ namespace DogWalks.Walks
                 if (userPreviousRating > 0) { this.inputValue = userPreviousRating.ToString(); }
 
                 //manage Favourite/Unfavourite buttons visibility
-                  var userFavouriteWalks = user.DogWalks;
+                var userFavouriteWalks = user.DogWalks;
 
-                  var result = userFavouriteWalks.SingleOrDefault(w => w.WalkID == walkID);
-                  if (result == null)
+                var result = userFavouriteWalks.SingleOrDefault(w => w.WalkID == walkID);
+                if (result == null)
+                {
+                  LoginView3.FindControl("btnFavourite").Visible = true;
+                  LoginView3.FindControl("btnUnFavourite").Visible = false;
+                }
+                else
+                {
+                  LoginView3.FindControl("btnFavourite").Visible = false;
+                  LoginView3.FindControl("btnUnFavourite").Visible = true;
+                }
+
+                //set the you may also like section
+                var getLengthRank = db.DogWalks.Where(w => w.WalkID == walkID).Select(w => w.Length.SizeRank).SingleOrDefault();
+
+                //get all walks, not including current walk, where they have the specified size rank
+                var getWalksOfLength = db.DogWalks.Where(w => w.WalkID != walkID && w.Length.SizeRank == getLengthRank).ToList();
+
+                if (getWalksOfLength != null)
+                {
+                  var randomWalks = getWalksOfLength.OrderBy(x => Guid.NewGuid()).Take(3).ToArray();
+
+
+
+                  ReapeaterYouMightLike.DataSource = randomWalks;
+                  ReapeaterYouMightLike.DataBind();
+
+                  foreach (var w in randomWalks)
                   {
-                    LoginView3.FindControl("btnFavourite").Visible = true;
-                    LoginView3.FindControl("btnUnFavourite").Visible = false;
+                    //lblSimilarWalks.Text += w. + ", ";
                   }
-                  else
-                  {
-                    LoginView3.FindControl("btnFavourite").Visible = false;
-                    LoginView3.FindControl("btnUnFavourite").Visible = true;
-                  }
+                }
               }
             }
           }
@@ -361,6 +382,13 @@ namespace DogWalks.Walks
       }
     }
 
+    //method used by the 'You might also like' section repeater to get the image URL
+    protected string Get_MightAlsoLikeImageUrl(object picture)
+    {
+        HashSet<DogWalks.DAL.Picture> c = picture as HashSet<DogWalks.DAL.Picture>;
+        return c.FirstOrDefault().PictureUrl;
+      }
+    }
   }
   
   //class used by commentslistview. Objects provide further details combining user profiles with their posted comments
