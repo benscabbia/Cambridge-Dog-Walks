@@ -227,8 +227,10 @@ namespace DogWalks
                 if (totalScore > 0)
                 {
                   result = (totalScore / nOfWalks);
-
-                  dogWalkRating.Value = result.ToString("#.#");
+                  //Math.Round(Item.AverageRating * 2, MidpointRounding.AwayFromZero) / 2  
+                  var roundedValue = Math.Round(result * 2, MidpointRounding.AwayFromZero) / 2; 
+                  //dogWalkRating.Value = result.ToString("#.#");
+                  dogWalkRating.Value = roundedValue.ToString();
                 }
               }
 

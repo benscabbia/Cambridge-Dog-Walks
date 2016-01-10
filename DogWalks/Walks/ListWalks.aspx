@@ -88,7 +88,7 @@
                 </a></div>
                 <div class="col-md-6">
                   <div style="padding-top: 10px">
-                    <input id="starRating" value="<%# Item.AverageRating %>" type="number" class="rating" min="0" max="5" step="0.5" readonly="true" data-size="xs"></div>
+                    <input id="starRating" value="<%# Math.Round(Item.AverageRating * 2, MidpointRounding.AwayFromZero) / 2  %>" type="number" class="rating" min="0" max="5" step="0.5" readonly="true" data-size="xs"></div>
                 </div>
               </div>
               <div class="row">
