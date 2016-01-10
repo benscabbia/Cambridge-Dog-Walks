@@ -60,7 +60,7 @@ namespace DogWalks.Walks
                                       where r.WalkID == walkID
                                       select r.Score).DefaultIfEmpty().Average();
                  
-                //inputVALUE NOT WORKING - I NEED TO GRAB USER RATING IF EXISTANT AND LET THEM INPUTTED IT
+                //grab the existing rating and set the star rating to it 
                 var userPreviousRating = (from r in db.Ratings
                                           where r.WalkID == walkID & r.AuthorID == user.UserProfileID
                                           select r.Score).SingleOrDefault();

@@ -50,7 +50,7 @@ namespace DogWalks.Walks
     //method which contains image logic
     private void ImageLogic(DogWalk dogWalk)
     {
-      HttpPostedFile myFile2 = Request.Files["myFile"];
+      //HttpPostedFile myFile2 = Request.Files["myFile"];
 
       for (int i = 0; i < Request.Files.Count; i++)
       {

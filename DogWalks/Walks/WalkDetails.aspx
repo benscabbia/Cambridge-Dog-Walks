@@ -180,7 +180,7 @@
       <asp:LoginView ID="LoginView3" runat="server">
         <LoggedInTemplate>
           <div class="col-md-offset-4 col-md-8">
-            <input id="starRating" type="number" class="rating" min="0" max="5" step="0.5" data-size="lg" value="<%# this.inputValue %>">
+            <input id="starRating" type="number" class="rating" min="0" max="5" step="0.5" data-size="lg" value=<%= inputValue %>>
           </div>
 
           <asp:UpdatePanel runat="server">
