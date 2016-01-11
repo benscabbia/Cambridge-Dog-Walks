@@ -104,7 +104,6 @@
             <asp:Label ID="lbPassword" runat="server" Text="Password" CssClass="control-label col-md-1"></asp:Label>
             <div class="col-md-11">
               <asp:Button ID="btChangePassword" runat="server" Text="Change Password" CssClass="btn btn-default" PostBackUrl="ManagePassword.aspx" />
-
             </div>
           </div>
           <div class="col-md-offset-1">
@@ -142,10 +141,39 @@
           </div>
         </div>
 
+
+
+     <%--   <div class="row">
+          <div class="col-md-3">
+            <h5><b>My Favourite Walks: </b>
+              <br />
+              <ul>
+                <asp:Repeater ID="RepeaterFavouriteWalks" runat="server" ItemType="DogWalks.DAL.DogWalk">
+                  <ItemTemplate>
+                    <li><a href='../Walks/WalkDetails?WalkID=<%#Item.WalkID %>'><%# Item.Title %></a></li>
+                  </ItemTemplate>
+                </asp:Repeater>
+              </ul>
+            </h5>
+          </div>--%>
+            <br />
+            <br />
+
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
+            <h5>My Favourite Walks: 
             <br />
-            <br />
+            <ul>
+              <asp:Repeater ID="RepeaterFavouriteWalks" runat="server" ItemType="DogWalks.DAL.DogWalk">
+                <ItemTemplate>
+                  <li><a href='../Walks/WalkDetails?WalkID=<%#Item.WalkID %>'><%# Item.Title %></a></li>
+                </ItemTemplate>
+              </asp:Repeater>
+            </ul>
+            </h5>
+          </div>
+
+          <div class="col-md-6">
             <div class="col-md-offset-1 ">
               <p>
                 To see how a user views your profile, please
@@ -154,6 +182,14 @@
             </div>
           </div>
         </div>
+
+
+
+
+
+
+
+
       </div>
     </div>
   </div>

@@ -263,24 +263,6 @@ namespace DogWalks
               repeaterUploadedWalks.DataSource = userDogWalks;
               repeaterUploadedWalks.DataBind();                 
             }
-            //favourite walks by user
-            Repeater repeaterFavouriteWalks = (Repeater)UserProfileFormView.Row.Cells[0].FindControl("RepeaterFavouriteWalks");
-            if (repeaterFavouriteWalks != null && userID > 0)
-            {
-              var userProfile = (from u in db.UserProfiles
-                                   where u.UserProfileID == userID
-                                   select u).Single();
-
-              if(userProfile != null)
-              {
-                var userFavouriteWalks = userProfile.DogWalks;
-                repeaterFavouriteWalks.DataSource = userFavouriteWalks;
-                repeaterFavouriteWalks.DataBind();  
-              }
-
-              
-            }
-
           }
         }
       }

@@ -245,6 +245,7 @@
     <Content Include="SystemPics\no-image-walk.jpg" />
     <Content Include="WebServices\PostcodeFill.svc" />
     <Content Include="WebServices\SaveRatingService.svc" />
+    <Content Include="WebServices\Tulips.jpg" />
     <EntityDeploy Include="DAL\WalkModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WalkModel.Designer.cs</LastGenOutput>

@@ -70,6 +70,7 @@ namespace DogWalks.Account
           tbAddress.Text = userProfile.Address;
           tbPostcode.Text = userProfile.Postcode;
           tbAboutMe.Text = userProfile.AboutMe;
+          GetFavouriteWalks(userProfile.UserProfileID);
         }
 
         // Determine the sections to render
@@ -98,6 +99,30 @@ namespace DogWalks.Account
               : message == "RemovePhoneNumberSuccess" ? "Phone number was removed"
               : String.Empty;
           successMessage.Visible = !String.IsNullOrEmpty(SuccessMessage);
+        }
+      }
+    }
+
+    private void GetFavouriteWalks(int userID)
+    {
+      //favourite walks by user
+      //RepeaterFavouriteWalks
+      //Repeater repeaterFavouriteWalks = (Repeater)UserProfileFormView.Row.Cells[0].FindControl("RepeaterFavouriteWalks");
+      
+      if (RepeaterFavouriteWalks != null)
+      {
+        using (var db = new WalkContext())
+        {
+          var userProfile = (from u in db.UserProfiles
+                             where u.UserProfileID == userID
+                             select u).Single();
+
+          if (userProfile != null)
+          {
+            var userFavouriteWalks = userProfile.DogWalks;
+            RepeaterFavouriteWalks.DataSource = userFavouriteWalks;
+            RepeaterFavouriteWalks.DataBind();
+          }
         }
       }
     }
