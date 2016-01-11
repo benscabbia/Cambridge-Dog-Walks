@@ -64,7 +64,7 @@
             <asp:Label ID="lbFirstName" runat="server" Text="First Name" CssClass="control-label col-md-1" AssociatedControlID="tbFirstName"></asp:Label>
             <div class="col-md-11">
               <asp:TextBox ID="tbFirstName" CssClass="form-control" runat="server"></asp:TextBox>
-              <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ControlToValidate="tbFirstName" runat="server" ErrorMessage="First name cannot be more than 50 characters" ValidationExpression="^[a-zA-Z0-9]{0,50}$" Text="Maximum 50 characters for the first name" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
+              <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ControlToValidate="tbFirstName" runat="server" ErrorMessage="First name cannot be more than 50 characters" ValidationExpression="^[\s\S]{0,50}$" Text="Maximum 50 characters for the first name" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
             </div>
           </div>
           <%--Last Name--%>
@@ -72,7 +72,7 @@
             <asp:Label ID="lbLastName" runat="server" Text="Last Name" CssClass="control-label col-md-1" AssociatedControlID="tbLastName"></asp:Label>
             <div class="col-md-11">
               <asp:TextBox ID="tbLastName" runat="server" CssClass="form-control"></asp:TextBox>
-              <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ControlToValidate="tbLastName" runat="server" ErrorMessage="Last name cannot be more than 50 characters" ValidationExpression="^[a-zA-Z0-9]{0,50}$" Text="Maximum 50 characters for the last name" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
+              <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ControlToValidate="tbLastName" runat="server" ErrorMessage="Last name cannot be more than 50 characters" ValidationExpression="^[\s\S]{0,100}$" Text="Maximum 50 characters for the last name" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
             </div>
           </div>
           <%--Address--%>
@@ -80,7 +80,7 @@
             <asp:Label ID="lbAddress" runat="server" Text="Address" CssClass="control-label col-md-1" AssociatedControlID="tbAddress"></asp:Label>
             <div class="col-md-11">
               <asp:TextBox ID="tbAddress" runat="server" CssClass="form-control"></asp:TextBox>
-              <asp:RegularExpressionValidator ID="RegularExpressionValidator4" ControlToValidate="tbAddress" runat="server" ErrorMessage="Address name cannot be more than 250 characters" ValidationExpression="^[a-zA-Z0-9]{0,250}$" Text="Maximum 250 characters for the address" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
+              <asp:RegularExpressionValidator ID="RegularExpressionValidator4" ControlToValidate="tbAddress" runat="server" ErrorMessage="Address cannot be more than 250 characters" ValidationExpression="^[\s\S]{0,250}$" Text="Maximum 250 characters for the address" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
             </div>
           </div>
           <%--Postcode--%>
@@ -96,7 +96,7 @@
             <asp:Label ID="lbAboutMe" runat="server" Text="About Me" CssClass="control-label col-md-1" AssociatedControlID="tbAboutMe"></asp:Label>
             <div class="col-md-11">
               <asp:TextBox ID="tbAboutMe" TextMode="MultiLine" Rows="4" runat="server" CssClass="form-control"></asp:TextBox>
-              <asp:RegularExpressionValidator ID="RegularExpressionValidator5" ControlToValidate="tbAboutMe" runat="server" ErrorMessage="About me section cannot be more than 1000 characters" ValidationExpression="^[a-zA-Z0-9]{0,1000}$" Text="Maximum 1000 characters for the about me section" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
+              <asp:RegularExpressionValidator ID="RegularExpressionValidator5" ControlToValidate="tbAboutMe" runat="server" ErrorMessage="About me section cannot be more than 1000 characters" ValidationExpression="^[\s\S]{0,1000}$" Text="Maximum 1000 characters for the about me section" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
             </div>
           </div>
           <%--password--%>

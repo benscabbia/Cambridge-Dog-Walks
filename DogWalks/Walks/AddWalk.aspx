@@ -111,7 +111,7 @@
           <div class="col-md-11">            
             <asp:TextBox ID="tbTitle" CssClass="form-control setMaxWidth" runat="server"></asp:TextBox>
             <asp:RequiredFieldValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbTitle" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Enter a Title" Text="You Must add a title" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RequiredFieldValidator>            
-            <asp:RegularExpressionValidator ValidationGroup="NewWalkValidationGroup" ID="RegularExpressionValidator1" ControlToValidate="tbTitle" runat="server" ErrorMessage="Title cannot be more than 100 characters" ValidationExpression="^[a-zA-Z0-9]{1,100}$" Text="Maximum 100 characters for the title" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
+            <asp:RegularExpressionValidator ValidationGroup="NewWalkValidationGroup" ID="RegularExpressionValidator1" ControlToValidate="tbTitle" runat="server" ErrorMessage="Title cannot be more than 100 characters" ValidationExpression="^[\s\S]{0,100}$" Text="Maximum 100 characters for the title" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
           </div>
         </div>
         <%--description--%>
@@ -120,7 +120,7 @@
           <div class="col-md-11">
             <asp:TextBox ID="tbDescription" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control setMaxWidth"></asp:TextBox>
             <asp:RequiredFieldValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbDescription" ErrorMessage="Enter a Description" Text="You Must add a Description" ID="RequiredFieldValidator2" runat="server"  Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RequiredFieldValidator>            
-            <asp:RegularExpressionValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbDescription" ErrorMessage="Description cannot be more than 1000 characters" Text="Maximum 1000 characters for the Description" ValidationExpression="^[a-zA-Z0-9]{1,1000}$" ID="RegularExpressionValidator2" runat="server" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
+            <asp:RegularExpressionValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbDescription" ErrorMessage="Description cannot be more than 1000 characters" Text="Maximum 1000 characters for the Description" ValidationExpression="^[\s\S]{0,1000}$" ID="RegularExpressionValidator2" runat="server" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
           </div>
         </div>
         <%--length--%>
@@ -139,7 +139,7 @@
           <div class="col-md-11">
             <asp:TextBox ID="tbLocation" runat="server" TextMode="MultiLine" CssClass="form-control setMaxWidth"></asp:TextBox>
              <asp:RequiredFieldValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbLocation" ErrorMessage="Enter a Location" Text="You Must add a Location" ID="RequiredFieldValidator4" runat="server"  Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RequiredFieldValidator>            
-            <asp:RegularExpressionValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbLocation" ErrorMessage="Location cannot be more than 250 characters" Text="Maximum 250 characters for the Description" ValidationExpression="^[a-zA-Z0-9]{1,250}$" ID="RegularExpressionValidator4" runat="server" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
+            <asp:RegularExpressionValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbLocation" ErrorMessage="Location cannot be more than 250 characters" Text="Maximum 250 characters for the Description" ValidationExpression="^[\s\S]{0,250}$" ID="RegularExpressionValidator4" runat="server" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
           </div>
         </div>
         <%--postcode--%>
