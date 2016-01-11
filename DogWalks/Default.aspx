@@ -5,7 +5,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
   <%--first section part 1--%>
-  <div id="background" class="container-full-bg" style="background-image: url('../HomePagePics/home-cover.jpg'); -webkit-filter: brightness(70%);"></div>
+  <div id="background" class="container-full-bg"></div>
   <div class="container special">
     <div class="row">
       <div class="Absolute-Center is-Responsive text-center">

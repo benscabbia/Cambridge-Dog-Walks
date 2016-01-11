@@ -17,6 +17,8 @@ html, body, form{
   max-width: 100%;
   background-position: center;
   background-size: cover;
+  background-image: url('../HomePagePics/home-cover.jpg'); 
+  -webkit-filter: brightness(70%);
 
   /*to test, i think I can set the background from here directly.... but maybe better in html for the extra flexibility */
   /*background-image:url('http://7-themes.com/data_images/out/53/6951736-nature-road-background.jpg')*/
