@@ -34,10 +34,10 @@ namespace DogWalks.Walks
           using (WalkContext db = new WalkContext())
           {
             var dogWalk = (from n in db.DogWalks
-                        where n.WalkID == walkID
-                        select n).SingleOrDefault();
+                           where n.WalkID == walkID
+                           select n).SingleOrDefault();
 
-            
+
             //dogwalk not found on server
             if (dogWalk == null)
             {
@@ -47,7 +47,7 @@ namespace DogWalks.Walks
             {
 
               //if user is logged in
-              if(userLoggedIn)
+              if (userLoggedIn)
               {
                 var userID = User.Identity.GetUserId();
 
@@ -59,14 +59,14 @@ namespace DogWalks.Walks
                 var averageRatings = (from r in db.Ratings
                                       where r.WalkID == walkID
                                       select r.Score).DefaultIfEmpty().Average();
-                 
+
                 //grab the existing rating and set the star rating to it 
                 var userPreviousRating = (from r in db.Ratings
                                           where r.WalkID == walkID & r.AuthorID == user.UserProfileID
                                           select r.Score).SingleOrDefault();
 
                 //user is the creator of the dogwalk, hide ratings
-                if (user.UserProfileID == dogWalk.AuthorID) 
+                if (user.UserProfileID == dogWalk.AuthorID)
                 {
                   Panel panelStarRating = (Panel)LoginView3.FindControl("PanelStarRating");
                   if (panelStarRating != null) panelStarRating.Visible = false;
@@ -105,8 +105,8 @@ namespace DogWalks.Walks
               }
             }
           }
-        }      
-        catch(Exception ex)
+        }
+        catch (Exception ex)
         {
           Response.Redirect("../Walks/ListWalks.aspx");
         }
@@ -120,13 +120,13 @@ namespace DogWalks.Walks
     {
       using (WalkContext db = new WalkContext())
       {
-       //find dog walk with matching ID
-       var walk = (from n in db.DogWalks.Include("Features").Include("Pictures").Include("Length")
-                   where n.WalkID == WalkID
-                   select n).SingleOrDefault();
+        //find dog walk with matching ID
+        var walk = (from n in db.DogWalks.Include("Features").Include("Pictures").Include("Length")
+                    where n.WalkID == WalkID
+                    select n).SingleOrDefault();
 
-       return walk;
-      }          
+        return walk;
+      }
     }
 
     protected void FormView1_DataBound(object sender, EventArgs e)
@@ -152,7 +152,7 @@ namespace DogWalks.Walks
                                    select u).SingleOrDefault();
 
               //ensures each walk has a name
-              string name = authorProfile.FirstName + " " + authorProfile.LastName;            
+              string name = authorProfile.FirstName + " " + authorProfile.LastName;
               lbl.Text = string.IsNullOrWhiteSpace(name) ? "user" + walkAuthorID : name;
             }
           }
@@ -173,12 +173,12 @@ namespace DogWalks.Walks
         var walk = (from w in db.DogWalks
                     where w.WalkID == id
                     select w).Single();
-               
+
         //remove features
         foreach (var feature in walk.Features.ToList())
         {
           walk.Features.Remove(feature);
-        }        
+        }
 
         //remove comments
         foreach (var comment in walk.Comments.ToList())
@@ -194,6 +194,22 @@ namespace DogWalks.Walks
           walk.Ratings.Remove(rating);
         }
 
+        //remove from user favourites walks
+        var allUsers = db.UserProfiles.ToList();
+        if (allUsers != null)
+        {
+          foreach (var user in allUsers)
+          {
+            var userFavouriteWalk = user.DogWalks;
+            var grabThisWalkInFavourite = userFavouriteWalk.SingleOrDefault(w => w.WalkID == id);
+            //user has favourited this walk
+            if (grabThisWalkInFavourite != null)
+            {
+              user.DogWalks.Remove(grabThisWalkInFavourite);
+            }
+          }
+        }
+
         db.DogWalks.Remove(walk);
         db.SaveChanges();
 
@@ -206,21 +222,23 @@ namespace DogWalks.Walks
     {
       using (var db = new WalkContext())
       {
-          var walk = (from w in db.DogWalks
-                      where w.WalkID == walkId
-                      select w).Single();
+        var walk = (from w in db.DogWalks
+                    where w.WalkID == walkId
+                    select w).Single();
 
-          var walkPictures = walk.Pictures;
+        var walkPictures = walk.Pictures;
         //deletes physical picture stored on server and database relative path
         foreach (var picture in walkPictures.ToList())
-        {        
+        {
           string filename = Server.MapPath(picture.PictureUrl);
-          System.IO.File.Delete(filename);
+
+          //do not delete filler picture
+          if (picture.PictureUrl != "~/SystemPics/no-image-walk.jpg") System.IO.File.Delete(filename);
 
           db.Pictures.Remove(picture);
           walk.Pictures.Remove(picture); //remove picture reference on server
         }
-          db.SaveChanges();
+        db.SaveChanges();
       }
     }
 
@@ -244,20 +262,20 @@ namespace DogWalks.Walks
         //                    select c).ToList();
 
         var walkAnonymousResult = (from c in db.Comments
-                                  join u in db.UserProfiles
-                                    on c.AuthorID equals u.UserProfileID
-                                  where c.WalkID == id
-                                  select new
-                                  {
-                                    CommentID = c.CommentID,
-                                    Title = c.Title,
-                                    Body = c.Body,
-                                    CreateDateTime = c.CreateDateTime,
-                                    UserProfileID = u.UserProfileID,
-                                    ProfilePicture = u.ProfilePicture,
-                                    FirstName = u.FirstName,
-                                    LastName = u.LastName,
-                                  }).ToList();
+                                   join u in db.UserProfiles
+                                     on c.AuthorID equals u.UserProfileID
+                                   where c.WalkID == id
+                                   select new
+                                   {
+                                     CommentID = c.CommentID,
+                                     Title = c.Title,
+                                     Body = c.Body,
+                                     CreateDateTime = c.CreateDateTime,
+                                     UserProfileID = u.UserProfileID,
+                                     ProfilePicture = u.ProfilePicture,
+                                     FirstName = u.FirstName,
+                                     LastName = u.LastName,
+                                   }).ToList();
 
         foreach (var i in walkAnonymousResult)
         {
@@ -277,32 +295,32 @@ namespace DogWalks.Walks
           lblSingleOrPluralComments.Text = "s";
         }
 
-         //sort the list before sending to listview (date descending)
+        //sort the list before sending to listview (date descending)
         commentsProfile.Sort((x, y) => y.CreateDateTime.CompareTo(x.CreateDateTime));
 
         return commentsProfile.AsQueryable();
       }
     }
-    
+
     public void CommentsListView_InsertItem([QueryString("WalkID")] int walkID)
     {
       var currentUserID = User.Identity.GetUserId();
-      
+
       var comment = new DogWalks.DAL.Comment();
 
       TryUpdateModel(comment);
       if (ModelState.IsValid)
       {
         // Save changes here
-        using(var db=new WalkContext())
-        {          
+        using (var db = new WalkContext())
+        {
           comment.WalkID = walkID;
           comment.CreateDateTime = DateTime.Now;
 
           var profile = (from u in db.UserProfiles
                          where u.FKUserID == currentUserID
                          select u).SingleOrDefault();
-          
+
           comment.AuthorID = profile.UserProfileID;
           db.Comments.Add(comment);
           db.SaveChanges();
@@ -314,7 +332,7 @@ namespace DogWalks.Walks
     protected void btnFavourite_Click(object sender, EventArgs e)
     {
       using (var db = new WalkContext())
-      {       
+      {
         var user = User.Identity.GetUserId();
 
         var userProfile = (from u in db.UserProfiles
@@ -326,8 +344,8 @@ namespace DogWalks.Walks
           var walkID = Request.QueryString["WalkID"];
           int id;
 
-          if (int.TryParse(walkID, out id)) 
-          { 
+          if (int.TryParse(walkID, out id))
+          {
             var walk = (from w in db.DogWalks
                         where w.WalkID == id
                         select w).Single();
@@ -357,7 +375,7 @@ namespace DogWalks.Walks
           var walkID = Request.QueryString["WalkID"];
           int id;
           if (int.TryParse(walkID, out id))
-          { 
+          {
             var userFavouriteWalks = userProfile.DogWalks;
             var currentWalk = userFavouriteWalks.SingleOrDefault(w => w.WalkID == id);
 
@@ -378,12 +396,12 @@ namespace DogWalks.Walks
     //method used by the 'You might also like' section repeater to get the image URL
     protected string Get_MightAlsoLikeImageUrl(object picture)
     {
-        HashSet<DogWalks.DAL.Picture> c = picture as HashSet<DogWalks.DAL.Picture>;
-        return c.FirstOrDefault().PictureUrl;
-      }
+      HashSet<DogWalks.DAL.Picture> c = picture as HashSet<DogWalks.DAL.Picture>;
+      return c.FirstOrDefault().PictureUrl;
     }
   }
-  
+
+
   //class used by commentslistview. Objects provide further details combining user profiles with their posted comments
   public class CommentsProfileModel
   {
