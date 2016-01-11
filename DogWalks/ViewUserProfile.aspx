@@ -22,6 +22,17 @@
             <div class="thumbnail">
               <asp:Image ID="imgProfilePic" runat="server" ImageUrl='<%# Item.ProfilePicture != null ? Item.ProfilePicture : "~/SystemPics/no-image-profile.png" %>' />
             </div>
+            <h5>
+              <b>Uploaded Dog Walks: </b>
+              <br />
+              <ul>
+                <asp:Repeater ID="RepeaterUploadedWalks" runat="server" ItemType="DogWalks.DAL.DogWalk">
+                  <ItemTemplate>
+                    <li><a href='../Walks/WalkDetails?WalkID=<%#Item.WalkID %>'><%# Item.Title %></a></li>
+                  </ItemTemplate>
+                </asp:Repeater>
+              </ul>
+            </h5>
           </div>
           <div class="col-md-3">
 
@@ -32,7 +43,6 @@
               <asp:Label ID="lblNumOfComments" runat="server"></asp:Label></h5>
             <h5><b>About Me: </b></h5>
             <p><%# Item.AboutMe %></p>
-
           </div>
 
           <div class="col-md-offset-2 col-md-4">
@@ -85,17 +95,7 @@
 
         <div class="row">
           <div class="col-md-3">
-            <h5>
-              <b>Uploaded Dog Walks: </b>
-              <br />
-              <ul>
-                <asp:Repeater ID="RepeaterUploadedWalks" runat="server" ItemType="DogWalks.DAL.DogWalk">
-                  <ItemTemplate>
-                    <li><a href='../Walks/WalkDetails?WalkID=<%#Item.WalkID %>'><%# Item.Title %></a></li>
-                  </ItemTemplate>
-                </asp:Repeater>
-              </ul>
-            </h5>
+            
           </div>
         </div>
 
