@@ -26,7 +26,7 @@
           <img style="height: 200px; width: 100%; display: block;" src="HomePagePics/newest-walks.jpg" />
           <div class="caption text-center">
             <h3>Newest Walks</h3>
-            <p><a href="../Walks/ListWalks?Filter=1" class="btn btn-success" role="button">Load Walks</a></p>
+            <p><a href='<%=ResolveUrl("~/Walks/ListWalks?Filter=1")%>' class="btn btn-success" role="button">Load Walks</a></p>
           </div>
         </div>
       </div>
@@ -36,7 +36,8 @@
           <img style="height: 200px; width: 100%; display: block;" src="HomePagePics/top-rated-walks.jpg" />
           <div class="caption text-center">
             <h3>Top Rated Walks</h3>
-            <p><a href="../Walks/ListWalks?Filter=2" class="btn btn-success" role="button">Load Walks</a></p>
+            <%--<p><a href="../Walks/ListWalks?Filter=2" class="btn btn-success" role="button">Load Walks</a></p>--%>
+            <p><a href='<%=ResolveUrl("~/Walks/ListWalks?Filter=2")%>' class="btn btn-success" role="button">Load Walks</a></p>
           </div>
         </div>
       </div>
@@ -46,7 +47,7 @@
           <img style="height: 200px; width: 100%; display: block;" src="HomePagePics/longest-walks.jpg" />
           <div class="caption text-center">
             <h3>Longest Walks</h3>
-            <p><a href="../Walks/ListWalks?Filter=3" class="btn btn-success" role="button">Load Walks</a></p>
+            <p><a href='<%=ResolveUrl("~/Walks/ListWalks?Filter=3")%>' class="btn btn-success" role="button">Load Walks</a></p>
           </div>
         </div>
       </div>
@@ -61,7 +62,7 @@
           <img style="height: 200px; width: 100%; display: block;" src="HomePagePics/postcode-search.jpg" />
           <div class="caption text-center">
             <h3>Postcode Radius Search</h3>
-            <p><a href="../Walks/ListWalks?Filter=4" class="btn btn-success" role="button">Load Walks</a></p>
+            <p><a href='<%=ResolveUrl("~/Walks/ListWalks?Filter=4")%>' class="btn btn-success" role="button">Load Walks</a></p>
           </div>
         </div>
       </div>
@@ -70,7 +71,7 @@
           <img style="height: 200px; width: 100%; display: block;" src="HomePagePics/search-alphabetically.jpg" />
           <div class="caption text-center">
             <h3>Search Alphabetically</h3>
-            <p><a href="../Walks/ListWalks?Filter=5" class="btn btn-success" role="button">Load Walks</a></p>
+            <p><a href='<%=ResolveUrl("~/Walks/ListWalks?Filter=5")%>' class="btn btn-success" role="button">Load Walks</a></p>
           </div>
         </div>
       </div>
@@ -79,7 +80,7 @@
           <img style="height: 200px; width: 100%; display: block;" src="HomePagePics/view-all-walks.jpg" />
           <div class="caption text-center">
             <h3>View all Walks</h3>
-            <p><a href="../Walks/ListWalks.aspx" class="btn btn-success" role="button">Load Walks</a></p>
+            <p><a href='<%=ResolveUrl("~/Walks/ListWalks")%>' class="btn btn-success" role="button">Load Walks</a></p>
           </div>
         </div>
       </div>
@@ -97,22 +98,22 @@
        });
 
        $('#newestWalks').click(function () {
-         window.location = "../Walks/ListWalks?Filter=1";
+         window.location = '<%=ResolveUrl("~/Walks/ListWalks?Filter=1")%>';
        });
        $('#topRatedWalks').click(function () {
-         window.location = "../Walks/ListWalks?Filter=2"
+         window.location = '<%=ResolveUrl("~/Walks/ListWalks?Filter=2")%>'
        });
        $('#longestWalks').click(function () {
-         window.location = "../Walks/ListWalks?Filter=3"
+         window.location = '<%=ResolveUrl("~/Walks/ListWalks?Filter=3")%>'
        });
        $('#postCodeRadius').click(function () {
-         window.location = "../Walks/ListWalks?Filter=4"
+         window.location = '<%=ResolveUrl("~/Walks/ListWalks?Filter=4")%>'
        });
        $('#searchAlpha').click(function () {
-         window.location = "../Walks/ListWalks?Filter=5"
+         window.location = '<%=ResolveUrl("~/Walks/ListWalks?Filter=5")%>'
        });
        $('#viewAllWalks').click(function () {
-         window.location = "../Walks/ListWalks.aspx"
+         window.location = '<%=ResolveUrl("~/Walks/ListWalks")%>'
        });
      });
   </script>

@@ -65,6 +65,8 @@ namespace DogWalks.Walks
             PanelPostcode.Visible = false;
             PanelSearch.Visible = true;
             tbPostcode.Text = "";
+
+            if (CategoryList.SelectedIndex == 2) SortOrder.SelectedIndex = 1;
             if (CategoryList.SelectedIndex == 3) SortOrder.SelectedIndex = 1;
           }
         }
