@@ -6,6 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DogWalks.DAL;
 using Microsoft.AspNet.Identity;
+using System.Collections;
+using AjaxControlToolkit;
+
 
 namespace DogWalks.Walks
 {
@@ -18,7 +21,7 @@ namespace DogWalks.Walks
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-    //  Page.Validate();
+      //  Page.Validate();
 
       if (Page.IsValid)
       {
@@ -39,11 +42,11 @@ namespace DogWalks.Walks
 
           dogWalk.AuthorID = profileID.UserProfileID;
 
-          if(cblTags.Items.Count > 0)TagLogic(db, dogWalk);
+          if (cblTags.Items.Count > 0) TagLogic(db, dogWalk);
 
-          
+
           ImageLogic(dogWalk);
-          
+
 
           PostCodeLogic(db, dogWalk);
 
@@ -81,7 +84,7 @@ namespace DogWalks.Walks
           image.SaveAs(System.IO.Path.Combine(physicalFolder, fileName + extension));  //save image on local
 
           picture.PictureUrl = virtualFolder + fileName + extension; //set picture url
-         
+
           picture.Description = "ID:" + dogWalk.WalkID + " , Title:S" + dogWalk.Title; //set description (temp)
 
           dogWalk.Pictures.Add(picture); //add the image to pictures
@@ -92,7 +95,7 @@ namespace DogWalks.Walks
           placeHolder.WalkID = dogWalk.WalkID;
           placeHolder.PictureUrl = "~/SystemPics/no-image-walk.jpg";
           placeHolder.Description = "Server Image";
-        
+
           dogWalk.Pictures.Add(placeHolder);
         }
       }
@@ -161,31 +164,31 @@ namespace DogWalks.Walks
     public IEnumerable<Length> LengthList_GetData()
     {
       WalkContext db = new WalkContext();
-      
-        var query = (from l in db.Lengths
-                     orderby l.SizeRank
-                     select l);
 
-        lbLengthDescription.Text = 
-                    (from l in db.Lengths
-                    orderby l.SizeRank
-                    where l.LengthID==1
-                    select l.Description).Single(); 
+      var query = (from l in db.Lengths
+                   orderby l.SizeRank
+                   select l);
 
-        return query;
-      
-      
+      lbLengthDescription.Text =
+                  (from l in db.Lengths
+                   orderby l.SizeRank
+                   where l.LengthID == 1
+                   select l.Description).Single();
+
+      return query;
+
+
     }
 
     protected void LengthList_SelectedIndexChanged(object sender, EventArgs e)
     {
-      DropDownList list = (DropDownList) sender;
+      DropDownList list = (DropDownList)sender;
       int selected = Convert.ToInt32(list.SelectedValue);
-      using(WalkContext db = new WalkContext())
+      using (WalkContext db = new WalkContext())
       {
         var query = (from l in db.Lengths
-                       where l.LengthID == selected
-                       select l.Description).Single();
+                     where l.LengthID == selected
+                     select l.Description).Single();
         lbLengthDescription.Text = query;
       }
     }

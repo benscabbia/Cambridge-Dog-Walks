@@ -1,13 +1,6 @@
 ﻿<%@ Page Title="List Walks" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="ListWalks.aspx.cs" Inherits="DogWalks.Walks.ListWalks" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContentChild" runat="server">
-  <style>
-    .errorMessage
-    {
-      color:red;
-    }
-  </style>
 </asp:Content>
-
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentChild" runat="server">
       <h2>Let's find the perfect walk!</h2>

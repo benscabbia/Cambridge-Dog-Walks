@@ -390,10 +390,9 @@
         var walkID = getUrlVars()["WalkID"];
 
         var score = $('#starRating').val();
-        alert(walkID + " " + score);
         window.UserID = '<%=HttpUtility.JavaScriptStringEncode(this.User.Identity.GetUserId())%>';
 
-        alert("walkid:" + walkID + ", score:" + score + ", ID: " + window.UserID);
+        //alert("walkid:" + walkID + ", score:" + score + ", ID: " + window.UserID);
         <%--var loggedinuserid = "<%=loggedInUserId%>";--%>
         //var loggedinUserID = "abc";
         //save rating using service

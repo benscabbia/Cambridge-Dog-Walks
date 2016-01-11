@@ -1,75 +1,7 @@
 ﻿<%@ Page Title="Add Walk" Language="C#" MasterPageFile="~/MasterPages/FrontendChild.master" AutoEventWireup="true" CodeBehind="AddWalk.aspx.cs" Inherits="DogWalks.Walks.AddWalk" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContentChild" runat="server">
-  <style type="text/css">
-    /*.auto-style1 {
-      height: 16px;
-    }
-
-    .auto-style2 {
-      height: 21px;
-    }*/
-    .setMaxWidth{
-      max-width: 280px;
-    }
-    .leftAlign{
-      text-align:left !important;
-    }
-
-    .checkboxListSpacing td {
-      padding:0 20px 2px 0;
-    }
-    .checkboxListSpacing label{
-      padding-left: 2px;
-    }
-
-    /* made select/change button have round corner */
-    /*used by jasny form upload*/
-    .fileinput-new .input-group .input-group-btn .btn.btn-file {
-      -webkit-border-radius: 0 4px 4px 0;
-      -moz-border-radius: 0 4px 4px 0;
-      border-radius: 0 4px 4px 0;
-    }
-
-    .fileinput .fileinput-filename {
-      overflow: visible;
-    }
-
-      .fileinput .fileinput-filename .dropdown-menu > li {
-        padding: 3px 20px;
-      }
-
-    /*used by autocomplete*/
-    .completionList {
-      padding: 0px;
-      margin: 0px;
-      color: black;
-      overflow: auto;
-      text-align: left;
-      border: 2px solid lightskyblue;
-      list-style-type: none;
-      cursor: default;
-      height: 200px;
-      background-color: white;
-    }
-
-    .item {
-      height: 17px;
-      cursor: pointer;
-    }
-
-    .itemHighLight {
-      color: White;
-      background-color: lightskyblue;
-      cursor: pointer;
-    }
-
-    /*used by validation*/
-    .errorMessage{
-      color: red;
-    }
-  </style>
-
+  <link href="../Content/AddWalkStyle.css" rel="stylesheet" />
   <script src="../Scripts/jasny-bootstrap.js"></script>
   <link href="../Content/jasny-bootstrap.min.css" rel="stylesheet" />
 
@@ -77,28 +9,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentChild" runat="server">
   <asp:UpdatePanel runat="server">
     <ContentTemplate>
-         
-
-  <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
-     <Services>
-      <asp:ServiceReference Path="~/WebServices/PostcodeFill.svc" />
-    </Services>
-  </asp:ScriptManagerProxy>
-
-          <ajaxToolkit:AutoCompleteExtender 
-          ID="ace1" 
-          TargetControlID="tbPostcode" 
-          runat="server" 
-          ServiceMethod="GetPostcodes" 
-          ServicePath="~/WebServices/PostcodeFill.svc" 
-          EnableCaching="true" 
-          MinimumPrefixLength="1" 
-          CompletionListCssClass="completionList" 
-          CompletionListItemCssClass="item" 
-          CompletionListHighlightedItemCssClass="itemHighLight"
-          CompletionInterval="10"
-            
-          ></ajaxToolkit:AutoCompleteExtender>
+      <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
+        <Services>
+          <asp:ServiceReference Path="~/WebServices/PostcodeFill.svc" />
+        </Services>
+      </asp:ScriptManagerProxy>
 
       <h2>Insert New Dog Walk</h2>
 
@@ -108,9 +23,9 @@
         <%--title--%>
         <div class="form-group">
           <asp:Label ID="Label1" runat="server" Text="Title*" CssClass="control-label col-md-1" AssociatedControlID="tbTitle"></asp:Label>
-          <div class="col-md-11">            
+          <div class="col-md-11">
             <asp:TextBox ID="tbTitle" CssClass="form-control setMaxWidth" runat="server"></asp:TextBox>
-            <asp:RequiredFieldValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbTitle" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Enter a Title" Text="You Must add a title" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RequiredFieldValidator>            
+            <asp:RequiredFieldValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbTitle" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Enter a Title" Text="You Must add a title" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ValidationGroup="NewWalkValidationGroup" ID="RegularExpressionValidator1" ControlToValidate="tbTitle" runat="server" ErrorMessage="Title cannot be more than 100 characters" ValidationExpression="^[\s\S]{0,100}$" Text="Maximum 100 characters for the title" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
           </div>
         </div>
@@ -119,7 +34,7 @@
           <asp:Label ID="lbDescription" runat="server" Text="Description*" CssClass="control-label col-md-1" AssociatedControlID="tbDescription"></asp:Label>
           <div class="col-md-11">
             <asp:TextBox ID="tbDescription" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control setMaxWidth"></asp:TextBox>
-            <asp:RequiredFieldValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbDescription" ErrorMessage="Enter a Description" Text="You Must add a Description" ID="RequiredFieldValidator2" runat="server"  Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RequiredFieldValidator>            
+            <asp:RequiredFieldValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbDescription" ErrorMessage="Enter a Description" Text="You Must add a Description" ID="RequiredFieldValidator2" runat="server" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbDescription" ErrorMessage="Description cannot be more than 1000 characters" Text="Maximum 1000 characters for the Description" ValidationExpression="^[\s\S]{0,1000}$" ID="RegularExpressionValidator2" runat="server" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
           </div>
         </div>
@@ -138,7 +53,7 @@
           <asp:Label ID="lbLocation" runat="server" Text="Location*" CssClass="control-label col-md-1" AssociatedControlID="tbLocation"></asp:Label>
           <div class="col-md-11">
             <asp:TextBox ID="tbLocation" runat="server" TextMode="MultiLine" CssClass="form-control setMaxWidth"></asp:TextBox>
-             <asp:RequiredFieldValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbLocation" ErrorMessage="Enter a Location" Text="You Must add a Location" ID="RequiredFieldValidator4" runat="server"  Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RequiredFieldValidator>            
+            <asp:RequiredFieldValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbLocation" ErrorMessage="Enter a Location" Text="You Must add a Location" ID="RequiredFieldValidator4" runat="server" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbLocation" ErrorMessage="Location cannot be more than 250 characters" Text="Maximum 250 characters for the Description" ValidationExpression="^[\s\S]{0,250}$" ID="RegularExpressionValidator4" runat="server" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
           </div>
         </div>
@@ -147,7 +62,7 @@
           <asp:Label ID="lbPostcode" runat="server" Text="Postcode*" CssClass="control-label col-md-1" AssociatedControlID="tbPostcode"></asp:Label>
           <div class="col-md-11">
             <asp:TextBox ID="tbPostcode" runat="server" CssClass="form-control setMaxWidth"></asp:TextBox>
-            <asp:RequiredFieldValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbPostcode" ErrorMessage="Enter a Postcode" Text="You Must add a Postcode" ID="RequiredFieldValidator3" runat="server"  Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RequiredFieldValidator>            
+            <asp:RequiredFieldValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbPostcode" ErrorMessage="Enter a Postcode" Text="You Must add a Postcode" ID="RequiredFieldValidator3" runat="server" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ValidationGroup="NewWalkValidationGroup" ControlToValidate="tbPostcode" ErrorMessage="Postcode must be valid" Text="Postcode must be valid" ValidationExpression="(?:[A-Za-z]\d ?\d[A-Za-z]{2})|(?:[A-Za-z][A-Za-z\d]\d ?\d[A-Za-z]{2})|(?:[A-Za-z]{2}\d{2} ?\d[A-Za-z]{2})|(?:[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]{2})|(?:[A-Za-z]{2}\d[A-Za-z] ?\d[A-Za-z]{2})" ID="RegularExpressionValidator3" runat="server" Display="Dynamic" CssClass="errorMessage" SetFocusOnError="true"></asp:RegularExpressionValidator>
           </div>
         </div>
@@ -191,7 +106,7 @@
               </div>
             </div>
           </div>
-        </div>               
+        </div>
         <%--  submit--%>
         <div class="form-group">
           <div class="col-md-offset-1 col-md-11">
@@ -207,7 +122,7 @@
       <br />
 
       <asp:Label ID="lbConsole" runat="server" Text="Label" Visible="false"></asp:Label>
-   </ContentTemplate>
+    </ContentTemplate>
     <Triggers>
       <asp:PostBackTrigger ControlID="btnSave" />
     </Triggers>
@@ -220,7 +135,7 @@
       $(document).on('change.bs.fileinput', '.fileinput', function (e) {
         var $this = $(this),
             $input = $this.find('input[type=file]'),
-            $span = $this.find('.fileinput-filename');        
+            $span = $this.find('.fileinput-filename');
         if ($input[0].files !== undefined && $input[0].files.length > 1) {
           $span.addClass('dropdown').html('<a href="#" data-toggle="dropdown" class="dropdown-toggle">multiple files selected <i class="caret"></i></a><ul class="dropdown-menu" role="menu"><li>' + $.map($input[0].files, function (val) { return val.name; }).join('</li><li>') + '</li></ul>');
         } else if ($input[0].files !== undefined && $input[0].files.length == 1) {

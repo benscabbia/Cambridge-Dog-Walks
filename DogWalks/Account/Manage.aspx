@@ -5,29 +5,7 @@
 <asp:Content ContentPlaceHolderID="HeadContentChild" runat="server">
   <script src="../Scripts/jasny-bootstrap.js"></script>
   <link href="../Content/jasny-bootstrap.min.css" rel="stylesheet" />
-
-  <style>
-    /* made select/change button have round corner */
-    /*used by jasny form upload*/
-    .fileinput-new .input-group .input-group-btn .btn.btn-file {
-      -webkit-border-radius: 0 4px 4px 0;
-      -moz-border-radius: 0 4px 4px 0;
-      border-radius: 0 4px 4px 0;
-    }
-
-    .fileinput .fileinput-filename {
-      overflow: visible;
-    }
-
-      .fileinput .fileinput-filename .dropdown-menu > li {
-        padding: 3px 20px;
-      }
-
-      .errorMessage
-      {
-        color:red;
-      }
-  </style>
+  <link href="../Content/ManageStyle.css" rel="stylesheet" />
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentChild" runat="server">
@@ -140,29 +118,16 @@
             </div>
           </div>
         </div>
-
-
-
-     <%--   <div class="row">
-          <div class="col-md-3">
-            <h5><b>My Favourite Walks: </b>
-              <br />
-              <ul>
-                <asp:Repeater ID="RepeaterFavouriteWalks" runat="server" ItemType="DogWalks.DAL.DogWalk">
-                  <ItemTemplate>
-                    <li><a href='../Walks/WalkDetails?WalkID=<%#Item.WalkID %>'><%# Item.Title %></a></li>
-                  </ItemTemplate>
-                </asp:Repeater>
-              </ul>
-            </h5>
-          </div>--%>
-            <br />
-            <br />
-
+            
+        <br />
+        
         <div class="row">
-          <div class="col-md-6">
-            <h5>My Favourite Walks: 
-            <br />
+          <div class="col-md-12">
+            <hr />
+          </div>
+          <div class="col-md-5 col-md-offset-1 ">
+            <h5><b>My Favourite Walks: </b>
+            <h5>
             <ul>
               <asp:Repeater ID="RepeaterFavouriteWalks" runat="server" ItemType="DogWalks.DAL.DogWalk">
                 <ItemTemplate>
@@ -173,12 +138,12 @@
             </h5>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div class="col-md-offset-1 ">
-              <p>
+              <h5>
                 To see how a user views your profile, please
                     <asp:HyperLink ID="HyperLink1" runat="server">click here</asp:HyperLink>
-              </p>
+              </h5>
             </div>
           </div>
         </div>

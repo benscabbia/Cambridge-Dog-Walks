@@ -187,10 +187,12 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="Content\AddWalkStyle.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
+    <Content Include="Content\ManageStyle.css" />
     <Content Include="Content\star-rating.css" />
     <Content Include="Demo\autoComplete1.aspx" />
     <Content Include="favicon.png" />
@@ -309,7 +311,6 @@
     <Content Include="Walks\ListWalks.aspx" />
     <Content Include="Walks\SaveRating.aspx" />
     <Content Include="Walks\Search.aspx" />
-    <Content Include="Walks\testpage.aspx" />
     <Content Include="Walks\WalkDetails.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -648,13 +649,6 @@
     </Compile>
     <Compile Include="Walks\Search.aspx.designer.cs">
       <DependentUpon>Search.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Walks\testpage.aspx.cs">
-      <DependentUpon>testpage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Walks\testpage.aspx.designer.cs">
-      <DependentUpon>testpage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Walks\WalkDetails.aspx.cs">
       <DependentUpon>WalkDetails.aspx</DependentUpon>
