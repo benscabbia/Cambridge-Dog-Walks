@@ -31,6 +31,15 @@ namespace DogWalks.Walks {
         protected global::System.Web.UI.WebControls.LoginView LoginView3;
         
         /// <summary>
+        /// LoginView4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LoginView LoginView4;
+        
+        /// <summary>
         /// ReapeaterYouMightLike control.
         /// </summary>
         /// <remarks>
@@ -74,14 +83,5 @@ namespace DogWalks.Walks {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LoginView LoginView1;
-        
-        /// <summary>
-        /// ScriptManagerProxy1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManagerProxy ScriptManagerProxy1;
     }
 }

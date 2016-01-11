@@ -40,7 +40,10 @@
               
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Site Scripts--%>
-            </Scripts>          
+            </Scripts>         
+          <Services>
+            <asp:ServiceReference Path="~/WebServices/SaveRatingService.svc" />
+          </Services> 
         </asp:ScriptManager>
 
         <%--navigation bar--%>

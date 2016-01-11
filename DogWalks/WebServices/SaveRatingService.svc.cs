@@ -24,7 +24,7 @@ namespace DogWalks.WebServices
     //     and include the following line in the operation body:
     //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
     [OperationContract]
-    public void Save(string score, string walkID)
+    public void Save(string score, string walkID, string loggedInUser)
     {
       // Add your operation implementation here
       using (var db = new WalkContext())
@@ -32,7 +32,8 @@ namespace DogWalks.WebServices
         var newRating = new Rating();
         //string userName = OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.GetUserId();
         //var userName2 = ServiceSecurityContext.Current.PrimaryIdentity.GetUserId();
-        var userName = HttpContext.Current.User.Identity.GetUserId();
+        var userName2 = HttpContext.Current.User.Identity.GetUserId();
+        var userName = loggedInUser; 
 
         var userProfileID = (from u in db.UserProfiles
                              where u.FKUserID == userName

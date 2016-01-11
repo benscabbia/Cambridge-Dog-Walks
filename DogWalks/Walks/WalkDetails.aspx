@@ -216,7 +216,16 @@
 
   <div class="row text-center">
     <div class="col-md-12">
-      <h2>You  might also like...</h2>
+      <asp:LoginView ID="LoginView4" runat="server">
+        <LoggedInTemplate>
+          <h2>You  might also like...</h2>
+        </LoggedInTemplate>
+        <AnonymousTemplate>
+          <h2>Please login to rate, favourite and get walk recommendations!</h2>
+        </AnonymousTemplate>
+      </asp:LoginView>
+      
+      <%--Repeater doesn't need to be in login view since it's only binded if user authenticated--%>
       <asp:Repeater ID="ReapeaterYouMightLike" runat="server">
         <ItemTemplate>
           <div class="might-also-like-feature-container">
@@ -261,6 +270,7 @@
             <ContentTemplate>
               <br /><br />
               <asp:Button ID="btnDelete" CssClass="btn btn-danger" CausesValidation="false" runat="server" Text="Delete" OnClick="btnDelete_Click" />
+              <br /><br />
             </ContentTemplate>
           </asp:RoleGroup>
           <%--moderator--%>
@@ -344,11 +354,13 @@
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="CustomScriptContentChild" runat="server">
-  <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
-    <Services>
-      <asp:ServiceReference Path="~/WebServices/SaveRatingService.svc" />
-    </Services>
-  </asp:ScriptManagerProxy>
+  <%--<asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
+    <Services>--%>
+      <%--<asp:ServiceReference Path="~/WebServices/SaveRatingService.svc" />--%>
+<%--      <asp:ServiceReference Path="https://jose.cs.herts.ac.uk/bs13acd/final/Walks/bs13acd/final/WebServices/SaveRatingService.svc" />--%>
+      
+   <%-- </Services>
+  </asp:ScriptManagerProxy>--%>
 
   <script type="text/javascript">
     $('#myCarousel').carousel({
@@ -370,20 +382,31 @@
     //used by star rating
     $(document).ready(function () {      
       $("#starRating").rating();
+      //alert("hello");
     });
 
-    $("#starRating").on('rating.change', function (event, value, caption) {
-      var walkID = getUrlVars()["WalkID"];
-      var score = $('#starRating').val();
-      
-      //save rating using service
-      SaveRatingService.Save(score, walkID);
-      //$.get("SaveRating.aspx",
-      //{
-      //  Score: score,
-      //  WalkID: walkID
-      //});
-    });
+    
+      $("#starRating").on('rating.change', function (event, value, caption) {
+        var walkID = getUrlVars()["WalkID"];
+
+        var score = $('#starRating').val();
+        alert(walkID + " " + score);
+        window.UserID = '<%=HttpUtility.JavaScriptStringEncode(this.User.Identity.GetUserId())%>';
+
+        alert("walkid:" + walkID + ", score:" + score + ", ID: " + window.UserID);
+        <%--var loggedinuserid = "<%=loggedInUserId%>";--%>
+        //var loggedinUserID = "abc";
+        //save rating using service
+        //SaveRatingService.Save(score, walkID, loggedinuserid);
+        //SaveRatingService.Save(score, walkID, window.UserID);
+
+        $.get("SaveRating.aspx",
+          {
+            Score: score,
+            WalkID: walkID,
+          });
+      });
+    
 
     //function to get query string
     function getUrlVars() {

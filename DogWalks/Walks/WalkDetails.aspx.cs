@@ -15,6 +15,7 @@ namespace DogWalks.Walks
   public partial class WalkDetail : System.Web.UI.Page
   {
     protected string inputValue { get; set; }
+    protected string loggedInUserId { get; set; }
     bool userLoggedIn = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -50,6 +51,7 @@ namespace DogWalks.Walks
               if (userLoggedIn)
               {
                 var userID = User.Identity.GetUserId();
+                loggedInUserId = userID;
 
                 var user = (from u in db.UserProfiles
                             where u.FKUserID == userID
