@@ -139,7 +139,11 @@ namespace DogWalks.Walks
               double dis = DistanceCalculator.distanceCalculator(userPostcodeLat, userPostcodeLong, walkLat, walkLong, 'M');
               if (dis <= radius)
               {
-                inRangeWalks.Add(new InRangeWalks(dis, walk));
+                float averageRatings = (float)(from r in db.Ratings
+                                               where r.WalkID == walk.WalkID
+                                               select r.Score).DefaultIfEmpty().Average();
+
+                inRangeWalks.Add(new InRangeWalks(dis, walk, averageRatings));
               }
             }
 
