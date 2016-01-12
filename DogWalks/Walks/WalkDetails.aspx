@@ -51,7 +51,7 @@
           <div class="row">
             <div class="col-md-7"><h1><%#Item.Title %></h1></div>
            <br /><br />
-              <div class="col-md-5"><input id="starRating" value="<%# GetAverageWalkScore() %>" type="number" class="rating" min="0" max="5" step="0.5" readonly="true" data-size="xs"></div>
+              <div class="col-md-5"><input id="starRating2" value="<%# GetAverageWalkScore() %>" type="number" class="rating" min="0" max="5" step="0.5" readonly="true" data-size="xs"></div>
           </div>
           
           <p><%# Item.Location %>, <%# Item.Postcode %></p>
