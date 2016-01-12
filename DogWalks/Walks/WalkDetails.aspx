@@ -3,101 +3,13 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContentChild" runat="server">  
+  <link href="../Content/WalkDetailStyle.css" rel="stylesheet" />
 </asp:Content>
 
 
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContentChild" runat="server">
-  <style type="text/css">
-    .carousel {
-      background: #2f4357;
-      margin-top: 20px;
-    }
-
-      .carousel .item img {
-        margin: 0 auto; /* Align slide image horizontally center */
-      }
-
-    .carousel-inner > .item > img, .carousel-inner > .item > a > img {
-      width: 490px;
-      height: 257px;
-      /*Above 100% width, below image constraints maintained*/
-      /*width: auto;
-      height: 250px;
-      max-height: 250px;*/
-    }
-
-    .bs-example {
-      margin: 20px;
-    }
-
-    /*used by comments*/
-    .comments-background {
-      background: #f5f5f5;
-      color: #6f6f6f;
-
-    }
-
-    .comments-section-background{
-      background:#565656;
-      margin-bottom:-21px; /*required to cover part of the footer*/
-    }
-
-    .white-text{
-      color: white;
-    }
-
-    .center-profile-image{
-      float:none;
-      display:inline-block;
-      vertical-align:middle;
-      margin-right:-4px;
-      padding-top:5px;
-    }
-
-    .profile-img-max-width{
-      max-width:154px;
-    }
-
-    /*used by features*/
-
-
-    .feature-container {
-      vertical-align: top;
-      display: inline-block;
-      text-align: center;
-      width: 120px;
-    }
-
-    .feature-img-style img {
-      width: 100px;
-      height: 100px;
-      background-color: grey;
-    }
-
-    .caption {
-      display: block;
-    }
-
-    /*Used by You might also like...*/
-    .might-also-like-img-style img{
-      width: 140px;
-      height: 100px;
-      background-color: grey;
-    }
-
-    .might-also-like-feature-container{
-      vertical-align: top;
-      display: inline-block;
-      text-align: center;
-      width: 160px;
-    }
-
-
-
-
-  </style>
   <br />
   
   <asp:FormView ID="FormView1" runat="server" ItemType="DogWalks.DAL.DogWalk" SelectMethod="FormView1_GetItem" OnDataBound="FormView1_DataBound">
@@ -134,12 +46,14 @@
             </a>
           </div>
 
-          <%--          <div class="thumbnail">
-            <asp:Image ID="Image2" runat="server" ImageUrl="<%# Item.Pictures.FirstOrDefault() != null ? Item.Pictures.FirstOrDefault().PictureUrl : string.Empty %>" />
-          </div>--%>
         </div>
         <div class="col-md-7">
-          <h1><%#Item.Title %></h1>
+          <div class="row">
+            <div class="col-md-7"><h1><%#Item.Title %></h1></div>
+           <br /><br />
+              <div class="col-md-5"><input id="starRating" value="<%# GetAverageWalkScore() %>" type="number" class="rating" min="0" max="5" step="0.5" readonly="true" data-size="xs"></div>
+          </div>
+          
           <p><%# Item.Location %>, <%# Item.Postcode %></p>
           <hr />
           <h5 style="line-height: 1.2"><%# Item.Description %></h5>
@@ -156,7 +70,7 @@
                   </ItemTemplate>
                 </asp:Repeater>
               </p>
-              <p><asp:Label ID="lbPostcodeDistance" runat="server" Text='<%# "<b>Useful Website: </b>" + Item.WebsiteUrl %>' Visible=<%# (string.IsNullOrEmpty(Item.WebsiteUrl)) ? false : true %>></asp:Label> </p>
+              <p><a href="<%# Item.WebsiteUrl %>"><asp:Label ID="lbPostcodeDistance" runat="server" Text='<%# Item.WebsiteUrl%>' Visible=<%# (string.IsNullOrEmpty(Item.WebsiteUrl)) ? false : true %>></asp:Label></a> </p>
               <p><b>Created by: </b><a href="../ViewUserProfile?UserProfileID=<%# Item.AuthorID %>"><asp:Label ID="lblCreatedBy" runat="server"></asp:Label></a>, on the <%# Item.CreateDateTime.ToShortDateString() %></p>
             </div>
           </div>

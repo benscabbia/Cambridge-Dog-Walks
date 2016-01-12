@@ -401,8 +401,29 @@ namespace DogWalks.Walks
       HashSet<DogWalks.DAL.Picture> c = picture as HashSet<DogWalks.DAL.Picture>;
       return c.FirstOrDefault().PictureUrl;
     }
-  }
 
+    protected string GetAverageWalkScore()
+    {
+      int walkID;
+      var walk = Request.QueryString["WalkID"];
+
+      if(int.TryParse(walk, out walkID))
+      {
+        using (var db = new WalkContext())
+        {
+          var allRatingsForWalk = db.Ratings.Where(r => r.WalkID == walkID);
+
+          var averageScore = (float)allRatingsForWalk.Select(r => r.Score).DefaultIfEmpty().Average();
+
+          var roundedScore = Math.Round(averageScore * 2, MidpointRounding.AwayFromZero) / 2;
+
+          return roundedScore.ToString();
+        }
+      }
+
+      return "0";
+    }
+  }
 
   //class used by commentslistview. Objects provide further details combining user profiles with their posted comments
   public class CommentsProfileModel

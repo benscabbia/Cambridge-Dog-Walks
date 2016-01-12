@@ -1,0 +1,84 @@
+﻿    .carousel {
+      background: #2f4357;
+      margin-top: 20px;
+    }
+
+      .carousel .item img {
+        margin: 0 auto; /* Align slide image horizontally center */
+      }
+
+    .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+      width: 490px;
+      height: 257px;
+      /*Above 100% width, below image constraints maintained*/
+      /*width: auto;
+      height: 250px;
+      max-height: 250px;*/
+    }
+
+    .bs-example {
+      margin: 20px;
+    }
+
+    /*used by comments*/
+    .comments-background {
+      background: #f5f5f5;
+      color: #6f6f6f;
+
+    }
+
+    .comments-section-background{
+      background:#565656;
+      margin-bottom:-21px; /*required to cover part of the footer*/
+    }
+
+    .white-text{
+      color: white;
+    }
+
+    .center-profile-image{
+      float:none;
+      display:inline-block;
+      vertical-align:middle;
+      margin-right:-4px;
+      padding-top:5px;
+    }
+
+    .profile-img-max-width{
+      max-width:154px;
+    }
+
+    /*used by features*/
+
+
+    .feature-container {
+      vertical-align: top;
+      display: inline-block;
+      text-align: center;
+      width: 120px;
+    }
+
+    .feature-img-style img {
+      width: 100px;
+      height: 100px;
+      background-color: grey;
+    }
+
+    .caption {
+      display: block;
+    }
+
+    /*Used by You might also like...*/
+    .might-also-like-img-style img{
+      width: 140px;
+      height: 100px;
+      background-color: grey;
+    }
+
+    .might-also-like-feature-container{
+      vertical-align: top;
+      display: inline-block;
+      text-align: center;
+      width: 160px;
+    }
+

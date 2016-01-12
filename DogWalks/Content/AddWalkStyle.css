@@ -1,0 +1,61 @@
+﻿.setMaxWidth {
+      max-width: 280px;
+    }
+
+    .leftAlign {
+      text-align: left !important;
+    }
+
+    .checkboxListSpacing td {
+      padding: 0 20px 2px 0;
+    }
+
+    .checkboxListSpacing label {
+      padding-left: 2px;
+    }
+
+    /* made select/change button have round corner */
+    /*used by jasny form upload*/
+    .fileinput-new .input-group .input-group-btn .btn.btn-file {
+      -webkit-border-radius: 0 4px 4px 0;
+      -moz-border-radius: 0 4px 4px 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .fileinput .fileinput-filename {
+      overflow: visible;
+    }
+
+      .fileinput .fileinput-filename .dropdown-menu > li {
+        padding: 3px 20px;
+      }
+
+    /*used by autocomplete*/
+    .completionList {
+      padding: 0px;
+      margin: 0px;
+      color: black;
+      overflow: auto;
+      text-align: left;
+      border: 2px solid lightskyblue;
+      list-style-type: none;
+      cursor: default;
+      height: 200px;
+      background-color: white;
+    }
+
+    .item {
+      height: 17px;
+      cursor: pointer;
+    }
+
+    .itemHighLight {
+      color: White;
+      background-color: lightskyblue;
+      cursor: pointer;
+    }
+
+    /*used by validation*/
+    .errorMessage {
+      color: red;
+    }

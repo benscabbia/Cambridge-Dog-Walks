@@ -194,6 +194,7 @@
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\ManageStyle.css" />
     <Content Include="Content\star-rating.css" />
+    <Content Include="Content\WalkDetailStyle.css" />
     <Content Include="Demo\autoComplete1.aspx" />
     <Content Include="favicon.png" />
     <Content Include="HomePagePics\home-cover.jpg" />
@@ -306,7 +307,6 @@
     <Content Include="ToDo.txt" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="ViewUserProfile.aspx" />
-    <Content Include="WalkPics\b49d8c8f-673a-4724-a47b-c6dec13f9e71.JPG" />
     <Content Include="Walks\AddWalk.aspx" />
     <Content Include="Walks\ListWalks.aspx" />
     <Content Include="Walks\SaveRating.aspx" />
@@ -667,6 +667,7 @@
   <ItemGroup>
     <Folder Include="Account\ProfilePicts\" />
     <Folder Include="App_Data\" />
+    <Folder Include="WalkPics\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,0 +1,15 @@
+﻿/* made select/change button have round corner */
+/*used by jasny form upload*/
+.fileinput-new .input-group .input-group-btn .btn.btn-file {
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.fileinput .fileinput-filename {
+  overflow: visible;
+}
+
+  .fileinput .fileinput-filename .dropdown-menu > li {
+    padding: 3px 20px;
+  }
