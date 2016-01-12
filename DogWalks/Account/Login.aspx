@@ -3,8 +3,13 @@
 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContentChild">
-    <h2><%: Title %>.</h2>
+    <style>
+      #socialLoginList{
+        display:none;
+      }
+    </style>
 
+    <h2><%: Title %>.</h2>
     <div class="row">
         <div class="col-md-8">
             <section id="loginForm">

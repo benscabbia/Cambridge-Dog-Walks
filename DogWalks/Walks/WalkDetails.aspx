@@ -135,7 +135,7 @@
           <h2>You  might also like...</h2>
         </LoggedInTemplate>
         <AnonymousTemplate>
-          <h2>Please login to rate, favourite and get walk recommendations!</h2>
+          <h2>Please login to rate this walk, add it to your favourites or get walk recommendations!</h2>
         </AnonymousTemplate>
       </asp:LoginView>
       
@@ -217,7 +217,7 @@
                       <div class="col-md-2 center-profile-image">
                         <div class="center-profile-image ">
                           <div class="thumbnail profile-img-max-width">
-                            <a href="../ViewUserProfile?=UserProfileID=<%# Item.UserProfileID %>">
+                            <a href="../ViewUserProfile?UserProfileID=<%# Item.UserProfileID %>">
                               <asp:Image ID="Image3" runat="server" ImageUrl='<%# Item.ProfilePicture != null ? Item.ProfilePicture : "~/SystemPics/no-image-profile.png" %>' /></a>
                           </div>
                         </div>

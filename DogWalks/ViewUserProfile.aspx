@@ -28,7 +28,8 @@
               <ul>
                 <asp:Repeater ID="RepeaterUploadedWalks" runat="server" ItemType="DogWalks.DAL.DogWalk">
                   <ItemTemplate>
-                    <li><a href='../Walks/WalkDetails?WalkID=<%#Item.WalkID %>'><%# Item.Title %></a></li>
+                    
+                    <li><a href='<%=ResolveUrl("~/Walks/WalkDetails?WalkID=")%> <%#Item.WalkID%>'><%# Item.Title %></a></li>
                   </ItemTemplate>
                 </asp:Repeater>
               </ul>
